@@ -1,0 +1,382 @@
+\chapter{Линейная регрессия}\label{cha:linreg}
+
+\section{Общие сведения}\label{cha:linreg/sec:basic}
+
+% \subsection*{Теория}\label{cha:linreg/sec:basic/subsec:theory}
+
+\subsection{Построение модели}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:model}
+
+% \subsubsection{Построение модели}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:model}
+
+Пусть $X = \begin{pmatrix}
+	X_1 \\ \vdots \\ X_n
+\end{pmatrix}$ - наблюдения. Имеем $k$ неслучайных факторов:
+$$\begin{gathered}
+	Z = 
+	\begin{pmatrix}
+		Z_{11} & \dots & Z_{1k} \\
+		\vdots & \ddots & \vdots \\
+		Z_{n1} & \dots & Z_{nk}
+	\end{pmatrix} \\
+	\left(Z_{ij}: \; i \text{ - номер эксперимента}, \; j \text{ - номер фактора}\right)
+\end{gathered}$$
+$E X_i$ линейно зависит от факторов:
+$$E X_i = \theta_1 Z_{i1} + \dots + \theta_k Z_{ik} = (Z_{i1}\dots Z_{ik})
+\begin{pmatrix}
+	\theta_1 \\ \vdots \\ \theta_k
+\end{pmatrix}, \; i = \ton n$$
+где $\theta_1, \dots, \theta_k$ - коэффициенты линейной регрессии.
+Пусть $\varepsilon = 
+\begin{pmatrix}
+	\varepsilon_1 \\ \vdots \\ \varepsilon_n
+\end{pmatrix}$ - столбец ошибок. Тогда:
+$X = Z \theta + \varepsilon$. $X_i$ называются откликами.
+$$\left.
+  	\begin{array}{ccc}
+		1) \; E \varepsilon_i = 0 \\
+		2) \; D \varepsilon = \sigma^2 \mathbb{I}_n
+  	\end{array}
+\right\} \Rightarrow \text{ошибки не коррелируют и } D \varepsilon_i = \sigma^2$$
+
+\begin{lstlisting}[language=Python]
+	from statsmodels.regression.linear_model import OLS
+
+	data = pd.read_csv('Carseats.csv')
+	data.head()
+	x = add_constant(data[['CompPrice', 'Advertising', 'Price', 'Age']])
+	y = data['Sales'] 
+	ols = OLS(y, x)
+	results = ols.fit()
+	results.summary()
+\end{lstlisting}
+
+\subsection{Метод наименьших квадратов}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:mse}
+
+% \subsubsection{Метод наименьших квадратов}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:mse}
+
+$$\begin{gathered}
+	S(\theta) = \left( X - Z \theta \right)^T\left( X - Z \theta \right) = \varepsilon^T \varepsilon = (\varepsilon_1 \dots \varepsilon_n)
+	\begin{pmatrix}
+		\varepsilon_1 \\ \vdots \\ \varepsilon_n
+	\end{pmatrix} = \underset{i=1}{\overset{n}{\sum}}\varepsilon_i^2 \\
+	\hat{\theta} = arg \; \underset{\theta}{min} S(\theta)
+\end{gathered}$$
+
+\begin{theorem}[]\label{lec:linreg/the:1}
+	Если $A = Z^T Z$ невырождена, то $\displaystyle \hat{\theta} = \left( Z^T Z \right)^{-1} Z^T X$ и верны следующие свойства:
+	\begin{itemize}
+		\item[1)] $E \hat{\theta} = \theta$, $D \hat{\theta} = \sigma^2 \left( Z^T Z \right)^{-1}$
+		\item[2)] $\displaystyle \hat{\sigma^2} = \frac{S(\hat{\theta})}{n-k} = \frac{\left( X - Z \hat{\theta} \right)^T\left( X - Z \hat{\theta} \right)}{n-k} = \frac{\underset{i=1}{\overset{n}{\sum}}\left( X_i - \hat{X_i} \right)^2}{n-k}$, где \\ $RSS = S(\hat{\theta}) = \underset{i=1}{\overset{n}{\sum}}\left( X_i - \hat{X_i} \right)^2$ - сумма квадратов остатков регрессии (residual sum of squares), $\hat{X_i} = \hat{\theta_1} Z_{i1} + \dots + \hat{\theta_k} Z_{ik}$
+	\end{itemize}
+\end{theorem}
+
+\subsubsection{Нормальная регрессия}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:normreg}
+
+Предположение нормальной регрессии: $ \varepsilon \sim N(0, \sigma^2 \mathbb{I}_n)$, тогда $\displaystyle X \sim N (Z \theta, \sigma^2 \mathbb{I}_n)$.
+
+\begin{properties}[]\label{lec:linreg/props:1}
+	\item[1)] $\hat{\theta}$ и $S(\hat{\theta})$ независимы
+	\item[2)] $\displaystyle \frac{\hat{\theta_j} - \theta_j}{\sigma \sqrt{a^{jj}}} \sim N(0,1)$, $a^{jj}$ - элементы $A^{-1}$
+	\item[3)] $\displaystyle \frac{\hat{\theta_j} - \theta_j}{\sqrt{\frac{S(\hat{\theta})}{n-k}a^{jj}}} \sim t(n-k)$
+	\item[4)] $\displaystyle \frac{S(\hat{\theta})}{\sigma^2} \sim \chi^2 (n-k)$
+\end{properties}
+
+\subsection{Доверительные интервалы}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:dovint}
+
+% \subsubsection{Доверительные интервалы}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:dovint}
+
+Доверительный интервал для $\theta_j$:
+$$\left( \hat{\theta_j} - t_{\frac{1+\gamma}{2}}(n-k) \sqrt{\frac{RSS}{n-k}a^{jj}}; \hat{\theta_j} + t_{\frac{1+\gamma}{2}}(n-k) \sqrt{\frac{RSS}{n-k}a^{jj}} \right)$$
+Доверительный интервал для $\sigma^2$:
+$$\left( \frac{RSS}{\chi_{\frac{1+\gamma}{2}}^2 (n-k)} ; \frac{RSS}{\chi_{\frac{1-\gamma}{2}}^2 (n-k)} \right)$$
+
+\begin{lstlisting}[language=Python]
+	#### Оценки параметров регрессии
+	results.params
+	y_hat = ols.predict(results.params, x)
+	print(y - y_hat) #вектор остатков регрессии
+
+	#### Построение прогноза
+	y_hat_new = ols.predict(results.params, [1, 120, 10, 100, 50])
+	print(y_hat_new)
+
+	#### Оценка дисперсии
+	RSS = results.ssr
+	k = 5
+	n = len(data['Sales'])
+	sigma2_hat = RSS/(n-k)
+	print(sigma2_hat)
+
+	##### ДИ параметров нормальной регрессии
+	conf_intervals = results.conf_int(alpha=0.05)
+	print (conf_intervals[1][2])
+\end{lstlisting}
+
+\subsection{Проверка значимости признаков}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:provznachprizn}
+
+% \subsubsection*{Проверка значимости признаков}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:provznachprizn}
+
+$H_0: \theta_j = 0, \; H_1: \theta_j \not = 0$ (т.е. фактор значимый).
+$$\begin{gathered}
+	T = \frac{\hat{\theta_j}}{\sqrt{\frac{RSS}{n-k} a^{jj}}} \Hosim t(n-k) \\
+	C_{\text{кр}} = \big( -\infty, t_{\frac{\alpha}{2}}(n-k) \big] \bigcup \big[t_{1-\frac{\alpha}{2}}(n-k), +\infty \big)
+\end{gathered}$$
+
+\begin{lstlisting}[language=Python]
+	##### Проверка значимости признаков
+	results.pvalues
+	results.tvalues
+\end{lstlisting}
+
+\subsection{Доверительный интервал для отклика}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:dovintotklik}
+
+% \subsubsection*{Доверительный интервал для отклика}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:dovintotklik}
+
+Пусть мы оценили $\theta$ по $X_1, \dots, X_n$ и получили $\hat{\theta}$. Тогда по $Z_{n+1} = (Z_{(n+1)1} \dots Z_{(n+1)k})$ строим отклик $X_{n+1} = Z_{n+1}\theta + \varepsilon_{n+1}$, где $\varepsilon_{n+1} \sim N(0, \sigma^2)$. Точечная оценка: $\hat{X_{n+1}} = Z_{n+1} \hat{\theta}$. Доверительный интервал:
+$$\begin{gathered}
+	\Big( \hat{X_{n+1}} - t_{\frac{1+\gamma}{2}}(n-k) \sqrt{\frac{RSS}{n-k}\left( 1+Z_{n+1}A^{-1}Z_{n+1}^T \right)}; \\
+	\hat{X_{n+1}} + t_{\frac{1+\gamma}{2}}(n-k) \sqrt{\frac{RSS}{n-k}\left( 1+Z_{n+1}A^{-1}Z_{n+1}^T \right)} \Big)
+\end{gathered}$$
+
+\begin{lstlisting}[language=Python]
+	#### ДИ для отклика
+	new_data = np.array([1, 120, 10, 100, 50])
+	pred_results = results.get_prediction(new_data)
+	#pred_results.predicted_mean = y_hat_new
+	pred_results.conf_int()
+\end{lstlisting}
+
+\subsection{Общая линейная гипотеза}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:oblingip}
+$H_0: T \theta = \tau$, где $T$ - $m\times k$ матрица, $m \le k$, $rk T = m$, $\theta = 
+\begin{pmatrix}
+	\theta_1 \\ \vdots \\ \theta_k
+\end{pmatrix}$, а $\tau = 
+\begin{pmatrix}
+	\tau_1 \\ \vdots \\ \tau_m
+\end{pmatrix}$.
+$$\begin{pmatrix}
+	T_{11} & \dots & T_{1k} \\
+	\vdots & \ddots & \vdots \\
+	T_{m1} & \dots & T_{mk}
+\end{pmatrix} 
+\begin{pmatrix}
+	\theta_1 \\ \vdots \\ \theta_k
+\end{pmatrix} = 
+\begin{pmatrix}
+	\tau_1 \\ \vdots \\ \tau_m
+\end{pmatrix}$$
+Статистика:
+$$\begin{gathered}
+	F = \frac{\left( T \hat{\theta} - \tau \right)^T B^{-1}\left( T \hat{\theta} - \tau \right)}{RSS}\cdot \frac{n-k}{m} \Hosim F(m, n-k) \\
+	\text{где } B = T \left( Z^T Z \right)^{-1} T^T \\
+	C_{\text{кр}} = \big[ f_{1-\alpha}(m, n-k) ; +\infty \big)
+\end{gathered}$$
+
+\subsection{Критерий значимости регрессии}\label{cha:linreg/sec:basic/subsec:theory/subsubsec:critznachreg}
+
+$$X_i = \theta_1 + Z_{i2}\theta_2 + \dots + Z_{ik}\theta_k + \varepsilon_i$$
+$H_0: \theta_2 = \dots = \theta_k = 0$, $H_1: \exists i \in \{2, \dots, k\}: \; \theta_i \not = 0$.
+$$T \theta = \tau, \; \tau = 
+\begin{pmatrix}
+	0 \\ \vdots \\ 0
+\end{pmatrix}, \; T = 
+\begin{pmatrix}
+	0 & 1 & \dots & 0 \\
+	\vdots & \vdots & \ddots & \vdots \\
+	0 & 0 & \dots & 1	
+\end{pmatrix}$$
+$$F = \frac{\underset{i=1}{\overset{n}{\sum}}\left( \hat{X_i} - \overline{X} \right)^2}{\underset{i=1}{\overset{n}{\sum}}\left( X_i - \hat{X_i} \right)^2} \cdot \frac{n-k}{k-1} = \frac{ESS}{RSS} \cdot \frac{n-k}{k-1} \Hosim F(k-1, n-k)$$
+
+\begin{lstlisting}[language=Python]
+	##### Критерий значимости регрессии
+	results.f_pvalue
+	results.fvalue
+\end{lstlisting}
+
+\subsection*{Пример}\label{cha:linreg/sec:basic/subsec:prob}
+
+\begin{problem}
+	В файле "Carseats.csv" представлены данные о продажах детских кресел в различных магазинах страны: Sales – количество проданных кресел, Advertising – бюджет, выделенный на рекламу, Price – цена, CompPrice - цена основного конкурента, Age – средний возраст населения.
+
+	Охарактеризовать линейную зависимость продаж кресел от всех перечисленных выше показателей.
+\end{problem}
+\begin{lstlisting}[language=Python]
+	from statsmodels.regression.linear_model import OLS
+
+	data = pd.read_csv('Carseats.csv')
+	data.head()
+	x = add_constant(data[['CompPrice', 'Advertising', 'Price', 'Age']])
+	y = data['Sales'] 
+	ols = OLS(y, x)
+	results = ols.fit()
+
+	#### Оценки параметров регрессии
+	results.params
+	y_hat = ols.predict(results.params, x)
+	print(y - y_hat) #вектор остатков регрессии
+
+	#### Построение прогноза
+	y_hat_new = ols.predict(results.params, [1, 120, 10, 100, 50])
+	print(y_hat_new)
+
+	#### Оценка дисперсии
+	RSS = results.ssr
+	k = 5
+	n = len(data['Sales'])
+	sigma2_hat = RSS/(n-k)
+	print(sigma2_hat)
+
+	##### ДИ параметров нормальной регрессии
+	conf_intervals = results.conf_int(alpha=0.05)
+	print (conf_intervals[1][2])
+
+	#### ДИ для отклика
+	new_data = np.array([1, 120, 10, 100, 50])
+	pred_results = results.get_prediction(new_data)
+	#pred_results.predicted_mean = y_hat_new
+	pred_results.conf_int()
+
+	##### Проверка значимости признаков
+	results.pvalues
+	results.tvalues
+\end{lstlisting}
+
+\section{Коэффициент детерминации и анализ остатков}\label{cha:linreg/sec:det+ost}
+
+\subsection*{Коэффициент детерминации}\label{cha:linreg/sec:det+ost/subsec:det}
+
+\subsubsection*{Теория}\label{cha:linreg/sec:det+ost/subsec:det/subsubsec:theory}
+
+Имеем: $X_i = 1 \cdot \theta_1 + \dots + Z_{ik} \cdot \theta_k + \varepsilon_i$.
+$$\begin{gathered}
+	R^2 = \frac{ESS}{TSS} = 1 - \frac{RSS}{TSS} \\
+	ESS = \underset{i=1}{\overset{n}{\sum}}\left( \hat{X_i} - \overline{X_i} \right)^2 \text{ - explained sum of squares} \\
+	TSS = ESS + RSS \text{ - total sum of squares} \\
+	\underset{i=1}{\overset{n}{\sum}}\left( X_i - \overline{X_i} \right)^2 = \underset{i=1}{\overset{n}{\sum}}\left( \hat{X_i} - \overline{X_i} \right)^2 + \underset{i=1}{\overset{n}{\sum}}\left( X_i - \hat{X_i} \right)^2
+\end{gathered}$$
+
+\subsubsection*{Пример}\label{cha:linreg/sec:det+ost/subsec:det/subsubsec:prob}
+
+\begin{lstlisting}[language=Python]
+	#### Коэффициент детерминации
+	results.rsquared
+\end{lstlisting}
+
+\subsection*{Анализ остатков}\label{cha:linreg/sec:det+ost/subsec:ost}
+
+\subsubsection*{Теория}\label{cha:linreg/sec:det+ost/subsec:ost/subsubsec:theory}
+
+$$e_i = X_i - \hat{X_i} = X_i - (Z_{i1} \hat{\theta_1} + \dots + Z_{ik} \hat{\theta_k}) \text{ - residuals}$$
+$$\begin{gathered}
+	e = 
+	\begin{pmatrix}
+		e_1 \\ \vdots \\ e_n
+	\end{pmatrix} = X - Z \hat{\theta} = X - \underbrace{Z \left( Z^T Z \right)^{-1} Z^T}_{= H} X = \left( \mathbb{I}_n - H \right) X
+\end{gathered}$$
+$E e = 0$, т.к. $\hat{\theta}$ несмещенная. $D e = D \left( \left( \mathbb{I}_n - H \right) X \right) = \sigma^2 \left( \mathbb{I}_n - H \right)$. Тогда если $ \varepsilon_i \sim N(0, \sigma^2)$, то $e_i \sim N(0, \sigma^2 (1-h_{ii}))$.
+
+\paragraph*{Стьюдентизированные и стандартизированные остатки}\label{cha:linreg/sec:det+ost/subsec:ost/subsubsec:theory/par:stu}
+
+$$t_i = \frac{e_i}{\sqrt{\frac{RSS}{n-k} \cdot \sqrt{1-h_{ii}}}} \sim t(n-k)$$
+Если $n >> k$, то $h_{ii} \simeq 0$ и $t(n-k) \to N(0,1)$. Тогда получаем стандартизированные остатки: 
+$$\tilde{e_i} = \frac{e_i}{\sqrt{RSS}{n-k}}$$
+
+\subsubsection*{Пример}\label{cha:linreg/sec:det+ost/subsec:ost/subsubsec:prob}
+
+\begin{lstlisting}[language=Python]
+	#### Анализ остатков
+	influence = results.get_influence()
+		#"Обычные" остатки e_i
+	residuals = influence.resid
+	print(residuals[0:5])
+		#Стьюдентизированные остатки
+	stud_residuals = influence.resid_studentized
+	print(stud_residuals[0:5])
+		#Стандартизированные остатки
+	stand_residuals = residuals/np.sqrt(sigma2_hat)
+	print(stand_residuals[0:5])
+		#Визуальный анализ остатков
+	plt.scatter(y_hat, stand_residuals)
+	from scipy.stats import probplot
+	probplot(stand_residuals, plot=plt);
+\end{lstlisting}
+
+\section{Проверка гомоскедастичности}\label{cha:linreg/sec:homosced}
+
+\subsection{Общие сведения}\label{cha:linreg/sec:homosced/subsec:basic}
+
+\subsubsection*{Теория}\label{cha:linreg/sec:homosced/subsec:basic/subsubsec:theory}
+
+$$X_i = \theta_1 + Z_{i2}\theta_2 + \dots + Z_{ik}\theta_k + \varepsilon_i$$
+$H_0: D \varepsilon_i = \sigma^2 \; \forall i$ (гомоскедастичность).\\
+$H_1: \exists i, j: \; D \varepsilon_i \not = D \varepsilon_j$ (гетероскедастичность).
+
+\subsection{Тест Уайта}\label{cha:linreg/sec:homosced/subsec:white}
+
+\subsubsection*{Теория}\label{cha:linreg/sec:homosced/subsec:white/subsubsec:theory}
+
+$E \varepsilon_i^2 \xrightarrow[]{?} E e_i^2$
+
+Рассмотрим вспомогательную регрессию:
+$$e_i^2 = \alpha_1 + \underset{}{\overset{}{\sum}}\alpha_j Z_{ij} + \underset{}{\overset{}{\sum}}\beta_j Z_{ij}^2 + \underset{}{\overset{}{\sum}}\gamma_{jl} Z_{ij} Z_{il} + u_i$$
+Количество факторов вспомогательной регрессии равно $m-1$.
+$$\begin{gathered}
+	R^2 = \frac{\underset{i=1}{\overset{n}{\sum}}\left( \hat{e_i^2} - \overline{e^2} \right)^2}{\underset{i=1}{\overset{n}{\sum}}\left( e_i^2 - \overline{e^2} \right)^2}, \; T = n \cdot R^2 \Hosim \chi^2 (m-1) \\
+	C_{\text{кр}} = \big[ \chi_{1-\alpha}^2 (m-1) ; +\infty \big)
+\end{gathered}$$
+
+\subsubsection*{Пример}\label{cha:linreg/sec:homosced/subsec:white/subsubsec:prob}
+
+\begin{lstlisting}[language=Python]
+	het_white(residuals, x)
+	het_white?
+\end{lstlisting}
+
+\subsection{Тест Голдфельда-Квандта}\label{cha:linreg/sec:homosced/subsec:goldkvandt}
+
+\subsubsection*{Теория}\label{cha:linreg/sec:homosced/subsec:goldkvandt/subsubsec:theory}
+
+Рассмотрим $e_i$. Гипотеза: $D \varepsilon_i$ возрастает, когда фактор возрастает. Алгоритм состоит из следующих шагов:
+\begin{enumerate}
+	\item 
+		упорядочиваем 
+		$\begin{pmatrix}
+			X_1 \\ \vdots \\ X_n
+		\end{pmatrix}$ по росту фактора
+	\item 
+		делим на три группы с размерами $n_1, n_2, n_3: \; n = n_1 + n_2 + n_3, \; n_1 = n_3$
+\end{enumerate}
+Если предположение верно, то $\displaystyle \frac{RSS_1}{n_1 - k} << \frac{RSS_3}{n_3 - k}$, иначе наоборот.
+
+Можно воспользоваться F-тестом:
+$$\begin{gathered}
+	F = \frac{RSS_3 \cdot (n_1 - k)}{RSS_1 \cdot (n_3-k)} \Hosim F(n_3-k, n_1-k) \\
+	C_{\text{кр}} = \big[ f_{1-\alpha}(n_3-k, n_1-k) ; +\infty \big)
+\end{gathered}$$
+
+\subsubsection*{Пример}\label{cha:linreg/sec:homosced/subsec:goldkvandt/subsubsec:prob}
+
+\begin{lstlisting}[language=Python]
+	het_goldfeldquandt(y, x, idx = 3) #idx = 3: номер фактора
+	het_goldfeldquandt?
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,245 @@
+\chapter{Базовые понятия}\label{cha:basic}
+
+\section{Python}\label{cha:basic/sec:python}
+
+\subsection{Преамбула}\label{cha:basic/sec:python/subsec:preambula}
+
+	\green{import numpy as np}
+
+	\green{import scipy as sp}
+
+	\green{import scipy.stats as st}
+
+	\green{from scipy.stats import norm} (нормальное распределение)
+
+	\green{from scipy.stats import uniform} (равномерное распределение)
+
+	\green{from scipy.stats import expon} (экспоненциальное распределение)
+
+	\green{from scipy.stats import beta} (бета-распределение)
+
+	\green{from scipy.stats import cauchy} (распределение Коши)
+
+	\green{from scipy.stats import t} (распределение Стьюдента)
+
+\subsection{Функции}\label{cha:basic/sec:python/subsec:funcs}
+
+\textbf{Функция плотности - pdf} (pdf - probability density function)
+
+	Плотность в точке $x=0.1$ распределения $N(2,9)$:
+
+	\blue{norm.pdf(0.1, 2, 3)}\\
+
+\textbf{Функция распределения - cdf} (cdf - cumulative density function)
+
+	Функция распределения в точке $x=0.3$ распределения $N(2,9)$:
+
+	\blue{norm.cdf(3.5, 2, 3)}\\
+
+\textbf{Квантиль - ppf} (ppf - pension protection fund)
+
+	Квантиль уровня $0.5$ распределения $N(2,9)$:
+
+	\blue{norm.ppf(0.5, 2, 3)}\\
+
+\textbf{Выборочное среднее - mean} (mean - среднее)
+
+	Выборочное среднее выборки:
+
+	\blue{sample.mean()}\\
+
+\textbf{Выборочное среднее - mean} (std - standart deviation)
+
+	Среднеквадртическое отклонение выборки:
+
+	\blue{sample.std()}
+
+	\blue{np.std(data, ddof = 1)} - исправленное ср. кв. отклонение\\
+
+\textbf{Дисперсия - mean} (var - variance)
+
+	Дисперсия выборки:
+
+	\blue{sample.var()}\\
+
+\textbf{Логарифм плотности - logpdf} (logpdf - logarithm of probability density function)
+
+	Логарифм функции плотности распределения $N(0,1)$:
+
+	\blue{norm.logpdf()}
+
+\subsection{Генерация выборок}\label{cha:basic/sec:pyhton/subsec:gen}
+
+\textbf{Генерация выборок из $N(0,1)$}
+
+	Выборка объема 1000 из $N(0,1)$:
+	\begin{itemize}
+		\item[$\bullet$] \blue{sample = np.random.randn(1000)}
+		\item[$\bullet$] \blue{sample = norm.rvs(size=1000)}
+	\end{itemize}
+
+\textbf{Генерация выборок из $N(a,\sigma^2)$}
+
+	Выборка объема 1000 из $N(2,9)$:
+	\begin{itemize}
+		\item[$\bullet$] \blue{sample = np.random.randn(1000)*3+2}
+		\item[$\bullet$] \blue{sample = norm.rvs(2, 3, size=1000)}
+	\end{itemize}
+
+\textbf{Генерация выборок из $R[0,1]$}
+
+	Выборка объема 1000 из $R[0,1]$:
+	\begin{itemize}
+		\item[$\bullet$] \blue{sample = np.random.rand(1000)}
+		\item[$\bullet$] \blue{sample = uniform.rvs(size=1000)}
+	\end{itemize}
+
+\textbf{Генерация выборок из $R[loc, loc + scale]$}
+
+	Выборка объема 1000 из $R[loc,loc + scale]$:
+	\begin{itemize}
+		\item[$\bullet$] \blue{sample = uniform.rvs(loc=1, scale=3, size=1000)}
+	\end{itemize}
+
+\textbf{Генерация выборок из $Exp[1]$}
+
+	Выборка объема 1000 из $Exp[1]$:
+	\begin{itemize}
+		\item[$\bullet$] \blue{sample = expon.rvs(size = 10000)}
+	\end{itemize}
+
+\textbf{Генерация выборок из Бета-распределения}
+
+	Выборка объема 1000 из Бета-распределения(6,2):
+	\begin{itemize}
+		\item[$\bullet$] alpha = 6, bheta = 2\\\blue{sample = beta.rvs(alpha, bheta, size = 1000)}
+	\end{itemize}
+
+\textbf{Генерация выборок из распределения Коши}
+
+	Выборка объема 1000 из распределения Коши:
+	\begin{itemize}
+		\item[$\bullet$] \blue{sample = cauchy.rvs(size = 1000)}
+	\end{itemize}
+
+\textbf{Генерация выборок из распределения Стьюдента}
+
+	Выборка объема 1000 из распределения Стьюдента:
+	\begin{itemize}
+		\item[$\bullet$] \blue{sample = t.rvs(size = 1000)}
+	\end{itemize}
+
+\subsection{Обработка}\label{cha:basic/sec:python/subsec:data}
+
+\textbf{Чтение из файла}
+
+	Считывание данных из файла File.txt в DataFrame data:
+	\begin{itemize}
+		\item[$\bullet$] \blue{data = pd.read$\_$csv(<<File.txt>>)}
+	\end{itemize}
+
+\textbf{Вывод нескольких строк DataFrame}
+
+	Вывод каждой второй строки в диапазоне от 30 до 35 строки DataFrame data:
+	\begin{itemize}
+		\item[$\bullet$] \blue{data.loc[30:35:2]}
+	\end{itemize}
+
+\textbf{Получение информации о DataFrame}
+
+	Получение информации о DataFrame data:
+	\begin{itemize}
+		\item[$\bullet$] \blue{data.describe}
+	\end{itemize}
+
+\textbf{Выделение одного столбца DataFrame}
+
+	Выделение столбца x из DataFrame data в массив x:
+	\begin{itemize}
+		\item[$\bullet$] \blue{x = data['x']}
+	\end{itemize}
+
+\textbf{Удаление элементов из массива}
+
+	Удаление из массива x элементов, равных нулю:
+	\begin{itemize}
+		\item[$\bullet$] \blue{x = x[x != 0]}
+	\end{itemize}
+
+	Удаление из массива x элементов, меньших 113:
+	\begin{itemize}
+		\item[$\bullet$] \blue{x = x[x > 113]}
+	\end{itemize}
+
+\section{Статистика}\label{cha:basic/section:stat}
+
+\subsection{Проверка гипотез}\label{cha:basic/section:stat/subsection:hyp}
+
+Дана выборка $X = (X_1, \dots, X_n)$. Параметр $\theta$ неизвестен.
+
+$H_0: \theta = \theta_0$ - гипотеза.
+
+$H_1: \begin{cases}
+	\theta < \theta_0 \text{ - левосторонняя альтернатива} \\
+	\theta > \theta_0 \text{ - правосторонняя альтернатива} \\
+	\theta \not = \theta_0 \text{ - двусторонняя альтернатива} \\
+	\theta = \theta_1 \text{ - простая альтернатива} 
+\end{cases}$
+
+Статистика $T(X)$ зависит от $\theta_0$, должны знать распределение $T$, если верна $H_0$. $C_{\text{кр}}$ строится по квантилям распределения $T$, если верна $H_0$.
+
+\begin{itemize}
+	\item[$\bullet$] левостороння альтернатива $\Rightarrow$ $C_{\text{кр}} = (-\infty; X_{\alpha})$
+	\item[$\bullet$] правостороння альтернатива $\Rightarrow$ $C_{\text{кр}} = (X_{1-\alpha}; +\infty)$
+	\item[$\bullet$] двустороння альтернатива $\Rightarrow$ $C_{\text{кр}} = (-\infty; X_{\frac{\alpha}{2}})\bigcup (X_{\frac{1-\alpha}{2}}; +\infty)$
+\end{itemize}
+
+\begin{rulee}\label{cha:basic/section:stat/subsection:hyp/rule:1}
+	$$\begin{cases}
+		T_{\text{реал}} \in C_{\text{кр}} \; \Rightarrow \; \text{отвергаем } H_0, \text{ принимаем } H_1 \\
+		T_{\text{реал}} \not \in C_{\text{кр}} \; \Rightarrow \; \text{принимаем } H_0
+	\end{cases}$$
+\end{rulee}
+
+\begin{itemize}
+	\item[$\bullet$] левостороння альтернатива $\Rightarrow$ $pvalue = P(T \le T_{\text{реал}} | H_0)$
+	\item[$\bullet$] правостороння альтернатива $\Rightarrow$ $pvalue = P(T \ge T_{\text{реал}} | H_0)$
+	\item[$\bullet$] двустороння альтернатива $\Rightarrow$ $pvalue = 2 min\left( P(T \le T_{\text{реал}} | H_0), P(T \ge T_{\text{реал}} | H_0) \right)$
+\end{itemize}
+
+\begin{rulee}\label{cha:basic/section:stat/subsection:hyp/rule:2}
+	$$\begin{cases}
+		pvalue < \alpha \; \Rightarrow \; \text{отвергаем } H_0, \text{ принимаем } H_1 \\
+		pvalue > \alpha \; \Rightarrow \; \text{принимаем } H_0
+	\end{cases}$$
+\end{rulee}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
