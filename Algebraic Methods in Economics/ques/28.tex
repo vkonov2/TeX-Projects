@@ -1,0 +1,136 @@
+\chapter{Оценка спектрального радиуса для неотрицательной матрицы с помощью
+элементов матрицы}
+\label{cha:28}
+
+\epigraph{
+	\textit{Очень возможно, что в мирской оценке качеств покойного неясно участвовало и сравнение.}}
+{-- Салтыков-Щедрин М.Е.}
+
+\begin{definition}\label{cha:28/def:1}
+	\textit{Спектральным радиусом} $\rho(A)$ оператора (матрицы) $A \in \mathcal{L}(V)$ называется максимум модулей собственных значений A.
+\end{definition}
+
+\begin{theorem}[]\label{cha:28/the:0}
+	Пусть $||\cdot||$ – норма в алгебре линейных операторов $\mathcal{L}(V)$ в конечномерном пространстве V. Если $A \in \mathcal{L}(V)$, то $\rho(A) \le ||A||$.
+\end{theorem}
+\begin{Proof}
+	Пусть $Ax = \lambda x$ для некоторого ненулевого собственного вектора x. Построим матрицу X, столбцами которой будут координаты вектора x. Тогда $AX = \lambda X$, откуда:
+	$$||AX|| = |\lambda| ||X|| \le ||A||||X||\eqno(89)$$
+	Так как $X \not = 0$, то $||X|| \not = 0$ и поэтому в (89) получаем $|\lambda| \le ||A||$. Отсюда вытекает утверждение, поскольку $\lambda$ – любое собственное значение.
+\end{Proof}
+
+\begin{theorem}[]\label{cha:28/the:1}
+	Пусть в алгебре линейных операторов $\mathcal{L}(V)$ на конечномерном пространстве V задана норма $||\cdot||$. Если $A \in \mathcal{L}(V)$, то $\rho(A) = \underset{k}{\lim}||A^k||^{\frac{1}{k}}$.
+\end{theorem}
+\begin{Proof}
+	Нам потребуется несколько лемм.
+
+	\begin{lemma}\label{cha:28/lemma:1}
+		Для любого натурального числа k имеем $\rho(A^k) = \rho(A)^k$.
+	\end{lemma}
+	\begin{Proof}
+		Достаточно выбрать базис, в котором матрица A имеет верхнетреугольный вид. Затем возвести эту матрицу в степень k.
+	\end{Proof}
+
+	\begin{lemma}\label{cha:28/lemma:2}
+		Пусть $\varepsilon > 0$ и $B = [\rho(A) + \varepsilon]^{−1}A$. Тогда $\rho(B) < 1$.
+	\end{lemma}
+	\begin{Proof}
+		Достаточно выбрать базис, в котором матрица A имеет верхнетреугольный вид.
+	\end{Proof}
+
+	Завершим доказательство теоремы. По лемме \ref{cha:28/lemma:1} и теореме \ref{cha:28/the:0} имеем $\rho(A) = \rho(A^k)^{\frac{1}{k}} \le ||A^k||^{\frac{1}{k}}$ для всех k. Пусть матрица B из леммы \ref{cha:28/lemma:2}. По теореме \ref{cha:27/the:2} и лемме \ref{cha:28/lemma:2} имеем $B^k \to 0$. Следовательно, существует такое N, что $||B^k|| < 1$ для всех $k > N$. Это означает, что при этих k выполняется неравенство $|\rho(A) + \varepsilon|^{−k}||A^k|| < 1$, откуда $||A^k|| < |\rho(A) + \varepsilon|^k$ и $||A^k||^{\frac{1}{k}} < |\rho(A) + \varepsilon|$.
+\end{Proof}
+
+\begin{propose}\label{cha:29/propose:3}
+	Пусть $A \ge 0$, причем $\underset{j=1}{\overset{n}{\sum}}a_{ij} = C$ — постоянно для всех $i = \ton n$. Тогда
+	$$\rho(A) = ||A||_{\infty} = \underset{i}{\max}\left( \underset{j=1}{\overset{n}{\sum}}a_{ij} \right) = C$$
+\end{propose}
+\begin{Proof}
+	Заметим, что $||A||_{\infty} = \underset{||x||_{\infty}=1}{\sup} ||Ax||_{\infty}$, где $||x||_{\infty} = \underset{i}{\max}|x_i|$. Отсюда $\rho(A) \le ||A||_{\infty} = C$. С другой стороны, если $e = (1, \dots, 1)$, то $Ae = Ce$, откуда $C \le rho(A)$.
+\end{Proof}
+
+\begin{propose}\label{cha:29/propose:1}
+	Cправедливы следующие соотношения:
+	\begin{itemize}
+		\item[1)] $AB \le |AB| \le |A||B|$
+		\item[2)] $|A+B|\le|A|+|B|$
+		\item[3)] $|\alpha A| = |\alpha||A|, \; \alpha \in \mathbb{R}$
+	\end{itemize}
+\end{propose}
+\begin{Proof}
+	Пусть $A, B \in Mat(n, \mathbb{R})$. Тогда:
+	$$\underset{j}{\overset{}{\sum}}a_{ij}b_{jk} \le \Big| \underset{j}{\overset{}{\sum}}a_{ij}b_{jk} \Big| \le \underset{j}{\overset{}{\sum}}|a_{ij}||b_{jk}|$$
+	откуда вытекает первое свойство.
+	
+	Остальные свойства проверяются аналогично.
+\end{Proof}
+
+\begin{propose}\label{cha:29/propose:2}
+	Пусть $A, B \in Mat(n, \mathbb{R})$. Если $|A| \le B$, то $\rho(A) \le \rho(|A|) \le \rho(B)$.
+\end{propose}
+\begin{Proof}
+	По предложению \ref{cha:29/propose:1} для любого натурального числа k имеем $A^k \le |A^k| \le |A|^k \le B^k$. Рассмотрим норму $||\cdot||_E$ ($||A||_E = \sqrt{\underset{i,j}{\overset{}{\sum}}|a_{i,j}|^2}$) на алгебре матриц. Тогда $\displaystyle ||A^k||_E = \Big|\Big| |A^k| \Big|\Big|_E \le \Big|\Big| |A|^k \Big|\Big|_E \le ||B^k||_E$. Отсюда $\displaystyle ||A^k||_E^{\frac{1}{k}} \le \Big|\Big| |A|^k \Big|\Big|_E^{\frac{1}{k}} \le ||B^k||_E^{\frac{1}{k}}$.
+
+	Остается воспользоваться теоремой \ref{cha:28/the:1}.
+\end{Proof}
+
+\begin{theorem}[]\label{cha:29/the:1}
+	Пусть $A \ge 0$. Тогда:
+	$$\begin{gathered}
+		\underset{i}{\min}\left( \underset{j}{\overset{}{\sum}}a_{ij} \right) \le \rho(A) \le \underset{i}{\max}\left( \underset{j}{\overset{}{\sum}}a_{ij} \right) \\
+		\underset{j}{\min}\left( \underset{i}{\overset{}{\sum}}a_{ij} \right) \le \rho(A) \le \underset{j}{\max}\left( \underset{i}{\overset{}{\sum}}a_{ij} \right)
+	\end{gathered}$$
+\end{theorem}
+\begin{Proof}
+	Пусть $C = \underset{i}{\min}\left( \underset{j}{\overset{}{\sum}}a_{ij} \right)$. Существует такая матрица B, что $A \ge B \ge 0$, причем $\underset{j}{\overset{}{\sum}}b_{ij} = C$. Действительно, если $C = 0$, то положим $B = 0$. Если же $C > 0$, то положим $\displaystyle b_{ij} = \frac{C a_{ij}}{\underset{t}{\overset{}{\sum}}a_{it}}$.
+
+	Соглсно предложениям \ref{cha:29/propose:3} и \ref{cha:29/propose:2} получаем $\rho(B) = C \le \rho(A)$.
+
+	Аналогично, если $D = \underset{i}{\max}\left( \underset{j}{\overset{}{\sum}}a_{ij} \right)$, то можно построить такую матрицу $B' = (b'_{ij})$, что $0 \le A \le B'$ и $\underset{j}{\overset{}{\sum}}b'_{ij} = D$.
+
+	Для доказательства второго утверждения рассмотрим транспонированную матрицу $^tA$ и заметим, что $\rho(A) = \rho(^tA)$.
+\end{Proof}
+
+\begin{conseq}[]\label{cha:29/conseq:1}
+	Пусть A – неотрицательная матрица и x – положительный вектор. Тогда:
+	$$\begin{gathered}
+		\underset{i}{\min}\frac{\underset{j}{\overset{}{\sum}}a_{ij}x_j}{x_i} \le \rho(A) \le \underset{i}{\max}\frac{\underset{j}{\overset{}{\sum}}a_{ij}x_j}{x_i} \\
+		\underset{j}{\min}\left[ x_j \left( \underset{i}{\overset{}{\sum}}\frac{a_{ij}}{x_i} \right) \right] \le \rho(A) \le \underset{j}{\max}\left[ x_j \left( \underset{i}{\overset{}{\sum}}\frac{a_{ij}}{x_i} \right) \right]
+	\end{gathered}$$
+\end{conseq}
+\begin{Proof}
+	Применим теорему \ref{cha:29/the:1} для матрицы
+	$$\begin{pmatrix}
+		x_1 & 0 & \dots & 0 \\ 
+		0 & x_2 & \dots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 \dots & x_n
+	\end{pmatrix}^{-1} A \begin{pmatrix}
+		x_1 & 0 & \dots & 0 \\ 
+		0 & x_2 & \dots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 \dots & x_n
+	\end{pmatrix}$$
+	На месте $(i,j)$ в этом произведении стоит $x_i^{−1}a_{ij}x_j$.
+\end{Proof}
+
+\begin{conseq}[]\label{cha:29/conseq:2}
+	Пусть $A,x$ из условий теоремы \ref{cha:29/the:1} и следствия \ref{cha:29/conseq:1}. Если $\alpha,\beta \in \mathbb{R}$ и $\alpha x \le Ax \le \beta x$, то $\alpha \le rho(A) \le \beta$. Если $\alpha x < Ax$, то $\alpha < \rho(A)$. Если $Ax < \beta x$, то $\rho(A) < \beta$.
+\end{conseq}
+\begin{Proof}
+	Если $\alpha_x \le Ax$, то $\displaystyle \alpha \le \underset{i}{\min} \frac{\underset{j}{\overset{}{\sum}}a_{ij}x_j}{x_i}$. Отсюда $\alpha \le \rho(A)$ по следствию \ref{cha:29/conseq:1}. Аналогично доказываются остальные утверждения.
+\end{Proof}
+
+
+
+
+
+
+
+
+
+
+
+
+

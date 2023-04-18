@@ -1,0 +1,44 @@
+\chapter{Для неотрицательной матрицы A $\exists$ неотрицательный собственный вектор, с.з. которого равно $\rho(A)$}
+\label{cha:33}
+
+\epigraph{
+	\textit{Предоставьте это времени и собственному ее желанию — сравниться в просвещении с остальной частию Европы.}}
+{-- Загоскин М.Н.}
+
+\begin{theorem}[]\label{cha:33/the:1}
+	Пусть $A \ge 0$. Тогда $\rho(A)$ – собственное значение A и существует неотрицательный собственный вектор с собственным значением $\rho(A)$.
+\end{theorem}
+\begin{Proof}
+	Пусть $A = (a_{ij})$, $\varepsilon > 0$. Тогда $A(\varepsilon) = (a_{ij} + \varepsilon) > 0$. Пусть $x(\varepsilon)$ – перронов вектор матрицы $A(\varepsilon)$ с собственным значением $\rho(A(\varepsilon))$. Тогда $x(\varepsilon) > 0$ и $\underset{j}{\overset{}{\sum}} x(\varepsilon)_j = 1$. Таким образом, все векторы $x(\varepsilon)$ лежат в компакте пространства $\mathbb{R}^n$. Рассмотрим убывающую последовательность $\varepsilon_k \to 0$. В последовательности $x(\varepsilon_k)$ выберем сходящуюся подпоследовательность $x(\varepsilon_k) \to x$. Так как $x(\varepsilon_k) > 0$, то $x \ge 0$ и, кроме того, $\underset{j}{\overset{}{\sum}}x_j = 1$. При этом $A(\varepsilon_k) < A(\varepsilon_{k−1})$, откуда $\rho(A) \le \rho(A(\varepsilon_k)) \le \rho(A(\varepsilon_{k−1}))$ по предложению \ref{cha:29/propose:2}. Итак, существует предел $\rho = \underset{k}{\lim} \rho(A(\varepsilon_k))$ и $\rho \ge \rho(A)$. Отсюда:
+	$$\begin{gathered}
+		Ax = [\underset{k}{\lim} A(\varepsilon_k)][\underset{k}{\lim} x(\varepsilon_k)] = \underset{k}{\lim} [A(\varepsilon_k)x(\varepsilon_k)] = \\
+		= \underset{k}{\lim} [\rho (A(\varepsilon_k )) x(\varepsilon_k )] = \lim \rho [A(\varepsilon_k )] [\underset{k}{\lim} x(\varepsilon_k )] = \rho x
+	\end{gathered}$$
+	Следовательно, x является собственным вектором A с собственным значением $\rho$. Но тогда $\rho \le \rho(A)$ и поэтому $\rho = \rho(A)$.
+\end{Proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
