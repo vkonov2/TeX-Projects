@@ -1,0 +1,104 @@
+\chapter{Статистическая модель}\label{cha:2}
+
+\section{Оценка среднего}\label{cha:2/sec:1}
+\begin{example}[\red{оценка среднего}]
+	Будем предполагать, что на некотором вероятностном пространстве $ (\Omega, \mathcal{F}, P)$ определена бесконенчая последовательность $ X_1, X_2, ...$ и $ X_1, ... , X_n$ - ее первые n членов. Интересующий нас параметр, определеяющий (в какой-то мере) срок службы, отождествим $ \theta = EX_1$.
+
+	Одна из стандратных статистических задач состоит в том, чтобы выяснить, чему равно $ \theta.$
+	Вот возможное решение.
+	В силу УЗБЧ Колмогорова
+	$$\overline{X} = \frac{1}{n}\sum\limits_{i=1}^{n}\xrightarrow[n\to \infty]{\text{п.н.}}EX_1 = \theta$$
+	Возьмем n готовых изделий и проверим их. Пусть $ x_1, x_2, ..., x_n$ - сроки службы готовых изделий. Это реализации сл.в. $ X_1, ..., X_n.$ Естественно ожидать, что $ \displaystyle \overline{X}  = \frac{1}{n}\sum\limits_{i=1}^{n}x_i$ при больших n окажется близким к $ \theta.$ Это \blue{задача точечного оценивания параметра}: пусть $ X_1, .. ,X_n- $ случайные наблюдения; $ \overline{X}-  $ статистическая оценка( это случайная величина); $ \overline{x}$ - реализация оценки, с ней обычно работают на практике.
+
+	Ясно, что нужны оценки, которые в среднем близки к $ \theta.$ Тогда и реализации будут близки.
+
+	Пусть в частности 
+	$\displaystyle P(X_1 \le t) = \begin{cases}
+		0, \; t \leq 0\\
+		1 - e^{-\frac{t}{\theta}}, \; t>0
+	\end{cases}$, параметр $ \theta > 0$. Т.е. $ X_1 \sim exp(\frac{1}{\theta})$ и $ E_{\theta}X_1 = \theta.$
+
+	Тогда $ \overline{X} $ \textbf{оптимальна} при любом n > 0 в следующем смысле.
+	\begin{itemize}
+			\item[1)] 
+				$\displaystyle E_{\theta}\overline{X} = \frac{1}{n}\sum\limits_{i=0}^{n}E_{\theta}X_i = \theta \; \forall \theta > 0$ - это свойство \blue{несмещенности}. Качественно: реализации $ \overline{x}$ группируются вокруг $ \theta$.
+			\item[2)] 
+				$\displaystyle D_{\theta}\overline{X} \leq D_{\theta} \hat{\theta}_n, \; \theta > 0$ и любой несмещенной оценки $ \hat{\theta}_n = \hat{\theta}_n(X_1, \dots, X_n).$ Качественно: реализации $  \overline{X}$ в среднем лежат ближе к $ \theta$, чем у других $ \hat{\theta}_n$.
+		\end{itemize}	
+\end{example}
+
+\section{Проверка однородности данных}\label{cha:2/sec:2}
+\begin{example}[\red{проверка однородности данных}]
+	Пусть некоторый эксперимент проводится сначала $ m$ раз в условиях $A$, а затем $ n$ раз в условиях $ B$ (например, влияет ли некоторый препарат на на развитие растений, лекарство на анализы больного и т.д.).
+
+	\noindent Будем считать $ {x_i}$ реализациями н.о.р.с.в. $ {X_i} $ c функцией распредления $ X_1 \sim F_X(x) = P(X_1 \leq x).$ Пусть $ {y_i}$ - реализации н.о.р.с.в. $ {Y_i}$, ф.р. $ Y = F_Y(x).$ Последовательности $ {x_i}, {y_i}$ независимы.
+
+	\noindent Интерпретируем поставленную задачу как проверку гипотезы $\displaystyle H: F_X = F_Y$.
+	Предположение о том, что условие $B$ дает другой результат интерпретируем как гипотезу (альтернативную к $ H$)
+	$\displaystyle K: F_X \neq F_Y$.
+
+	\textbf{Важно}: ни $ F_X$, ни $ F_Y$ неизвестны!
+
+	\noindent Оценкой $ F_X$ возьмем $\displaystyle \hat{F}_{mX}(x) = \frac{1}{m}\sum\limits_{i=1}^{m}I(X_i \leq x), \; x \in \mathbb{R}$ - это <<хорошая>> оценка, т.к. в силу УЗБЧ: $\displaystyle \hat{F}_{mX}(x) \xrightarrow{\text{п.н.}}\; EI(X_1 \leq x) = F_X(x)$ $($у нас $ \{X_i\}$ и $ \{Y_i\}$ определены на одном $ (\Omega, \mathcal{F}, P)$$)$.
+
+	\begin{theorem}[\red{Глиненко-Кантелли}]
+		\[ \sup\limits_x|\hat{F}_{mX}(x) - F_X(x)| \xrightarrow[m \to \infty]{\text{п.н.}}
+		0\]
+	\end{theorem}
+
+	Очевидно, если гипотеза $ H$ верна, то величина $\displaystyle D_{mn} := \sup\limits_x|\hat{F}_{mX}(x) -\hat{F}_{nY}(x)|$ мала при больших $ m,n.$
+	Вот естественное правило:
+	\begin{itemize}
+		\item[$\bullet$] $\text{если } D_{mn}\leq c, \text{ то } H \text{ принять }$
+		\item[$\bullet$] $\text{если } D_{mn}> c, \text{то } H \text{ отвергнуть и принять } K$
+	\end{itemize}
+
+	\textbf{Но как выбрать константу с?}
+	\begin{lemma}
+		Пусть верна гипотеза $H$ и $F_X = F_Y = F$. Пусть $F$ непрерывна. Тогда распределение сл.в. $D_{mn}$ не зависит от $F(x)$ при любом $x$ и конечных $m,n$.
+	\end{lemma}
+	\begin{Proof}
+		Докажем лемму при дополнительном предположении: $F(x)$ строго возрастает. Тогда при любом $t \in (0,1)$ существует $F^{-1}(t)$, и эта функция непрерывна и строго возрастает. Сделаем замену переменной $F(x) = t, \; x =F^{-1}(t)$. Тогда при $x \in \mathbb{R}$ переменная $t \in (0,1)$ и 
+		\[D_{mn} = \sup\limits_{t \in (0,1)}|\hat{F}_{mX}(F^{-1}(t)) -\hat{F}_{nY}(F^{-1}(t))|.\]
+		Но $\displaystyle \hat{F}_{mX}(F^{-1}(t)) = \frac{1}{m}\sum\limits_{i=1}^{m}I(X_i \leq F^{-1}(t)) = \frac{1}{m}\sum\limits_{i=1}^{m}I(F(X_i)\leq t)$, т.к.\\ $ (X_i \leq F^{-1}(t)) = (F(X_i)\leq t)$. Осталось заметить, что если $X_i \sim F(x)$ и $F(x)$ строго возрастает, то $\displaystyle F(X_i)	=\eta_i \sim R(0,1)$.
+
+		\noindent Действительно, 
+		$\displaystyle \forall t \in (0,1) \;\; P(F(X_i) \leq t) = P(X_i \leq F^{-1}(t)) = F(F^{-1}(t)) = t$.
+
+		\noindent Значит $\displaystyle \hat{F}_{mX}(F^{-1}(t)) = \frac{1}{m}\sum\limits_{i=1}^{m}I(\eta_i \leq t)$,
+		где $ {\eta_i}$ - н.о.р. $ R(0,1)$ сл.в., а тогда $\hat{F}_{mX}(F^{-1}(t))$ имеет ф.р., которая от $F(x)$ не зависит. Для $\hat{F}_{nY}(F^{-1}(t))$ имеем то же самое. 
+	\end{Proof}
+
+	\vspace{0.3cm}
+	Если $D_{mn}$ свободно от $F(x)$ (при $H$), то его можно вычислить при любых $m,n$. Например, полагая, что $X_1, .., X_m$ и $Y_1, .., Y_n$ распределены как $R(0,1)$. Но особенно красив ответ при $m,n \rightarrow  \infty$.
+
+	\begin{theorem}[\red{Смирнова}]
+		Пусть $H$ верна. Пусть $F_X = F_Y =F$, и $F$ непрерывна. Тогда при $\lambda > 0$
+		\[ \lim\limits_{m,n \rightarrow \infty}P(\sqrt{\frac{mn}{m+m}D_{mn}}< \lambda) = K(\lambda),\]
+		где $ K(\lambda) = 1 - 2 \sum\limits_{j\geq1}(-1)^{j+1}e^{-2j^2\lambda^2} $ - \blue{функция распредления Колмогорова}.
+	\end{theorem}
+	
+	Выберем малое $0<\alpha<1$ и пусть $\lambda_{1-\alpha}$ такое число, что $K(\lambda_{1-\alpha}) = 1- \alpha$ . Число $\lambda_{1-\alpha}$ называют \red{квантилью уровня} $1-\alpha$.
+
+	Положим $\displaystyle c_{\alpha}(m,n) =\sqrt{\frac{m+n}{mn}\lambda_{1-\alpha}}$ - это и есть искомая константа с!
+
+	\textbf{Правило}:
+	$\displaystyle \begin{cases}
+		\text{если } D_{mn}\leq c_{\alpha}(m,n), \text{ то } H \text{ принимаем }\\
+		\text{если } D_{mn}> c_{\alpha}(m,n), \text{ то принимаем } K
+	\end{cases}$
+
+	Тогда вероятность \red{ошибки первого рода}:
+	\begin{gather*}
+		P(K|H) = P(\sqrt{\frac{mn}{m+n}}D_{mn} > \lambda_{1-\alpha}) =\\
+		=1 - P(\sqrt{\frac{mn}{m+n}}D_{mn}\leq \lambda_{1-\alpha}) \rightarrow 1 - K(\lambda_{1-\alpha}) = \alpha
+	\end{gather*}
+	Можно показать, что $P(H|K) \to 0$ при $m,n \to \infty$. Это вероятность \red{ошибки 2-ого рода}.
+
+	Итак, $\displaystyle \begin{cases}
+			P(H|H) \rightarrow \; 1-\alpha\\
+			P(K|K) \rightarrow \; 1
+		\end{cases}$\\
+	(т.е. тест с большой вероятностью выберет правильную гипотезу!)
+\end{example}
+% chapter примеры_статистических_задач_статистическая_модель (end)

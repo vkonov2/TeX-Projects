@@ -1,0 +1,444 @@
+\chapter{УМО и условные распределения} % (fold)
+\section{Определение условного математического ожидания} % (fold)
+
+
+% subsection определение_условного_математического_ожидания (end)
+\textbf{ШАГ 1}:
+
+Пусть имеются вероятностное пространство $(\Omega, \mathcal{F}, P)$, случайная величина $\xi: (\Omega, \mathcal{F}) \rightarrow (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ , причем $E|\xi|<\infty$, где $E\xi = \int\limits^{}_{\Omega}\xi(\omega)P(d\omega)$.
+
+\noindentПусть $A \in \mathcal{F}$ . Тогда для $C \in \mathcal{F}$ $\displaystyle P(C|A) = \frac{P(CA)}{P(A)} = P_A(C)$.
+
+\noindentЕсли $CA = \varnothing$, то $P_A(C) = 0$, а если $C \subset A$, то $P_A(C) = \frac{P(C)}{P(A)}$.
+
+\noindentИмеем новое вероятностное пространство $(\Omega, \mathcal{F}, P_A)$.
+
+\noindentЕстественно положить $\displaystyle E(\xi|A) = \int\limits^{}_{\Omega}\xi(\omega)P_A(d\omega)$. Тогда: 
+$$E(\xi|A) = \int\limits^{}_{A}\xi(\omega)P_A(d\omega)+ \int\limits^{}_{\overline{A}}\xi(\omega)P_A(d\omega) = \frac{1}{P(A)}\int\limits^{}_{A}\xi(\omega)P(d\omega)$$
+
+\noindentИтак: $\displaystyle E(\xi|A) = \frac{1}{P(A)}\int\limits^{}_{A}\xi(\omega)P(d\omega)=\frac{E(\xi I(A))}{P(A)} = \frac{E(\xi, A)}{P(A)}$.
+
+\textbf{ШАГ 2}:
+Рассмотрим $(\Omega, \mathcal{F}, P)$, и пусть $\{A_1, A_2, ..\}$ - разбиение $\Omega$, т.е. 
+\[A_1 + A_2 + .. = \Omega, \;\; A_iA_j = \varnothing\; i\neq j,\;\; P(A_i)>0.\]
+Рассмотрим сигма-алгебру $U = \sigma\{A_1, A_2, ..\}$. Элементы $U$ - всевозможные объединения $A_1, A_2, ..$.
+
+\noindentПусть $\xi$ - сл.в., определенная на $(\Omega, \mathcal{F})$ со значениями в $(\mathbb{R}, B(\mathbb{R})), \;E|\xi|<\infty$.
+
+\begin{definition}
+	\red{Условным математическим ожиданием} сл.вел. $\xi$ \red{ относитльно } $ U$ называется случайная величина 
+	$$\hat{\xi} = E(\xi|U) = \sum\limits_{k\geq1}^{}\frac{E(\xi, A_k)}{P(A_k)}I(A_k)\eqno(1)$$
+	где $E(\xi, A_k) = \int\limits^{}_{A_k}\xi(\omega)P(d\omega)$.
+	Т.е. $\displaystyle E(\xi|U) = \sum\limits_{k\geq1}^{}E(\xi|A_k)I(A_k)$.
+ \end{definition}
+
+Имеем следующую лемму (без доказательства):
+\begin{lemma}
+	Пусть $U_{\xi}$ - сигма-алгебра, порожденная $\xi$. Тогда сл.в. $\eta$ является $U_{\xi}$- измеримой тогда и только тогда, когда $\eta = \varphi(\xi)$ для некторой борелевской $\varphi$. 
+\end{lemma}
+
+С помощью этого утверждения можно вывести два свойства УМО из (1):
+\begin{itemize}
+	\item[$1)$] 
+		Сл.в. $\hat{\xi}$ измерима относительно $U$.
+		\begin{Proof}
+			$ U$ порождается сл.в. $\displaystyle \xi = \sum\limits_{k\geq1}^{}c_kI(A_k)$, где все $c_k$ различны. Тогда сл.в. $\eta$ будет $U$-измерима тогда и только тогда, когда $\displaystyle \eta = \phi(\xi) = \sum\limits_{k\geq1}^{}b_kI(A_k)$.
+			Но именно такой вид имеет $\hat{\xi}$ из (1).
+		\end{Proof}
+	\item[$2)$] 
+		$ \forall A\in U \;\; E(\hat{\xi}, A) = E(\xi, A).$
+		\begin{Proof}
+			Так как имеется представление $\displaystyle A = \sum\limits_{k}^{}A_{jk}$, то 
+			$$\begin{gathered}
+				E(\hat{\xi}, A) = \sum\limits_{k}^{}E(\hat{\xi}, A_{jk}) = \sum\limits_{k}^{}E(\hat{\xi}I(A_{jk}))=\\
+				=\sum\limits_{k}^{}E(\frac{E(\xi I(A_{jk}))}{P(A_{jk})}I(A_{jk})) = \sum\limits_{k}^{}E(\xi I(A_{jk})) = E(\xi, A).
+			\end{gathered}$$
+		\end{Proof}
+\end{itemize}
+
+\begin{lemma}
+	Свойства $1)$ и $2)$ выше однозначно определяют УМО и эквивалентны определению $(1)$.
+\end{lemma}
+\begin{proof}
+	Уже доказано, что определение (1) влечет свойства $1),2)$.
+
+	Обратно, пусть для некоторой сл.в. $\hat{\xi}$ выполнены свойства $1)$ и $2)$ Тогда в силу $1)$: $\displaystyle \hat{\xi} = \sum\limits_{k\geq1}^{}c_kI(A_k)$. В силу $2)$: $\displaystyle E(\hat{\xi}, A_j) = E(\xi, A_{j}) = E(c_jI(A_j)) = c_jP(A_j)$, т.е. $c_j = E(\xi, A_j)/P(A_j)$.
+\end{proof}
+
+\textbf{ШАГ 3} (определение УМО для произвольных $U$):
+\begin{definition}\label{lec:6/def:2}
+	Пусть $\xi$ есть сл.вел. (или сл. вектор) на $(\Omega, \mathcal{F},P)$, и $U \subset \mathcal{F}$. Пусть $E|\xi|<\infty$. Тогда \red{ условным математическим ожиданием} $\xi$ \red{ относиительно } $U$ называется сл.в. (или сл.вектор той же размерности, что и $\xi$), которая обладает двумя свойствами:
+	\begin{itemize}
+		\item[$1)$] $\hat{\xi}$ измерима относительно $U$;
+		\item[$2)$] $\forall A\in U\;\; E(\hat{\xi}, A) = E(\xi, A)$, т.е.
+		$\displaystyle \int\limits^{}_{A}\hat{\xi}(\omega)P(d\omega) = \int\limits^{}_{A}\xi(\omega) P(d\omega)$.
+	\end{itemize}
+\end{definition}
+
+\noindentУМО будет обозначаться так же $E(\xi|U)$. Заметим, что если $E|\xi|<\infty$, то $\displaystyle E\hat{\xi} = \int\limits^{}_{\Omega}\hat{\xi}(\omega)P(d\omega) = \int\limits^{}_{\Omega}\xi(\omega)P(d\omega) = E\xi$ и, значит, $E|\hat{\xi}| < \infty$.
+
+\begin{theorem}\label{lec:6/the:1}
+	Если $E|\xi| < \infty$, то УМО $\hat{\xi}$ в определении \ref{lec:6/def:2} всегда существует и единственно с точностью до значений на множестве меры нуль.
+\end{theorem}
+
+\noindent\rule{\textwidth}{1pt}
+\colorbox{DarkSeaGreen}{О производной Радона-Никодима}
+\begin{definition}
+	Пусть на измеримом пространстве $(\Omega, \mathcal{F})$ заданы сигма-конечные меры $\mu$ и $\lambda$. Меру $\lambda$ называют \red{ абсолютно непрерывной относительно меры} $\mu$ , если из равенства $\mu(A) = 0, \; A \in \mathcal{F}$, следует $\lambda(A) = 0$. Пишут $ \lambda \prec \mu$.
+\end{definition}
+	
+\begin{theorem}[\blue{Радона-Никодима}]
+	Пусть на $(\Omega, \mathcal{F})$ заданы $\sigma$-конечные меры $\mu$ и $\lambda$. Тогда $\lambda \prec \mu$ тогда и только тогда, когда существует $\mathcal{F}$-измеримая функция $f(\omega) \geq 0$, для которой $\displaystyle \lambda(A) = \int\limits^{}_{A}f(\omega)\mu(d\omega)\; \; \forall \; A \in \mathcal{F}$.
+	Функция $f(\omega)$ единственна с точностью до значений на множестве $\mu$-меры нуль. Функция $f(\omega)$ называется \red{ производной Радона-Никодима} меры $\lambda$ по мере $\mu$. Пишут $f(\omega)= \frac{d\lambda}{d\mu}(\omega)$.
+\end{theorem}
+\noindent\rule{\textwidth}{1pt}
+
+\vspace{2cm}
+Докажем теорему \ref{lec:6/the:1}.
+\begin{Proof}
+	\begin{itemize}
+		\item[$1)$] 
+			$\xi$ - скалярная сл.в., $\xi \geq 0$. Введем функцию множеств
+			$$Q(A) = \int\limits^{}_{A}\xi(\omega)P(d\omega) = E(\xi, A), \;\; A \in U$$
+			Тогда [Ширяев, Вероятность, гл. III, § 6]:
+				\begin{itemize}
+					\item a) $Q(A) \geq 0, \;\; Q(\Omega) = E\xi < \infty;$	
+					\item b) Если $A = \sum\limits_{i}^{}A_i, \;\; A_iA_j = \varnothing \; i \neq j$, то $\displaystyle Q(A) = \sum\limits_{i}^{}Q(A_i)$;
+					\item c) Если $P(A) = 0$, то $Q(A) = 0.$
+				\end{itemize}
+
+			Свойства a)-c) означают, что $Q(A)$ есть конечная $\sigma$-аддитивная мера, и $Q \prec P$. В силу \blue{ теоремы Радона -Никодима} существует $U$-измеримая функция $\hat{\xi}$, такая что
+			\[ Q(A) = \int\limits^{}_{A}\xi(\omega)P(d\omega) = \int\limits^{}_{A}\hat{\xi}(\omega)P(d\omega).\]
+			Эта функция почти наверное единственна.
+		\item[$2)$]
+			Пусть $\xi$ - скалярная и не обязательно неотрицательная. Тогда 
+			$\displaystyle \xi = \xi^+ - \xi^-$, где $\xi^+ = \max(0, \xi) \geq 0 $, $\xi^- = \max(0, -\xi)$. Положим $\displaystyle \hat{\xi} = \hat{\xi^+} - \hat{\xi^-}$.
+			Очевидно, $\hat{\xi} - \;\;U$-измерима, т.к. $\hat{\xi^+}$ и $\hat{\xi^-}$ - $U$-измеримы. Далее:
+			$$E(\hat{\xi}, A) = E(\hat{\xi^+}, A) - E(\hat{\xi^-},A) = E(\xi^+, A) - E(\xi^-,A) = E(\xi, A), \;A \in U$$
+			Наконец, если $\overline{\xi}$ - $U$-измерима и $E(\overline{\xi}, A) = E(\xi, A)\; \forall A\in U$, то $\overline{\xi} = \hat{\xi}$ почти наверное [Ширяев, Вероятность, гл. II, § 6]. Здесь использовалось предположение $E|\hat{\xi}| < \infty, \; E|\overline{\xi}|< \infty$.
+		\item[$3)$]
+			Пусть $\xi = (\xi_1, \dots, \xi_s)^T$. Тогда $\displaystyle \hat{\xi} = (\hat{\xi_1}, \dots, \hat{\xi_s})^T$. Измеримость следует из измеримости $\hat{\xi_i}, \; i=1, \dots,s$. Далее:
+			$$E(\hat{\xi}, A) = (E(\hat{\xi_1}, A), \dots, E(\hat{\xi_s}, A))^T = (E(\xi_1, A), \dots, E(\xi_s, A))^T = E(\xi, A)$$
+			Наконец, если $E(\overline{\xi}, A) = E(\hat{\xi}, A), \;\; \forall\;A \in F$, то $\displaystyle E(\overline{\xi_i}, A) = E(\hat{\xi_i}, A) \; \Rightarrow \; \overline{\xi_i}\PNdef \hat{\xi_i}$, т.е. $\overline{\xi}\PNdef \hat{\xi}$.
+	\end{itemize}
+\end{Proof}
+
+\section{Свойства условного математического ожидания} 
+Далее всегда $E|\xi|<\infty$. Следующие 6 утверждений верны и для скаляров и для векторов, причем соотношения $\xi_1 \leq \xi_2, \; \xi_n\uparrow \xi$ понимаются для векторов покомпонентно. Пусть также сигма-алгебра $U \subset \mathcal{F}$.
+
+\begin{clair}\label{lec:6/clair:1}
+	Имеем следующие свойства:
+	\begin{itemize}
+		\item[$a)$] $E(c\xi|U) = cE(\xi|U) \;\;$ п.н.
+		\item[$b)$] $E(\xi_1 + \xi_2|U) =E(\xi_1|U) + E(\xi_2|U)\;\;$ п.н.
+		\item[$c)$] Если $\xi_1 \leq \xi_2$ п.н., $E(\xi_1|U) \leq E(\xi_2|U)$ п.н.
+	\end{itemize}
+\end{clair}
+\begin{Proof}
+	\begin{itemize}
+		\item[$a)$] 
+			Напомним, что $\hat{\xi} = E(\xi|U)$ такая сл.величина (вектор), что:
+			$$\hat{\xi} \text{ - } U-\text{измеримая сл.в.}\eqno(5)$$
+			$$E(\hat{\xi}, A) = E(\xi, A) \; \forall A \in U, \text{ т.е. } \underset{A}{\overset{}{\int}}\hat{\xi}(\omega)P(d\omega) = \underset{A}{\overset{}{\int}}\xi(\omega)P(d\omega)\eqno(6)$$
+			Значит, надо показать, что:
+			\begin{itemize}
+				\item[$1)$] $c\hat{\xi}$ - $U-$измерима,
+				\item[$2)$] $\forall \; A \in U \;\; E(c\hat{\xi}, A) = E(c\xi, A)$
+			\end{itemize}
+			Соотношение $1)$ очевидно, если $\hat{\xi}$ - $U$-измерима.
+			Докажем $2)$: $\displaystyle E(c\hat{\xi}, A) = cE(\hat{\xi}, A) = cE(\xi, A) = E(c\xi, A)$.
+		\item[$b)$] 
+			Доказательство $b)$ аналогично доказательству $a)$.
+		\item[$c)$]
+			Пусть $\displaystyle \hat{\xi}_i = E(\xi_i|U),\;i=1,2$.\\
+			Тогда $\displaystyle \forall A \in U E(\hat{\xi}_1, A) = \int\limits^{}_{A} \hat{\xi}_1 P(d\omega) = E(\xi_1, A) \leq E(\xi_2, A) = \int\limits^{}_{A} \hat{\xi}_2 P(d\omega)$.\\
+			Значит, $\displaystyle \int\limits^{}_{A}(\hat{\xi}_2 - \hat{\xi}_1)P(d\omega) \geq 0\; \forall A \in U$
+			и $\hat{\xi}_2 - \hat{\xi}_1 \geq 0$ п.н.
+	\end{itemize}
+\end{Proof}
+
+\begin{clair}\label{lec:6/clair:2}
+	Если сигма-алгебра $U$ и сигма-алгебра $\sigma(\xi)$ независимы, то $E(\xi|U) = E\xi$ п.н.
+\end{clair}
+\begin{Proof}
+	Надо проверить, что $E\xi$- вариант УМО. Так как константа $U$-измерима, то достаточно проверить, что $\displaystyle E(E\xi,A) = E(\xi, A)\;\; \forall\;A \in U$. \\
+	Имеем $\displaystyle E(\xi, A) = E(\xi I(A)) = E\xi P(A) = E(E\xi,A)$.
+\end{Proof}
+
+\begin{clair}[\blue{теорема о монотонной сходимости}]\label{lec:6/clair:3}
+	Если п.н. $0\leq \xi_n \uparrow \xi$, то $E(\xi_n|U) \uparrow E(\xi|U)$ п.н.
+\end{clair}
+\begin{Proof}
+	Из $\xi_{n+1} \geq \xi_n$ п.н. следует в силу пункта $ cс)$ утвреждения \ref{lec:6/clair:1}, что $\hat{\xi}_{n+1} \geq \hat{\xi}_n \geq 0$ п.н. Значит (т.2, §4 , гл.2. [Ширяев, Вероятность]) существует $U$-измеримая случайная величина $\hat{\xi}$, такая что $\hat{\xi}_n \uparrow \hat{\xi}$ п.н. 
+	Почему $\hat{\xi}$ - УМО?
+
+	В силу теоремы о монотонной сходимости:
+	$$\forall A \in U \; \int\limits^{}_{A}\hat{\xi_n}P(d\omega)\;\rightarrow\;\int\limits^{}_{A}\hat{\xi}P(d\omega), \;\;\int\limits^{}_{A}\xi_nP(d\omega)\;\rightarrow\;\int\limits^{}_{A}\xi P(d\omega)$$
+	Т.к. левые части в двух последних равенствах совпадают (т.к. $\hat{\xi}_n$ - УМО для $\xi$), то совпадают правые. Т.е. $\displaystyle \int\limits^{}_{A}\hat{\xi}P(d\omega)=\int\limits^{}_{A}\xi P(d\omega)$.
+	Значит, $\hat{\xi}$ - УМО для $\xi$.
+\end{Proof}
+
+\begin{clair}\label{lec:6/clair:4}
+	Если $\eta$ - скалярная сл.в. и $U$-измерима, $E|\xi|<\infty,\;E|\xi\eta| < \infty$, то
+	\[E(\xi\eta|U) = \eta E(\xi|U)\;\;\;\text{п.н.}\]
+\end{clair}
+\begin{Proof}
+	Докажем в 4 шага.
+	\begin{itemize}
+		\item[$1)$]
+			Если $\eta = I(B),\;B \in U$, то утверждение верно.
+			Действительно, $\eta E(\xi|U)$ - $U$-измерима, и $\forall A \in U$
+			\begin{gather*}
+				\int\limits^{}_{A}E(I(B)\xi|U)P(d\omega) = \int\limits^{}_{A}I(B)\xi P(d\omega) = \int\limits^{}_{AB}\xi P(d\omega) =\\
+				= \int\limits^{}_{AB}E(\xi|U)P(d\omega) = \int\limits^{}_{A}I(B)E(\xi|U)P(d\omega).
+			\end{gather*}
+			
+			Значит (см. §6, гл.2 [Ширяев, Вероятность]) $\displaystyle E(I(B)\xi|U) = I(B)E(\xi|U)\;\;\text{п.н.}$
+		\item[$2)$]
+			Значит, утверждение верно для простых $U$-измеримых функций $\eta = \sum\limits_{i=1}^{k}c_i I(B_i)$, \\
+			$B_i \in U$ в силу линейности УМО.
+		\item[$3)$]
+			Пусть $\xi \geq 0,\; \eta \geq 0.$ 
+			Возьмем последовательность простых $U$-измеримых $0 \leq \eta_n \uparrow \eta$ (см теорему 1 в §4 гл.II [Ширяев, Вероятность]).
+
+			Тогда в силу шага $2)$ имеем:
+			$$E(\eta_n\xi|U) = \eta_nE(\xi|U) \uparrow \eta E(\xi|U) \;\; \text{ п.н.}\eqno(7)$$
+			Отсюда в силу утверждения \ref{lec:6/clair:3}, т.к. $\eta_n\xi \uparrow \eta\xi$, имеем:
+			$$E(\eta_n\xi|U) \uparrow E(\eta\xi)\;\;\text{ п.н.}\eqno(8)$$
+			В соотношениях $(7)$,$(8)$ левые части совпадают, значит совпадают и правые части, т.е. $\displaystyle E(\eta\xi|U) = \eta E(\xi|U)\;\text{ п.н.}$.
+		\item[$4)$]
+			Пусть $\xi$ и $\eta$ произвольные. Тогда: 
+			\begin{gather*}
+				E(\xi\eta|U) = E((\eta^+-\eta^-)(\xi^+-\xi^-)|U)= \eta^+E(\xi^+|U) - \eta^-E(\xi^+|U)-\\
+				-\eta^+E(\xi^-|U)+ \eta^-E(\xi^-|U) = \eta^+E(\xi|U) - \eta^-E(\xi|U) = \eta E(\xi|U)\;\text{ п.н.} 
+			\end{gather*}
+	\end{itemize}
+\end{Proof}
+
+\begin{clair}[\blue{формула полной вероятности}]\label{lec:6/clair:5}
+	$\displaystyle EE(\xi|U) = E\xi$.
+\end{clair}
+\begin{Proof}
+	$\displaystyle EE(\xi|U) = \int\limits^{}_{\Omega}E(\xi|U)P(d\omega)=\int\limits^{}_{\Omega}\xi P(d\omega) = E\xi$.
+\end{Proof}
+
+\begin{clair}[\blue{формула последовательного усреднения}]\label{lec:6/clair:6}
+	Если $U \subset U_1 \subset F$, то $\displaystyle E(\xi|U) = E (E(\xi|U_1)|U)\; \text{ п.н.}$
+\end{clair}
+\begin{Proof}
+	Если $A\in U$, то $A \in U_1$. Значит, $\forall\;A \in U$ 
+	\[\int\limits^{}_{A}E(E(\xi|U_1)|U)P(d\omega) = \int\limits^{}_{A}E(\xi|U_1)P(d\omega) = \int\limits^{}_{A}\xi P(d\omega) = \int\limits^{}_{A}E(\xi|U)P(d\omega).\]
+	Значит $\displaystyle E(E(\xi|U_1)|U) = E(\xi|U)\;\;\text{ п.н.}$ $U$-измеримость $E(E(\xi|U_1)|U)$ - следствие определения.
+\end{Proof}
+
+\begin{clair}\label{lec:6/clair:7}
+	Пусть $\xi$- скалярная сл. вел., $E\xi^2<\infty$. Пусть $H_U$ есть множество $U$-измеримых сл.величин с конечным вторым моментом. Тогда решение задачи $\displaystyle E(\xi(\omega) - a(\omega))^2\;\rightarrow\;\min\limits_{a(\omega)\in H_U}$ есть $a^*(\omega) = E(\xi|U)$.
+\end{clair}
+\begin{Proof}
+	Имеем:
+	$$\begin{gathered}
+		E(\xi - a(\omega))^2 = E(\xi - E(\xi|U))^2 + 2E(\xi - E(\xi|U))(E(\xi|U) - a(\omega)) + \\
+		+ E(E(\xi|U) -a(\omega))^2 
+	\end{gathered}$$
+	Для среднего члена имеем:
+	\begin{gather*}
+		2E(\xi - E(\xi|U))(E(\xi|U) - a(\omega)) = 2EE(\xi - E(\xi|U))(E(\xi|U) - a(\omega)|U) =\\
+		=2E(E(\xi|U)-a(\omega))E(\xi-E(\xi|U)|U) = 0
+	\end{gather*}
+	Т.е. $\displaystyle E(\xi - a(\omega))^2 = E(\xi - E(\xi|U))^2 + E(E(\xi|U) - a(\omega))^2$. Минимум последнего выражения достигается при $\displaystyle a^*(\omega) = E(\xi|U)$. Осталось проверить, что $\displaystyle E(a^*(\omega))^2 = E(E(\xi|U))^2 < \infty$ при $E\xi^2 < \infty$.
+	\begin{problem}
+		Доказать \blue{неравенство Коши-Буняковского}: 
+		$$\text{при } E\xi^2 < \infty \;\; (E(\xi|U))^2 \leq E(\xi^2|U) \; \text{ п.н.}$$
+	\end{problem}
+	Тогда в силу неравенства Коши-Буняковского имеем:
+	$$E(E(\xi|U))^2 \leq EE(\xi^2|U) = E\xi^2 < \infty$$
+\end{Proof}
+
+\begin{example}[\blue{оптимальный среднеквадратический прогноз в авторегрессии}]
+	Пусть $S_t, \; t = 0, 1, \dots$ - стоимости ценных бумаг в момент времени $t$. Введем логарифмические приращения 
+	$\displaystyle u_t := \ln \frac{S_t}{S_{t-1}} = \ln S_t - \ln S_{t-1}$.
+	Для описании динамики последоватльности $\{u_t\}$ используют стохастические разностные уравнения. Например, $AR(1)$ уравнение имеет вид:
+	$$u_t = \beta u_{t-1} + \varepsilon_t, \; t = 1, 2, \dots, \; \beta \in \mathbb{R}^1$$
+	$\{\varepsilon_t\}$ - н.о.р.с.в., $E \varepsilon_1 = 0$, $0 < D \varepsilon_1 = \sigma^2 < \infty$.
+	Начальное значение $u_0$ от $\{\varepsilon_t\}$ не зависит, $E u_0 = 0$, $E u_0^2 < \infty$. Параметры $\beta$ и $\sigma^2$ обычно неизвестны, распределение сл.в. $\varepsilon_1$ тоже неизвестны.
+
+	Из $AR(1)$ уравнения следует:
+	\begin{gather*}
+		u_t =\varepsilon_t + \beta(\varepsilon_{t-2} + \beta u_{t-2}) = \varepsilon_t + \beta\varepsilon_{t-2}+ \beta^2u_{t-2}=\\
+		=...=\varepsilon_t+\beta\varepsilon_{t-1}+...+\beta^{t-1}\varepsilon_1 + \beta^tu_0
+	\end{gather*}
+	Поэтому $\displaystyle E u_0 = 0$, $\displaystyle D u_t = \sigma^2(1+\beta^2+...+\beta^{2(t-1)}) + \beta^{2t}Eu_0^2<\infty$.
+	Сл.величина $\varepsilon_{t+1}$ от ${u_t, u_{t-1, \dots,u_1}}$ не зависит.
+
+	Пусть $u_1, \dots, u_n$ - наблюдения, $\mathcal{F}_n = \sigma \{u_1, \dots, u_n\}$. Оптимальный среднеквадратический прогноз ненаблюдаемой величины $u_{n+1}$ по наблюдениям - есть решение $u_{n+1}^*$ задачи
+	$$E(u_{n+1} - u_{n+1}^*)^2 \to \min, \; u_{n+1}^* \text{ - } \mathcal{F}_n-\text{измерима}, \; E(u_{n+1}^*)^2 < \infty$$
+	Тогда $\displaystyle u_{n+1}^* = \varphi(u_1, \dots, u_n) = E(u_{n+1}|\mathcal{F}_n)$ в силу утверждения \ref{lec:6/clair:7}. Имеем:
+	\begin{gather*}
+		E(u_{n+1}|F_n) = E(\beta u_n + \varepsilon_{t+1}|F_n) = E(\beta u_n|F_n) + E(\varepsilon_{n+1}|F_n) = \beta u_n + E\varepsilon_{n+1} = \beta u_n
+	\end{gather*}
+
+	Пусть $L^2$ будет множество сл.в. с коненчным вторым моментом. Отождествим сл.в., равные п.н. Получим множество классов эквивалентных сл.в. Для класса $\tilde{\xi}$ норма $|\tilde{\xi}|:=\left(E \xi^2\right)^{\frac{1}{2}}$, $\xi$ - любой элемент $\tilde{\xi}$.
+
+	Множество классов эквивалентных сл.в. с такой нормой есть банаховское линейное пространство $\mathbb{L}^2$. Для $\xi, \eta \in \mathbb{L}^2$ можно ввести скалярное произведение $(\xi, \eta) := E \xi \eta$.
+	Если $(\xi, \eta) = 0$, то $\xi \bot \eta$.
+
+	Если $H_U$ есть линейное подпространство сл.в. в $\mathbb{L}^2$, которые $U$-измеримы, то решение задачи $\displaystyle E \left( \xi - a (\omega) \right)^2 \to \underset{a(\omega) \in H_U}{\min}$ есть $\displaystyle a^* = proj_{H_U}\xi$. В силу утверждения \ref{lec:6/clair:7} имеем:
+	$$\displaystyle a^* (\omega) = proj_{H_U}\xi = E(\xi | U)$$
+	Это соотношение может служить определением УМО $E(\xi | U)$ в случае $E \xi^2 < \infty$. Но у нас только $E|\xi| < \infty$!
+\end{example}
+
+\section{УМО и условные распределения относительно сл.в.}\label{lec:6/sec:3}
+
+Пусть на $(\Omega, \mathcal{F}, P)$ заданы сл. векторы $\xi \in \mathbb{R}^s, \; \eta \in \mathbb{R}^k$. Пусть $U_{\eta} = \sigma \{\omega: \eta (\omega) \in B, B \in \mathcal{B}(\mathbb{R}^k)\}$.
+
+\begin{definition}\label{cha:6/def:1}
+	$E(\xi | \eta) := E(\xi | U_{\eta})$ - \blue{УМО $\xi$ относительно $\eta$}. Т.к. $E(\xi | \eta)$ - $U_{\eta}$-измерима, то $E(\xi | \eta) = m(\eta)$ для некоторой борелевской функции $m(y), \; y \in \mathbb{R}^k$, обозначается $E(\xi | \eta = y)$ или короче $E(\xi | y)$.
+\end{definition}
+
+Ясно, что $m(\eta)$ такая функция, что (она автоматически $U_{\eta}$-измерима):
+$$\underset{W}{\overset{}{\int}}m(\eta) P(d \omega) = \underset{W}{\overset{}{\int}}\xi P(d \omega) \; \forall B \in \mathcal{B}(\mathbb{R}^k), \; W = \{\omega: \eta(\omega) \in B\}\eqno(9)$$
+Делая замену $\eta(\omega) = y$ и заменяя $m(\eta)$ на $E(\xi | y)$, получим для $(9)$ эквивалентное выражение:
+$$\underset{B}{\overset{}{\int}}E(\xi | y) P_{\eta}(d y) = \underset{W}{\overset{}{\int}}\xi P(d \omega) \; \forall B \in \mathcal{B}(\mathbb{R}^k), \; W = \{\omega: \eta(\omega) \in B\}\eqno(10)$$
+Итак, $E(\xi | y)$ - борелевская функция, удовлетворяющая $(10)$. Она определена на множестве $P_{\eta}$-вероятности ноль.
+
+\begin{definition}\label{cha:6/def:2}
+	Поскольку $P(C) = E I(C), \; C \in \mathcal{F}$, то естественно определение $P(C | \eta) := E \left( I(C) | U_{\eta} \right), \; C \in \mathcal{F}$. Тогда $P(C | \eta) = g_C (\eta)$. Функцию $g_C(y), \; y \in \mathbb{R}^k$ обозначим $P(C | \eta = y)$ или короче $P(C | y)$.
+\end{definition}
+
+Ясно, что $g_C (\eta)$ такая функция, что (это переписанное соотношение $(9)$):
+$$\underset{W}{\overset{}{\int}}g_C(\eta) P(d \omega) = \underset{W}{\overset{}{\int}}I(C) P(d \omega) \; \forall B \in \mathcal{B}(\mathbb{R}^k), \; W = \{\omega: \eta(\omega) \in B\}\eqno(11)$$
+Делая в $(11)$ замену $\eta(\omega) = y$, получим, что $P(C | y)$ такая функция, что:
+$$\underset{B}{\overset{}{\int}}P(C | y)) P_{\eta}(d y) = P(C, \eta \in B) \; \forall B \in \mathcal{B}(\mathbb{R}^k)\eqno(12)$$
+Функция $P(C | y)$ определена с точностью до значений на множестве $P_{\eta}$-вероятности ноль.
+
+\begin{definition}\label{cha:6/def:3}
+	Функция $P(A|y)$ множества $A \in \mathcal{B}(\mathbb{R}^s)$ и $y \in \mathbb{R}^k$ называется \red{условным распределением $\xi$ при условии $\eta = y$}, если выполнены два условия:
+	\begin{itemize}
+		\item[$1)$]
+			При каждом фиксированном $A$ $P(A|y)$ есть условная веростность события $C = \left( \omega : \xi(\omega \in A) \right)$ при условии $\eta = y$, т.е. $P(A|y) = P(\xi(\omega) \in A | \eta = y)$.
+		\item[$2)$]
+			Для любого $y \in \mathbb{R}^k$, за исключением, быть может, множества $y$-ов $P_{\eta}$-веростности ноль, $P(A|y)$ есть распределение веростностей по $A$, т.е. выполняется счетная аддитивность по $A$.
+	\end{itemize}
+\end{definition}
+
+Условное распределение существует (см. [Ширяев, Вероятность, §7, гл. \RNumb{2}]). Условное распределение обозначается также $P(\xi \in A | y)$, $P(\xi \in A | \eta = y)$.
+
+\begin{definition}\label{cha:6/def:4}
+	Пусть скалярная функция $f(x | y) \ge 0$ и измерима по паре $(x,y)$ (т.е. борелевская). Если для $P_{\eta}$-п.в. $y \in \mathbb{R}^k$ условное распределение
+	$$P(\xi \in A | \eta = y) = \underset{x \in A}{\overset{}{\int}}f(x|y)\mu (d x) \; \forall A \in \mathcal{B}(\mathbb{R}^s)$$
+	то $f(x|y)$ называется \red{условной плотностью $\xi$ при условии $\eta = y$} относительно меры $\mu$.
+\end{definition}
+
+\begin{remark}\label{cha:6/remark:1}
+	Если $f(x|y)$ - неотрицательная борелевская функция, удовлетворяющая условию:
+	$$\forall A \in \mathcal{B}(\mathbb{R}^s), \; B \in \mathcal{B}(\mathbb{R}^k) \underset{y \in B}{\overset{}{\int}}\left( \underset{x \in A}{\overset{}{\int}}f(x|y) \mu (d x) \right) P_{\eta}(d y) = P(\xi \in A, \eta \in B)\eqno(13)$$
+	то $f(x|y)$ - условная плотность вероятность. Действительно, если $(13)$ выполнено, то в силу $(12)$ $\displaystyle \underset{x \in A}{\overset{}{\int}}f(x|y)\mu(d x)$ есть условная вероятность $P(\xi \in A | \eta = y)$. Но этот интеграл счетно-аддитивен по $A$, т.е. $\displaystyle \underset{x \in A}{\overset{}{\int}}f(x|y)\mu(d x)$ есть условное распределение $\xi$ при условии $\eta = y$, но тогда $f(x|y)$ - условная плотность!
+\end{remark}
+
+\begin{remark}\label{cha:6/remark:2}
+	Пусть на $\mathbb{R}^s$ и $\mathbb{R}^k$ заданы меры $\mu$ и $\lambda$. Произведение этих мер называется такая мера $\mu \times \lambda$ на $\mathbb{R}^s \times \mathbb{R}^k$, что
+	$$\forall A \in \mathcal{B}(\mathbb{R}^s), \; B \in \mathcal{B}(\mathbb{R}^k) \; \mu \times \lambda (A \times B) = \mu(A) \times \lambda(B)$$
+	Если $\mu$ и $\lambda$ - меры Лебега, то $\mu \times \lambda$ - мера Лебега на $\mathbb{R}^s \times \mathbb{R}^k = \mathbb{R}^{s+k}$.\\
+	Если $\mu$ и $\lambda$ - считающие меры, то $\mu \times \lambda$ - <<считающая мера на $\mathbb{R}^{s+k}$>>.
+\end{remark}
+
+\begin{theorem}[]\label{cha:6/the:1}
+	Если совместное распределение $\xi$ и $\eta$ в $\mathbb{R}^s \times \mathbb{R}^k$ имеет плотность $f(x,y)$ относительно меры $\mu \times \lambda$, то функция
+	$$f(x|y) = \begin{cases}
+		\dfrac{f(x,y)}{q(y)}, \; q(y) \not = 0 \\
+		0, \; q(y) = 0
+	\end{cases}\eqno(14)$$
+	есть условная плотность вероятности $\xi$ при условии $\eta = y$. Здесь
+	$$q(y) = \underset{\mathbb{R}^s}{\overset{}{\int}}f(x,y) \mu(d x)\eqno(15)$$
+	есть плотность $\eta$ относительно меры $\lambda$. Кроме того:
+	$$E(\xi | \eta = y) = \underset{\mathbb{R}^s}{\overset{}{\int}}x f(x|y) \mu (d x) \text{ для } P_{\eta}\text{-п.в. } y\eqno(16)$$
+\end{theorem}
+\begin{Proof}
+	\begin{itemize}
+		\item[$\bullet$] 
+			\underline{Докажем $(15)$}.
+			$$\begin{gathered}
+				P(\eta \in A) = P(\eta \in A, \xi \in \mathbb{R}^s) = \underset{y \in A, x \in \mathbb{R}^s}{\overset{}{\iint}}f(x,y)\mu(d x) \lambda(d y) = \\
+				= \Big|\text{по теореме Фубини}\Big| = \underset{y \in A}{\overset{}{\int}}\left( \underset{x \in \mathbb{R}^s}{\overset{}{\int}}f(x,y)\mu (d x) \right) \lambda (d y)
+			\end{gathered}$$
+			Отсюда $\displaystyle q(y) = \underset{\mathbb{R}^s}{\overset{}{\int}}f(x,y)\mu (d x)$ есть плотность $\eta$ относительно $\lambda$.
+		\item[$\bullet$]
+			\underline{Докажем $(14)$}.
+			Т.к. $f(x|y) \ge 0$, $f(x|y)$ - борелевская и $\eta$ имеет плотность $q(y)$, достаточно проверить $(13)$. Для $f(x|y)$ из $(14)$ имеем:
+			$$\begin{gathered}
+				\underset{y \in B, q(y) \not = 0}{\overset{}{\int}}\left( \underset{x \in A}{\overset{}{\int}}\frac{f(x,y)}{q(y)}\mu (d x) \right) q(y) \lambda (d y) = \underset{x \in A, y \in B}{\overset{}{\iint}} f(x,y)\mu(d x)\lambda(d y) = \\
+				= P(\xi \in A, \eta \in B)
+			\end{gathered}$$
+			Значит, $(13)$ выполянется, и $f(x|y)$ из $(14)$ есть условная плотность вер-ти.
+		\item[$\bullet$]
+			\underline{Докажем $(16)$}.
+			Достаточно проверить $(10)$ с $E(\xi | \eta = y)$ из $(16)$. Имеем:
+			$$\begin{gathered}
+				\underset{y \in B}{\overset{}{\int}}\left( \underset{\mathbb{R}^s}{\overset{}{\int}} x f(x|y)\mu(d x) \right) q(y) \lambda(d y) = \underset{y \in B, q(y) \not = 0}{\overset{}{\int}}\left( \underset{\mathbb{R}^s}{\overset{}{\int}}x \frac{f(x,y)}{q(y)}\mu(d x) \right) q(y) \lambda(d y) = \\
+				= \underset{x \in \mathbb{R}^s, y\in B}{\overset{}{\iint}} x f(x,y) \mu (d x) \lambda (d y) = E \left( \xi I(y \in B) \right) = \underset{\left( \omega: \eta (\omega) \in B \right)}{\overset{}{\int}}\xi P(d \omega) \; \forall B \in \mathcal{B}(\mathbb{R}^k)
+			\end{gathered}$$
+			Т.е. $(10)$ с $E(\xi | \eta = y)$ из $(16)$ верно и $(16)$ доказано.
+	\end{itemize}
+\end{Proof}
+
+\begin{example}
+	Пусть $\xi$ и $\eta$ дискретные векторы со значениями $X = (x_1, x_2, \dots)$ и $Y = (y_1, y_2, \dots)$. Тогда $f(x,y) = P(\xi = x, \eta = y)$, $q(y) = P(\eta = y)$. Для $y \in Y$ $\displaystyle f(x|y) = \dfrac{P(\xi = x, \eta = y)}{P(\eta = y)} = P(\xi = x | \eta = y)$. При $y \not \in Y$ $f(x|y) = 0$. Условное распределение:
+	$$P(\xi \in A| \eta = y) = \underset{A}{\overset{}{\int}}f(x|y)\mu (d x) = \underset{x_i \in A}{\overset{}{\sum}}P(\xi = x_i | \eta = y), \; y \in Y$$
+	При $y \not \in Y$ $P(\xi \in A | \eta = y) = 0$. Наконец:
+	$$E(\xi | y) = \underset{\mathbb{R}^s}{\overset{}{\int}}x f(x|y) \mu (d x) = \underset{i}{\overset{}{\sum}}x_i P(\xi = x_i| \eta = y), \; y \in Y$$
+	При $y \not \in Y$ $E(\xi | y) = 0$.
+\end{example}
+
+\begin{example}
+	Говорят, что вектор $(\xi, \eta)$ имеет двумерный невырожденный гауссовский закон, если:
+	$$\begin{gathered}
+		f(x,y) = \frac{1}{2\pi \sqrt{1 - \rho_{\xi \eta}^2}\sigma_{\xi}\sigma_{\eta}}exp \Big\{ -\frac{1}{2 (1 - \rho_{\xi \eta}^2)} \Big[ \frac{(x - m_{\xi})^2}{\sigma_{\xi}^2} + \frac{(y - m_{\eta})^2}{\sigma_{\eta}^2} - \\
+		- 2 \rho_{\xi \eta} \frac{(x - m_{\xi})(y - m_{\eta})}{\sigma_{\xi} \sigma_{\eta}}\Big] \Big\}
+	\end{gathered}$$
+	Здесь $m_{\xi}, m_{\eta} \in\mathbb{R}; \; \sigma_{\xi}^2, \sigma_{\eta}^2 > 0; \; |\rho_{\xi \eta}| < 1$.\\
+	Прямым вычислением показывается:
+	$$\begin{gathered}
+		f_{\eta}(y) \sim N(m_{\eta}, \sigma_{\eta}^2), \; f_{\xi}(x) \sim N(m_{\xi}, \sigma_{\xi}^2), \; \rho_{\xi \eta} = corr (\xi, \eta) = \frac{cov(\xi, \eta)}{\sigma_{\xi} \sigma_{\eta}} \\
+		f(x|y) \sim N\left( E(\xi | \eta = y), D(\xi | \eta = y) \right),\\
+		\text{где } E(\xi | \eta = y) = m_{\xi} + \rho_{\xi \eta}(y - m_{\eta}), \; D(\xi | \eta = y) = (1 - \rho_{\xi \eta}^2) \sigma_{\xi}^2
+	\end{gathered}$$
+	При $\rho_{\xi \eta} = 0$ $\xi$ и $\eta$ независимы!
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% chapter условные_математические_ожидания_и_условные_распределения (end)
