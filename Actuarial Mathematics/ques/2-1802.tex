@@ -1,0 +1,355 @@
+\chapter{Лекция №2 - 18.02.2021}\label{lec:2} % (fold)
+
+\section{Оценка числа доживших до момента t} % (fold)
+
+Используя обозначения прошлой лекции, имеем
+
+\begin{clair}
+	$ l_{\omega + \varepsilon } = 0, \;\;\; l_{x+t} = l_y(x \leq y \leq \omega) = l_x {}_tp_x $
+\end{clair}
+
+Множество значений $ l_y$ определяет \red{закон выживаемости}. По нему строится \red{таблица смертности}. При этом обычно берутся $ l_x \sim 10^5, 10^6.$
+
+\section{Ожидаемая продолжительность оставшейся длительности жизни} 
+\label{sec:expectd}
+
+
+\begin{definition}
+	\red{Ожидаемой продолжительностью оставшейся длительности жизни} называется математиеческое ожидание дожития $\mathring{e}_x=ET_x$
+\end{definition}
+
+Имеем
+\begin{gather*}
+	\mathring{e}_x = \int\limits^{\omega - x}_{0}tf(t)dt = \int\limits^{\omega - x}_{0}tF'(t)dt = -\int\limits^{\omega - x}_{0}t(1-F(t))'dt =\\
+	=[0\leq T_x \leq \omega - x] = -\int\limits^{\omega - x}_{0}t({}_tp_x)'dt = -\int\limits^{\omega - x}_{0}t(\frac{l_{x+t}}{l_x})'dt = -\frac{1}{l_x}-\int\limits^{\omega - x}_{0}t(l_{x+t})'dt=\\
+	=[d(tl_{x+t}) = tl'_{x+t}dt + l_{x+t}dt] = -\frac{1}{l_x}\int\limits^{\omega - x}_{0}d(tl_{x+t}) + \frac{1}{l_x}\int\limits^{\omega - x}_{0}l_{x+t}dt=\\
+	=\frac{1}{l_x}\int\limits^{\omega - x}_{0}l_{x+t}dt = \frac{1}{l_x}\int\limits^{\omega}_{x}l_ydy
+\end{gather*}
+
+\begin{val}
+Оценим полученный интеграл:
+	\begin{gather*}
+		\sum\limits^{\omega - x -1}_{k = 0}l_{x+k+1} < \int\limits^{\omega}_{x}l_ydy < \sum\limits^{\omega - x -1}_{k=0}l_{x+k}\\
+		\frac{l_{x+1}+...+l_{\omega}}{l_x} < \frac{1}{l_x}\int\limits^{\omega}_{x}l_ydy < 1 + \frac{l_{x+1}+...+l_{\omega}}{l_x}\\
+		e_x < \mathring{e}_x < 1 + e_x,\\
+		 \text{ где } e_x \text{ \red{усечённая ожидаемая продолжительность оставшейся жизни}}\\
+		\mathring{e}_x \approx \frac{1}{2} + e_x
+	\end{gather*}
+\end{val}
+
+\begin{definition}
+	Пусть имеем начальное число индивидов в возрасте 0 лет ( можно любое другое число лет) $ l_0 = L_0$.
+
+	Тогда 
+	\begin{gather*}
+		l_1 = l_0(1-q_0)\\
+		l_2 = l_1(1-q_1)\\
+		...\\
+		l_{x+1}=l_x(1-q_x)
+	\end{gather*}
+
+	Введем 
+	\[\overline{X}_i=
+		\begin{cases}
+			0, \; p_x - \text{ прожил больше года}\\
+			1, \; q_x - \text{ скончался в течение года}
+		\end{cases}
+	\]
+	и 
+	\[
+		D_x = \sum\limits^{L_x}_{i=1}\overline{X}_i
+	\]
+
+	Тогда величина
+	\[Q_x = \frac{D_x}{L_x}\]
+	называется \red{коэффициентом наблюдаемой годовой смертности}.
+\end{definition}
+
+\begin{clair}
+Имеем
+	\begin{gather*}
+		EQ_x = \frac{ED_x}{L_x} = \frac{L_xq_x}{L_x} = q_x\\
+		DQ_x = \frac{DD_x}{L_x} = \frac{\sum D\overline{X}_i}{L^2_x} = \frac{q_xp_x}{L_x}
+	\end{gather*}
+ввиду независимости $ \overline{X}_i $. 
+\end{clair}
+
+Рассмотрим величину
+
+\[ \frac{Q_x - q_x}{\sqrt{DQ_x}}.\]
+
+При больших значениях $ L_x$ распределение данной величины близко к стандартному нормальному в силу ЦПТ. Тогда
+\[ P(\frac{|Q_x - q_x|T_x}{\sqrt{p_xq_x}} < t) = 2\Phi(t) -1, \]
+где $ \Phi(t)-$ функция распределения стандартного нормального распределения.
+
+\begin{example}
+	Пусть 
+	\begin{gather*}
+		t = 2\;\;\; \Rightarrow \;\;\; \Phi(2) = 0,9772\\
+		L_x = 100000\\
+		D_x = 261\\
+		\Rightarrow\;\;\; Q_x = \frac{261}{100000} = 0,0261
+	\end{gather*}
+	Однако на деле имеем
+	\begin{gather*}
+		p_x \approx 1\\
+		q_x \approx Q_x\\
+		\Rightarrow \;\;\; Q_x - 2 \sqrt{\frac{Q_x}{L_x}} < q_x < Q_x + 2\sqrt{\frac{Q_x}{L_x}}\\
+		\Rightarrow\;\;\; 2,281 < q_x < 2,933 permill
+	\end{gather*}
+\end{example}
+
+ТУТ ТАБЛИЦА СМЕРТНОСТИ ПО АНГЛИИ
+
+\begin{clair}
+	Для непересекающихся прожеутков времени имеем
+	\[{}_{x+t}p_0 = {}_xp_0{}_tp_x	\]
+\end{clair}
+
+\begin{proof}
+	\begin{gather*}
+		{}_tp_x = P(T_x > t) = P(T_x + x > x+t) = P(T_0 > t+x|T_0 > x)=\\
+		=\frac{P(T_o > t+x)}{P(T_0>x)}=\frac{{}_{t+x}p_0}{{}_{x}p_0}
+	\end{gather*}
+\end{proof}
+
+Можем строить \red{таблицы смертности}. Бывают \red{полные, неполные, селективные} таблицы.
+
+Пусть
+\[[x]-\text{ время заключения договора при одновременном прохождении медосмотра}\]
+
+\[	P_{[x]}- \text{ вероятность прожить год с момента х.}\]
+
+Имеет место эмпирический
+
+\begin{fact}
+	\begin{gather*}
+		p_{[x]} > p_{[x-1]+1} > p_{[x-2]+2}>...\\
+		p_{[x-r]+r}=p_{[x-r-1]+r+1} = ...,
+	\end{gather*}
+	где $ r$ - \red{период отбора(время селекции)} = 5-7 лет
+	
+\end{fact}
+
+\chapter{Лекция №2 - 18.02.2021. Дожитие как сумма целой и дробной частей} % (fold)
+Имеем
+\[	T_x \equiv T(x) = K(x) + S(x) ,\]
+
+где 
+\begin{gather*}
+	T_x - \text{ случайная величина - время жизни, начиная с х лет}\\
+	K(x) = [T_x] - \text{ целая часть от времени жизни - случайная величина}\\
+	S(x) = \{T_x\} - \text{ дробная часть от времени жизни - случайная величина}
+\end{gather*}
+
+\section{Распределение и моменты K(x)} % (fold)
+
+\begin{theorem}
+	\begin{gather*}
+		P(K(x) = k) = {}_kp_x - {}_{k+1}p_x\\
+		EK(x) = \sum\limits^{\infty}_{k = 1}{}_kp_x = e_x\\
+		DK(x) = \sum\limits^{\infty}_{k=1}{}_kp_x(2k-1) - (\sum\limits^{\infty}_{k=1}{}_kp_x)^2
+	\end{gather*}
+	
+\end{theorem}
+
+\begin{proof}
+	Непосредственно следуя определениям, выпишем распределение и математическое ожидание $ K(x)$:
+	\begin{gather*}
+		P(K(x) = k) = P(k \leq K(x) \leq k+1) = {}_kp_xq_{x+k} = {}_kp_x(1 - p_{x+k}) = \\
+		={}_kp_x - {}_kp_xp_{x+k} = {}_kp_x - {}_{k+1}p_x\\
+		EK(x) = \sum\limits^{\infty}_{k=1}kP(K(x) = k) = \sum\limits^{\infty}_{k=1}k({}_kp_x - {}_{k+1}p_x) =\\
+		= \sum\limits^{\infty}_{k=1}{}_kp_x - {}_{k+1}p_x + \sum\limits^{\infty}_{k=2}{}_kp_x - {}_{k+1}p_x + ...==\\
+		= [p_x - {}_2p_x + {}_2p_x - {}_3p_x + ...] + [{}_2p_x - {}_3p_x +{}_3p_x - {}_4p_x + ...] = \sum\limits^{\infty}_{k = 1}{}_kp_x = e_x
+	\end{gather*}
+	Для подсчета дисперсии по определению
+	\[DK(x) = E(K(x))^2 - (EK(x))^2 \]
+
+	воспользуемся слеудющим соображением:
+	\begin{mind}[\blue{Суммирование по частям}]
+		Пусть \[\Delta f_k = f_{k+1} - f_k. \]
+		Тогда \[ \sum\limits^{b}_{k=a}\Delta f_a + \Delta f_{a+1} + ...+ \Delta f_b = f_{b+1} - f_a = f_k|^{b+1}_a. \]
+
+		Также 
+		\begin{gather*}
+			\Delta u_kv_k = u_{k+1}v_{k+1} - u_kv_k = u_{k+1}v_{k+1}- u_{k+1}v_k - u_kv_k=\\
+			u_{k+1}\Delta v_k + v_k\Delta u_k.
+		\end{gather*}
+
+		Отсюда
+		\begin{gather*}
+			\sum\limits_{k=a}^{b} \Delta(u_kv_k) = u_kv_k|^{b+1}_a = \sum\limits_{k=a}^{b}u_{k+1}\Delta v_k + \sum\limits_{k=a}^{b}v_k\Delta u_k\\
+			\Rightarrow\;\;\; \sum\limits_{k=a}^{b}v_k\Delta u_k = u_kv_k|^{b+1}_a - \sum\limits_{k=a}^{b}u_{k+1}\Delta v_k
+		\end{gather*}
+	\end{mind}
+
+	Согласно соображению
+	\begin{gather*}
+		E(K(x))^2 = \sum\limits_{k=0}^{\infty}k^2({}_kp_x - {k+1}p_x) =\\
+		= -{}_kp_xk^2|^{\infty}_0 + \sum\limits_{k=0}^{\infty}{}_{k+1}p_x(2k +1)=[\lim\limits_{k\rightarrow \infty}{}_kp_x = 0] = \sum\limits_{r=1}^{\infty}{}_rp_x(2r-1)\\
+		\Rightarrow \;\;\; DK(x) = \sum\limits_{k=1}^{\infty}{}_kp_x(2k-1) - (\sum\limits_{k=1}^{\infty}{}_kp_x)^2	
+	\end{gather*}
+\end{proof}
+% section распределение_и_моменты_k (end)
+
+\section{Распределение и моменты S(x)}
+
+Рассмотрим 3 варианта моделей
+\begin{enumerate}
+	\item \red{Линейная модель} $ \Leftrightarrow \;\;\; {}_uq_x = uq_x, \;\;\; u \in [0;1)$
+
+			\begin{theorem}
+				$ S(x)$ равномерно распределена.
+			\end{theorem}
+			\begin{conseq}
+			\begin{gather*}
+				ES(x) = \frac{1}{2}\\
+				DS(x) = \frac{1}{12}\\
+				\mathring{e}_x = ET(x) =\frac{1}{2} + e_x\\
+				DT(x) = DK(x) + \frac{1}{12}
+			\end{gather*}	
+			\end{conseq}
+			\begin{proof}
+				Найдем распределение:
+				\begin{gather*}
+					P(S(x) \leq u| K(x) = K) = \frac{{}_uq_{x+k}}{q_{x+k}} = \frac{uq_{x+k}}{q_{x+k}} = u\\
+					S(x), K(x) - \text{ независимы } \Rightarrow\;\;\; P(S(x) \leq u) = u
+				\end{gather*}
+			\end{proof}
+			\begin{remem}
+			 Помним:
+				  \[ \mu _x(u) - \text{ \red{интенсивность смерти} }, \]
+			также
+				\begin{gather*}
+				 	{}_tp_x = e^{-\int\limits^{t}_{0}\mu(u)du}\\
+				 	\Rightarrow\;\;\; \mu_x(u) = -\frac{d\ln({}_up_x)}{du} = -\frac{d\ln(1- {}_uq_x)}{du} = \\
+				 	=-\frac{1 - uq_x}{du} - \text{ монотонно возрастающая функция u}.
+				\end{gather*}  
+			\end{remem}
+	\item \red{Постоянство интенсивности смерти в течении года}
+		\[
+			\forall \;\;u \in [0;1) \;\;\; \mu_k(u) = \mu_k(\frac{1}{2}) = \mu_{k+\frac{1}{2}},
+		\]
+		т.е. интенсивность смерти приближают ступенчатой функцией. Отсюда
+		\[	{}_tp_x = (p_x)^t	\]
+		и
+		\begin{gather*}
+			P(S(x) \leq u | K(x) = k)= \frac{{}_uq_{x+k}}{q_{x+k}} = \frac{1-(p_{x+k})^u}{1-p_{x+k}}
+		\end{gather*}
+		Понятно, как считать моменты.
+		\begin{remark}
+			 В такой модели не может быть независимости между $ K(x) \text{ и } S(x)$
+		\end{remark}
+
+	\item \red{Условия Балдуччи}:
+
+	\[ \forall\;\; u \in [0;1) \text { имеем } {}_{1-u}q_{x+u} = (1-u)q_x \]
+
+	\begin{remark}
+		Имеем для первого типа модели
+		\[ {}_{1-u}q_x = (1-u)q_x. \]
+		А для данной
+		\[ {}_{1-u}q_{x+u} = (1-u)q_x.\]
+		Но
+		\[  {}_{1-u}q_x \neq {}_{1-u}q_{x+u},\]
+		А значит 1 модель точно не совпадает с 3.
+	\end{remark}
+	\begin{mind}
+		Вероятность прожить год:
+		\[	p_x = {}_up_x{}_{1-u}p_{x+u}\;\;\;\Rightarrow\;\;\; {}_up_x = \frac{1-q_x}{1-(1-u)q_x}.\]
+		С другой стороны
+		\[  {}_tp_x = e^{-\int\limits^{t}_{0}\mu_x(u)du} .\]
+		Значит
+		\[  \mu_x(u) = \frac{q_x}{1-(1-u)q_x} \]
+	\end{mind}
+
+	\blue{Распределение дробной части} в данной модели
+	\begin{gather*}
+		P(S(x) \leq u| K(x)=k) = \frac{{}_kp_x{}_uq_{x+k}}{{}_kp_xq_{x+k}}=\\
+		=[q_{x+k} \text{ можно записать: } ] = \frac{u}{1-(1-u)q_x}
+	\end{gather*}
+
+	\begin{remark}
+		$ \mu_x(u)$ на интервале внутри года по этой модели монотонно убывает, что противоречит действительности.
+	\end{remark}
+\end{enumerate}
+
+
+
+\chapter{Лекция №2 - 18.02.2021. Долгосрочные финансовые операции} 
+\section{Вводные слова} % (fold)
+
+
+% section вводные_слова (end)
+Деньги приносят доход. Он зависит от
+\begin{enumerate}
+	\item времени
+	\item начальной суммы
+	\item процента дохода
+\end{enumerate}
+
+Пусть в начале клиент платит страховой компании $ Z$ рублей.
+
+В момент смерти компания выплачивает $ Y$ рублей.
+
+Пока говорим о целом числе лет.
+
+\begin{mindanddef}
+	Пусть $ i$ - \red{процентная ставка} (доля годового роста капитала).
+
+	$ v = \frac{1}{1+i} -  $ \red{дисконтирующий множитель}.
+
+	Пусть клиент умрет через $ T$ лет.
+
+	Через $ T$ лет сумме $ Z$ соответствует сумма $ Z(1+i)^T.$
+
+	В момент $ t = 0$ (\red{момент заключения контракта}) финансовые обязанности клиента: \[ Z, \]
+	страховой компании: \[ Y(1+i)^{-T}, \]
+	где $ Z = Y(1+i)^{-T} - $ \red{ настоящее значение $Y$ (present value)} ($pvY$).
+
+	Но в долгосрочном страховании $ Z, i , Y - $ константы, а $ T -$ случайная величина с функцией распределения $ F(t)$ и плотностью распределения $ f(t) = \frac{dF(t)}{dt} $.
+
+	Тогда 
+
+	\begin{gather*}
+		E(pvY) = Y \int\limits^{\infty}_{0}(1+i)^tf(t)dt\\
+		D(pvY) = [E(pvY)^2] - [E(pvY)]^2 = Y^2 \int\limits^{\infty}_{0}(1+i)^{-2t}f(t)dt - [E(pvY)]^2.
+	\end{gather*}
+
+	Естественно, что в качестве премии выбирают не $ Y(1-i)^{-T}$, а 
+	\[ \pi = E(pvY)= EZ \]
+	- \red{ одноразовая нетто ставка}.
+
+\end{mindanddef}
+
+\section{Дисконтированные платежи} % (fold)
+Для предпринимателя (банк, страховое общество), получающего и выдающего денежные суммы в разное время, важно на какой срок приходит к нему или уходит от него некоторая сумма. От пришедшей суммы предприниматель может получить некторый доход, а от выданной суммы теряется возможный доход. Для сравнения сумм, поступающих или уходящих в разное время вводится понятие \red{ современной дисконтированной стоимости платежа}.
+
+\begin{mindanddef}
+	Пусть $ A(t)$ - \red{ функция накопления}
+	\[ A(t) = A(0)(1+i)^t, \]
+	где $ A(0)$ - сумма в момент $ t = 0$.
+
+	\red{ Относительный прирост капитала за n-ый год}:
+	\[ i_n = \frac{A_n - A_{n-1}}{A_{n-1}} = \frac{A_0(1+i)^n-A_0(1+i)^{n-1}}{A_0(1+i)^{n-1}} = \frac{1+i-1}{1} = i  \]
+
+	Бывает полезным рассматривать как бы обратное движение капитала.
+
+	Найдем так называемое \red{ уменьшение капитала за n-ый год}(при движении назад):
+	 \[ d_n = \frac{A_n - A_{n-1}}{A_n} = \frac{A_0(1+i)^n-A_0(1+i)^{n-1}}{A_0(1+i)^{n}} = 1 - \frac{1}{1+i} = \frac{i}{1+i} = d- \]
+	 \red{ коэффициент дисконта}(годовой дисконт) или \red{ эффективная учетрная ставка} за единицу времени.
+
+	 Имеем
+	 \begin{gather*}
+	 	d = iv\\
+	 	1 -d = v\\
+	 	\frac{1}{1-d} = 1+i.
+	 \end{gather*}
+	Как видно, коэффициент дисконта представляет собой приведенную современную стоимость процентой ставки
+	\[ d = \frac{i}{1+i} \]
+
+	 или же, обртано, его можно рассматривать как годичный доход, приносимый суммой $ v$:
+	 \[ d = iv. \]
+\end{mindanddef}
+
+% section дисконтированные_платежи (end)
