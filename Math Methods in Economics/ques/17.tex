@@ -1,0 +1,88 @@
+\chapter{Теорема Моришимы о магистралях.}\label{cha:17}
+
+A, B -- неотрицательные матрицы $m \times m$. Рассмотрим последовательность интенсивностей: $x_1, \ldots, x_r, \ldots, \; x_t \in \mathbb{R}^m_+, Ax_t \text{-- вектор затрат, } Bx_t \text{-- вектор выпуска.}$
+
+\begin{definition}[Условие замкнутости]
+	$Ax_t \leq Bx_{t-1} \Rightarrow x_1, \ldots, x_t$ -- траектория.
+\end{definition}
+
+\begin{problem}
+	$$\begin{cases}
+		<c, x_T> \to \max\\
+		Ax_t \leq B x_{t - 1}, \; t = 2, \ldots, T\\
+		x_t \geq 0
+	\end{cases}$$ Решение этой задачи -- оптимальная траектория.
+\end{problem}
+
+\begin{remark}
+	Если $c = qB, \; q \geq 0 \text{ -- вектор цен, } <c, x_T> = qBx_{T}$ -- стоимость выпуска $Bx_T.$
+\end{remark}
+
+\begin{sign}
+	$x, y \in \mathbb{R}^m, \; y \neq 0, \; s(x, y) = \| \dfrac{x}{\| x \|} - \dfrac{y}{\| y \|}\|$ -- расстояние между направлениями x и y.
+\end{sign}
+
+\begin{definition}[Магистраль]
+	В задаче выше -- это вектор $x \neq 0: \; \forall \; \varepsilon > 0 \exists T_1(\varepsilon), T_2(\varepsilon): \; \forall \; t: \; T_1(\varepsilon) \leq t \leq T - T_2(\varepsilon) \; \forall \text{ оптимальной траектории } \{ x_t\}: \; s(x_t, \vec{x}) < \varepsilon.$
+\end{definition}
+
+\begin{definition}[Слабая магистраль]
+	Это вектор $x: \; \forall \; \varepsilon > 0 \exists Q(\varepsilon) \in \mathbb{N}: \forall \text{ оптимальной траектории } \{ x_t\} \text{ неравенство } s(x_t, \vec{x}) < \varepsilon \text{ нарушается } \leq Q(\varepsilon) \text{ раз.}$
+\end{definition}
+
+\begin{problem}
+	Дано: m = n, B = I -- единичная матрица, А -- неразложимая, примитивная, $c \gg 0, \; x_0 \gg 0$. 
+
+	$$\begin{cases}
+		<c, x_T> \to \max\\
+		Ax_t \leq B x_{t - 1}\\
+		x_t \geq 0
+	\end{cases}$$ 
+\end{problem}
+
+\begin{lemma}
+	A -- неразложимая, примитивная $\Rightarrow \exists T_1: \; \forall \; t \geq T_1: \; A^t \gg 0.$
+\end{lemma}
+
+\begin{lemma}
+	$s(x, y) < 2\dfrac{\| x - y\|}{\| x\|}.$
+\end{lemma}
+
+\begin{proof}
+	$\| \dfrac{x}{\| x \|} - \dfrac{y}{\| y \|}\| = \| \dfrac{x - y}{\| x \|} + y (\dfrac{1}{\| x \|} - \dfrac{1}{\| y \|}) \| \leq \dfrac{\|x - y \|}{\| x \|} + \| y\| \left| \dfrac{1}{\| x \|} - \dfrac{1}{\| y \|}\right| = \dfrac{\|x - y \|}{\| x \|} + \| y\| \dfrac{\left| \dfrac{1}{\| x \|} - \dfrac{1}{\| y \|} \right|}{\| y\| \| x\|} \leq 2\dfrac{\| x - y\|}{\| x\|}.$
+\end{proof}
+
+\begin{lemma}
+	A -- неразложимая, примитивная $\Rightarrow \forall \; \varepsilon > 0: \; \exists T_2(\varepsilon): \; \forall \; t \geq T_2 \; \forall \; x > 0 \; s(A^t, x_A) < \varepsilon.$
+\end{lemma}
+
+\begin{proof}
+	Можно считать, что $\lambda_A = 1$ (иначе заменим матрицу на $\dfrac{1}{\lambda_A}A$) $\Rightarrow A$ -- устойчива. Пусть $\{ e_i\}_{i = 1}^n \text{ базис } \mathbb{R}^n \Rightarrow \exists \lim\limits_{k \to \infty} A^ke_i = \lambda_i x_A \Rightarrow \exists \tilde{T_i}(\varepsilon): \; \forall \; t \geq \tilde{T_i}(\varepsilon): \; \| A^te_i - \lambda_i x_A\| < \dfrac{\varepsilon}{2}\lambda_i \| x_A\|.$ Положим $T_2(\varepsilon) = \underset{i = \bar{1,m}}{max}\tilde{T_i}(\varepsilon)$. Пусть $x > 0, \; x = \sum x_i e_i, \; x_i > 0.$
+
+	$\| A^tx - (\sum \lambda_i x_i)x_A\| \leq \sum \| x_i\| \| A^t e_i - \lambda_i x_A\| < \dfrac{\varepsilon}{2} \sum \lambda_i x_i \| x_A\|. \; s(A^tx, x_A) = \rho(A^tx, (\sum \lambda_i x_i)x_A) \leq \dfrac{2\| A^tx - (\sum \lambda_i x_i)x_A \|}{\|  (\sum \lambda_i x_i)x_A \|} < \dfrac{2 \frac{\varepsilon}{2} \sum \lambda_i x_i\|x_A\| }{\sum \lambda_i x_i\|x_A\|} = \varepsilon.$ 
+\end{proof}
+
+\begin{theorem}[Теорема Моришимы]
+	В задаче номер 3 $x_A$ -- магистраль.
+\end{theorem}
+
+\begin{proof}
+	$x_1, \ldots, x_T$ -- оптимальная траектория. $\forall \; t \geq T_1, \; x_t := Ax_{t-1} \text{ так как: пусть } \exists t \geq T_1:\; x_t > Ax_{t-1}. \text{ Рассмотрим последовательность } \tilde{x}_0, \ldots, \tilde{x}_T:$
+
+	$$\begin{cases}
+		\tilde{x}_i = A^{t+1-i}x_{t + 1}, \; i \leq t\\
+		\tilde{x}_i = x_{t}, \; i > t
+	\end{cases}$$
+
+	$x_0 - \tilde{x}_0 \geq Ax_1 - A\tilde{x}_1 \geq A^2x_2 - A^2\tilde{x}_2 \geq \ldots \geq A^t(x_t - \tilde{x}_t) = \underset{\gg 0}{A^t}\underset{> 0}{(x_t - Ax_{t+1})} \gg 0 \Rightarrow \exists \lambda > 1: \; x_0 \geq \lambda_0 \tilde{x}_0.$
+
+	Тогда рассмотрим последовательность $x'_0, \ldots, x'_T, \; x'_0 = x_0, \; x'_i = \lambda \tilde{x}_i, \; i > 0 \Rightarrow x'_0 = x_0 \geq \lambda \tilde{x}_0 = \lambda A \tilde{x}_1 = A x'_1 \text{ и } x'_i \geq Ax'_{i + 1} \text{ при } i > 0, \text{ то есть } x'_0, \ldots, x'_T \text{ --} \\
+	\text{ -- траектория}\Rightarrow <c, x'_T> = \lambda <c, x_T> > <c, x_T> \text{ так как } x_T > 0, \; c \gg 0,\\
+	<c, X_T> > 0$ -- противоречие, так как $x_0, \ldots, x_T$ -- оптимальная траектория.
+
+	Пусть $T_1 \leq t \leq T - T_2(\varepsilon) \Rightarrow x_t = A^{T - t} x_T, \; T - t \geq T_2(\varepsilon) \Rightarrow s(x_t, x_A) = s(A^{T - t}  x_T, x_A) < \varepsilon$, то есть $x_A$ -- магистраль.
+\end{proof}
+
+\begin{remark}
+	$T_1$ зависит только от А, $T_2$ зависит от А и $\varepsilon$, но оба не зависят от $x_0, c, T, \{ x_t\}_{t = 1}^T.$
+\end{remark}

@@ -1,0 +1,40 @@
+\chapter{Теорема Раднера.}\label{cha:18}
+
+Пусть $Z \subset \mathbb{R^{2n}_+}$ -- модель Гейбла и $u: \mathbb{R}^n \to \mathbb{R}$ -- функция полезности, $z = (x, y) \in \mathbb{R}^n \times \mathbb{R}^n.$
+
+$z_1, \ldots, z_T \in Z$ называется траекторией, если $\forall \; t \; x_{t + 1} \leq y_t.$
+
+\begin{problem}
+	$$\begin{cases}
+		u(y_T) \to \max\\
+		z_t \in Z\\
+		x_{t + 1} \leq y_t\\
+		y_0 \leq x_1
+	\end{cases}$$ Решение этой задачи -- оптимальная траектория. 
+\end{problem}
+
+Рассмотрим условия:
+
+\begin{enumerate}
+	% \item $ \vec{z} = (\vec{x}, \alpha \vec{x}) \in Z, \; \vec{x} > 0.$
+	\item $ z = (x, \alpha x) \in Z, \; x > 0.$
+	% \item $\exists p > 0: \; \forall \; z = (x, y) \in Z, \; z \neq \lambda \vec{z}: \; \lambda p x > py.$
+	\item $\exists p > 0: \; \forall \; z = (x, y) \in Z, \; z \neq \lambda z: \; \lambda p x > py.$
+	\item $\forall \; x \gg 0 \; \exists L > 0: \; (x, Lx) \in Z.$
+	\item u -- непрерывна и неортицательна.
+	\item u -- однородная степени 1: $u(\lambda y) = \lambda u(y) \forall \; \lambda > 0.$
+	\item u(x) > 0.
+	\item $\exists k > 0: \; \forall \; y \geq 0: \; u(y) \leq kpy.$
+\end{enumerate}
+
+\begin{sign}
+	$S(\varepsilon, T, \{ z_t \}) = \#\{ t = 1, \ldots, T | s(y_t, x) \geq \varepsilon \}.$
+\end{sign}
+
+\begin{lemma}
+	$C_{\varepsilon} := \{ (x, y) \in z | s(x, y) \geq \varepsilon \} \Rightarrow \exists \delta > 0: \; \forall (x,y) \in C_{\varepsilon}: \; (\alpha - \delta)px \geq py.$
+\end{lemma}
+
+\begin{theorem}[Раднера]
+	Если модель Гейбла $Z$ удовлетворяет условиям 1)-7), то х -- слабая магистраль, то есть $\forall \; \varepsilon > 0 \; \exists Q(\varepsilon) = Q: \; \forall$ оптимальных траекторий $\{ x_t \}: \; S(\varepsilon, T, \{ z_t \}) \leq Q.$
+\end{theorem}

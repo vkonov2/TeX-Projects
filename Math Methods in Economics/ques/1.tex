@@ -1,0 +1,187 @@
+\chapter{Элементы теории потребления.}\label{cha:1}
+
+Элементы теории потребления. Пространство товаров. Множество потребления. Отношения. Отношение предпочтения и функция полезности.
+
+\vspace{0.5cm}
+
+Пусть $A_1, \dots, A_n$ - различные товары в количестве $x_1, \dots, x_n$.
+
+$\mathbb{R}_{+}^n = \Set{x \in \mathbb{R}^n}{x = (x_1, \dots, x_n), x_i \ge 0, i = \ton n}$ - положительный ортант.
+
+\begin{definition}\label{cha:1/def:1}
+	Множество $\mathbb{R}_{+}^n$, а также пространство $\mathbb{R}^n$ называются \red{пространством товаров}.
+\end{definition}
+
+\begin{clair}\label{cha:1/clair:1}
+	$(x_1, \dots, x_n)$ - \red{потребительский набор} (план потребления)
+
+	$x_i > 0$ - количество товара, которое должно быть предоставлено потребителю
+
+	$x_j > 0$ - количество товара, предлагаемого потребителем
+\end{clair}
+
+\begin{definition}\label{cha:1/def:2}
+	Множество всех планов потребления данного участника экономики называется \red{множеством потребления} $X$.
+\end{definition}
+
+\begin{remark}\label{cha:1/remark:1}
+	Множество потребления $X$ учитывает физические и неэкономические ограничения.
+\end{remark}
+
+\textbf{Свойства}:
+\begin{itemize}
+	\item[$1$)]
+		\blue{выпуклость}
+
+		Если $x, y \in X$ и $\lambda x + (1-\lambda) y \in X \; \forall \lambda \in [0,1]$, то $X$ - выпуклое.
+	\item[$2$)]
+		\blue{замкнутость}
+
+		$X$ замкнуто, если $\mathbb{R}^n \setminus X$ открыто, т.е. $\forall x \in \mathbb{R}^n \setminus X \; \exists r > 0: \; U(x, r) = \Set{y \in \mathbb{R}^n}{||x-y||_2<r} \subset (\mathbb{R}^n \setminus X)$
+\end{itemize}
+
+\begin{itemize}
+	\item[$3$)]
+		\blue{ограниченность}
+
+		Пусть $x, y \in \mathbb{R}^n$, тогда:
+		\begin{itemize}
+			\item[$\bullet$]
+				$x \le y$, если $x_i \le y_i \; \forall i = \ton n$
+			\item[$\bullet$]
+				$x < y$, если $x \le y$ и $x \not= y$
+			\item[$\bullet$]
+				$x << y$ (строго больше), если $x_i < y_i \; \forall i$
+		\end{itemize}
+
+		$X \subset \mathbb{R}^n$ ограничено сверху (снизу), если $\exists b \in\mathbb{R}^n: \; \forall x \in X \; x \le b \; (x \ge b)$.
+
+		$X$ ограничено, если оно ограничено сверху и снизу.
+
+		Ограниченность и замкнутость в $\mathbb{R}^n$ = компактность.
+
+		$X$ компактно, если: $\forall \{x_k \subset X\} \; \exists$ сходящаяся подпоследовательность \\
+		$x_{k_l} \underset{l \longrightarrow \infty}{\to} x: \; \forall \varepsilon > 0 \; \exists L: \; \forall l > L \; ||x - x_{k_l}|| < \varepsilon$. 
+\end{itemize}
+
+Пусть $X \subset \mathbb{R}^n$ - множество потребления. $K \in \mathbb{R}_{+}$ - капитал потребителя. $p \in \mathbb{R}_{+}^n$ - вектор цен. \\
+
+$x = (x_1, \dots, x_n) \in X$, $p \cdot x = \underset{i=1}{\overset{n}{\sum}}p_i \cdot x_i$ - стоимость набора товаров. $p \cdot x \le K$ - бюджетные ограничения.\\
+
+$B_{p, K} = \Set{x \in X}{p\cdot x \le K}$ - \blue{бюджетное множество} (вальрасово множество).
+
+\begin{definition}\label{cha:1/def:3}
+	Пусть $X,Y$ - множества, тогда $R \subset X \times Y$ называется (бинарным) \red{отношением}.
+
+	$x$ находится в отношении $R$ с $y$ $(xRy)$, если $(x,y) \in R$.
+\end{definition}
+
+Отношения можно задать:
+\begin{itemize}
+	\item[$\bullet$] 
+		матрицей $M=(m_{ij}): \; m_{ij} = \begin{cases}
+			1, \; x_i R y_i \\
+			0, \; (x_i, y_i) \not \in R
+		\end{cases}$
+	\item[$\bullet$]
+		графом $x_1 \to x_2$, $(x_1, x_2) \in R$, $(x_2, x_1) \not \in R$
+\end{itemize}
+
+$\overline{D(R)} = \Set{x \in X}{\exists y \in Y: \; xRy}$ - область определения отношения $R$.
+
+$I(R) = \Set{y \in Y}{\exists x \in X: \; xRy}$ - множество значений отношения $R$.
+
+Если $A \subset X$, то $R(A) = \Set{y \in Y}{\exists x \in A: \; xRy}$ - образ подмножества $A$.
+
+Если $\forall x \in X \; |R(x)| = 1$, то $R$ - однозначное отображение.\\
+
+Пусть $X=Y$, $R \subset X\times X$ - отношение на $X$. Отношение $R$ называется:
+\begin{itemize}
+	\item[$1$)]
+		\blue{рефлексивным}, если $\forall x \in X \; xRx$
+	\item[$2$)]
+		\blue{иррефлексивным}, если $\forall x \in X \; (x,x) \not \in R$
+	\item[$3$)]
+		\blue{симметричным}, если $\forall x, y \in X \; xRy \; \Rightarrow \; yRx$
+	\item[$4$)]
+		\blue{асимметричным}, если $\forall x, y \in X \; xRy \; \Rightarrow \; (y,x) \not \in R$
+	\item[$5$)]
+		\blue{антисимметричным}, если $\forall x, y \in X \; xRy, yRx \; \Rightarrow \; x = y$
+	\item[$6$)]
+		\blue{транзитивным}, если $xRy, yRz \; \Rightarrow \; xRz$
+	\item[$7$)]
+		\blue{полным}, если $\forall x, y, \in X \; xRy$ или $yRx$
+\end{itemize}
+
+\begin{example}\label{cha:1/example:1}
+	Примеры отношений:
+
+	Отношение эквивалентности: $1) + 3) + 6)$
+
+	Частичный порядок: $1) + 5) + 6)$
+
+	Линейный порядок: частный порядок $+ 7)$
+\end{example}
+
+\begin{definition}\label{cha:1/def:4}
+	\red{Отношение предпочтения} - это отношение на множестве потребления, являющееся рефлексивным, транзитивным и полным ($1) + 6) + 7)$).
+
+	Обозначение: $\preceq$
+\end{definition}
+
+\textbf{Пример} отношения $\preceq$:\\
+
+$u: \; X \to \mathbb{R}, \; x \preceq y \; \Leftrightarrow \; u(x) \le u(y)$, $u$ - функция полезности.
+\begin{proof}
+	очевидно, т.к.:
+	\begin{itemize}
+		\item[$1$)]
+			$\forall x \in X u(x) \ge u(x)$
+		\item[$6$)]
+			$u(x) \ge u(y) \ge u(z) \; \Rightarrow \; u(x) \ge u(z)$
+		\item[$7$)]
+			либо $u(x) \ge u(y)$, либо $u(y) \ge u(x)$
+	\end{itemize}
+\end{proof}
+
+Пусть $X$ - топологическое пространство и $\preceq$ - отношение предпочтения на $X$.
+
+$x \prec y$, если $x \preceq y$ и $y \not \preceq x$.
+
+$W = \Set{(x,y) \in X \times X}{x \prec y}$.
+
+\begin{definition}\label{cha:1/def:5}
+	Отношение $\prec$ называется \red{непрерывным}, если $W$ открыто в $X \times X$, т.е. $\exists$ открытые подмножества $U_{\alpha}, V_{\alpha} \subset X: \; W = \underset{\alpha}{\bigcup} U_{\alpha} \times V_{\alpha}$.
+
+	Т.е. при малом изменении наборов $x$ и $y$ отношение сохраняется:
+
+	$x \succ y$, $x'$ близко к $x$, $y'$ близко к $y \; \Rightarrow \; x' \succ y'$
+\end{definition}
+
+\begin{definition}\label{cha:1/def:6}
+	Функция $u(x)$, определенная на множестве потребления $X$, называется \red{функцией полезности}, соответствующей отношению предпочтения $\preceq$, если $u(x) \preceq u(y) \; \Leftrightarrow \; x \preceq y$.
+\end{definition}
+
+\begin{theorem}[\red{Дебра}]\label{cha:1/the:1}
+	Пусть $X \subset \mathbb{R}^n$, $\preceq$ - непрерывное отношение предпочтения, тогда $\exists$ непрерывная функция полезности $u: \; X \to \mathbb{R}$, такая, что $u$ - функция полезности для $\preceq$.
+\end{theorem}
+
+\begin{definition}\label{cha:1/def:7}
+	Отношение предпочтения $\preceq$ на $X$ называют \red{локально ненасыщенным}, если $\forall x \in X$ $\exists$ открестность $U(x): \; \exists y \in U \bigcap X: \; x \prec y$, т.е. функция полезности $u(x)$ не имеет локальным максимумов на $X$.
+\end{definition}
+
+Аксиома (свойство) ненасыщенности: $x << y \; \Rightarrow \; x \prec y$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

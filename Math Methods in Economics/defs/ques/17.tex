@@ -1,0 +1,61 @@
+\chapter{Теорема Моришимы о магистралях.}\label{cha:17}
+
+A, B -- неотрицательные матрицы $m \times m$. Рассмотрим последовательность интенсивностей: $x_1, \ldots, x_r, \ldots, \; x_t \in \mathbb{R}^m_+, Ax_t \text{-- вектор затрат, } Bx_t \text{-- вектор выпуска.}$
+
+\begin{definition}[Условие замкнутости]
+	$Ax_t \leq Bx_{t-1} \Rightarrow x_1, \ldots, x_t$ -- траектория.
+\end{definition}
+
+\begin{problem}
+	$$\begin{cases}
+		<c, x_T> \to \max\\
+		Ax_t \leq B x_{t - 1}, \; t = 2, \ldots, T\\
+		x_t \geq 0
+	\end{cases}$$ Решение этой задачи -- оптимальная траектория.
+\end{problem}
+
+\begin{remark}
+	Если $c = qB, \; q \geq 0 \text{ -- вектор цен, } <c, x_T> = qBx_{T}$ -- стоимость выпуска $Bx_T.$
+\end{remark}
+
+\begin{sign}
+	$x, y \in \mathbb{R}^m, \; y \neq 0, \; s(x, y) = \| \dfrac{x}{\| x \|} - \dfrac{y}{\| y \|}\|$ -- расстояние между направлениями x и y.
+\end{sign}
+
+\begin{definition}[Магистраль]
+	В задаче выше -- это вектор $x \neq 0: \; \forall \; \varepsilon > 0 \exists T_1(\varepsilon), T_2(\varepsilon): \; \forall \; t: \; T_1(\varepsilon) \leq t \leq T - T_2(\varepsilon) \; \forall \text{ оптимальной траектории } \{ x_t\}: \; s(x_t, \vec{x}) < \varepsilon.$
+\end{definition}
+
+\begin{definition}[Слабая магистраль]
+	Это вектор $x: \; \forall \; \varepsilon > 0 \exists Q(\varepsilon) \in \mathbb{N}: \forall \text{ оптимальной траектории } \{ x_t\} \text{ неравенство } s(x_t, \vec{x}) < \varepsilon \text{ нарушается } \leq Q(\varepsilon) \text{ раз.}$
+\end{definition}
+
+\begin{problem}
+	Дано: m = n, B = I -- единичная матрица, А -- неразложимая, примитивная, $c \gg 0, \; x_0 \gg 0$. 
+
+	$$\begin{cases}
+		<c, x_T> \to \max\\
+		Ax_t \leq B x_{t - 1}\\
+		x_t \geq 0
+	\end{cases}$$ 
+\end{problem}
+
+\begin{lemma}
+	A -- неразложимая, примитивная $\Rightarrow \exists T_1: \; \forall \; t \geq T_1: \; A^t \gg 0.$
+\end{lemma}
+
+\begin{lemma}
+	$s(x, y) < 2\dfrac{\| x - y\|}{\| x\|}.$
+\end{lemma}
+
+\begin{lemma}
+	A -- неразложимая, примитивная $\Rightarrow \forall \; \varepsilon > 0: \; \exists T_2(\varepsilon): \; \forall \; t \geq T_2 \; \forall \; x > 0 \; s(A^t, x_A) < \varepsilon.$
+\end{lemma}
+
+\begin{theorem}[Теорема Моришимы]
+	В задаче номер 3 $x_A$ -- магистраль.
+\end{theorem}
+
+\begin{remark}
+	$T_1$ зависит только от А, $T_2$ зависит от А и $\varepsilon$, но оба не зависят от $x_0, c, T, \{ x_t\}_{t = 1}^T.$
+\end{remark}
