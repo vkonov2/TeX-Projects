@@ -1,0 +1,73 @@
+\chapter{Краевые задачи для уравнений Лапласа и Пуассона. Единственность решения задачи Дирихле. Задача Неймана: условие разрешимости, теорема о множестве решений.}
+\label{cha:19}
+
+\begin{definition}
+	Имеем несколько видов уравнений:
+	\begin{itemize}
+		\item[$\bullet$] $ \Delta u = 0 $ -- \blue{уравнение Лапласа}
+		\item[$\bullet$] $ \Delta u = f(x) $ -- \blue{уравнение Пуассона}
+	\end{itemize}
+\end{definition}
+
+\begin{theorem}[\red{Единственность решения задачи Дирихле}]
+	$\;$\\
+	Имеем задачу Дирихле: 
+	$\begin{cases}
+		\Delta u(x) = f(x), \; x \in \Omega \\
+		u(x) \mid_{\partial \Omega} = h(x)
+	\end{cases}$. \\
+	Тогда $ \exists ! u(x) $ - решение для $ \forall \text{ непрерывных } f(x), \; h(x)$.
+\end{theorem}
+\begin{Proof}
+	Доказываем \textit{единственность}, т.к. существование уже доказано через функцию Грина.
+
+	Пусть $\exists u_1, u_2 $ - два различных решения. Рассмотрим их разность $ z = u_1 - u_2 $ и задачу Дирихле для нее:
+	$$\begin{cases}
+		\Delta z(x) = 0, \; x \in \Omega \\
+		z(x) \mid_{\partial \Omega} = 0
+	\end{cases}$$
+	Тогда по принципу максимума max и min достигаются на границе, а значит $ z \equiv 0$, т.е. $u_1 \equiv u_2$.
+\end{Proof}
+
+\begin{definition}[\red{Условие разрешимости задачи Неймана}]
+	$$\iint\limits_{\Omega} f(x)dx = \oint\limits_{\partial\Omega}h(x)dx$$
+\end{definition}
+
+\begin{theorem}[\red{Теорема о множестве решений задачи Неймана}]
+	$\;$\\
+	Имеем задачу Неймана: 
+	$\begin{cases}
+		\Delta u(x) = f(x), \; x \in \Omega \\
+		\dfrac{\partial u(x)}{\partial \bar{n}} \mid_{\partial \Omega} = h(x)
+	\end{cases}$\\
+	Если выполнено условия разрешимости и
+	$ u_1, u_2 $ - решения задачи Неймана, то $u_1 - u_2 \equiv const$, т.е. решений бесконечно много. Если условие разрешимости не выполнено, то решений нет.
+\end{theorem}
+\begin{Proof}
+	Отстутствие решение в случае невыполнения условия разрешимости очевидно следует из теоремы о потоке.
+
+	Теперь предположим, что 
+	$\exists u_1, u_2 $ - два различных решения. Рассмотрим их разность $ z = u_1 - u_2 $ и задачу Неймана для нее:
+	$$\begin{cases}
+		\Delta z(x) = 0, \; x \in \Omega \\
+		\dfrac{\partial z(x)}{\partial \bar{n}} \mid_{\partial \Omega} = 0
+	\end{cases}$$
+	Условие разрешимости автоматически выполнено. Воспользуемся 1-ой формулой Грина для $ \nu = \omega = z $:
+	$$\begin{gathered}
+		\iint\limits_{\Omega} \nu \Delta \omega d\bar{x} = \oint\limits_{\partial \omega} \nu \dfrac{\partial \omega}{\partial \bar{n}}d\sigma - \iint\limits_{\Omega}( \bar{\nabla} \nu, \bar{\nabla} \omega)d\bar{x} \\
+		\underbrace{\iint\limits_{\Omega} z \Delta z d\bar{x}}_{= 0} = \underbrace{\oint\limits_{\partial z} z \dfrac{\partial z}{\partial \bar{n}}d\sigma}_{= 0} - \iint\limits_{\Omega}|| \bar{\nabla} z||^2d\bar{x} = 0 \; \Rightarrow \; \iint\limits_{\Omega}|| \bar{\nabla} z||^2d\bar{x} = 0
+	\end{gathered}$$
+	Так как $|| \bar{\nabla} z||^2 \geq 0$ и $|| \bar{\nabla} z|| = (\dfrac{\partial z}{\partial x_1})^2 + \dots + (\dfrac{\partial z}{\partial x_n})^2 \equiv 0$, то: 
+	$$\dfrac{\partial z}{\partial x_i} \equiv 0, \; i = 1, \ldots, n \; \Rightarrow \;  z \equiv const \; \Rightarrow \;  u_1 - u_2 \equiv const$$
+\end{Proof}
+
+
+
+
+
+
+
+
+
+
+

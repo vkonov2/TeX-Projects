@@ -1,0 +1,153 @@
+\chapter{Полуограниченная струна. Методы четного и нечетного продолжения. Решение задачи для полуограниченной струны с неоднородным граничным условием.}
+\label{cha:5}
+
+\textbf{Однородное уравнение с однородным граничным условием $\RNumb{1}$ рода}
+
+$$\begin{cases}
+	u_{tt} = a^2 u_{xx}, \; t > 0, \; x > 0 \\
+	\left.
+  		\begin{array}{ccc}
+    		u|_{t=0} = \varphi(x) \\
+    		u_t |_{t=0} = \psi (x)
+  		\end{array}
+	\right\} \text{ - начальные условия для } x > 0 \\
+	u|_{x=0} = 0, \; t > 0
+\end{cases}\eqno(*)$$
+
+Нечетно отразим начальные условия:
+\begin{multicols}{2}
+	$\varphi (x) = 
+		\begin{cases}
+			\varphi (x), \; x \ge 0 \\
+			- \varphi (-x), \; x < 0
+		\end{cases}$
+	\columnbreak
+	$\psi (x) = 
+		\begin{cases}
+			\psi (x), \; x \ge 0 \\
+			- \psi (-x), \; x < 0
+		\end{cases}$
+\end{multicols}
+
+Т.е. свели задачу к виду:
+$$\begin{cases}
+	u_{tt} = a^2 u_{xx}, \; t > 0, \; x \in \mathbb{R} \\
+	\left.
+  		\begin{array}{ccc}
+    		u|_{t=0} = \varphi(x) \\
+    		u_t |_{t=0} = \psi (x)
+  		\end{array}
+	\right\}, \; x \in \mathbb{R}
+\end{cases}$$
+
+По формуле Даламбера:
+$$u(t,x) = \frac{1}{2} \left( \varphi(x+at) + \varphi(x-at) \right) + \frac{1}{2a} \underset{x-at}{\overset{x+at}{\int}} \psi(y) dy$$
+
+Проверим, что $u|_{x=0} = 0$:
+$$u|_{x=0} = \frac{1}{2}\left( \varphi(at) + \varphi(-at) \right) + \frac{1}{2a} \underset{-at}{\overset{at}{\int}}\psi(y) dy = 0, \text{ т.к. функции нечетные.}$$
+
+Т.е. если надо решить $*$, то продолжим нечетным образом начальные условия. Тогда функция $\frac{1}{2} \left( \varphi(x+at) + \varphi(x-at) \right) + \frac{1}{2a} \underset{x-at}{\overset{x+at}{\int}} \psi(y) dy$ определена при $x \in \mathbb{R}$, $t>0$ и $u|_{x=0} = 0$. Кроме того, эта функция при $x>0$ удовлетворяет условиям $u|_{t=0} = \varphi(x), \; u_t |_{t=0} = \psi (x)$. Т.е. рассматривая полученную функцию при $x \ge 0, \; t \ge 0$, получим функцию, удовлетворяющую $*$.
+
+$$u(t,x) = \begin{cases}
+	\frac{1}{2} \left( \varphi(x+at) + \varphi(x-at) \right) + \frac{1}{2a} \underset{x-at}{\overset{x+at}{\int}} \psi(y) dy, \; x > at \\
+	\frac{1}{2} \left( \varphi(x+at) - \varphi(at-x) \right) + \frac{1}{2a} \underset{at-x}{\overset{x+at}{\int}} \psi(y) dy, \; x < at
+\end{cases}$$
+
+\textbf{Однородное уравнение с однородным граничным условием $\RNumb{2}$ рода}
+
+$$\begin{cases}
+	u_{tt} = a^2 u_{xx}, \; t > 0, \; x > 0 \\
+	\left.
+  		\begin{array}{ccc}
+    		u|_{t=0} = \varphi(x) \\
+    		u_t |_{t=0} = \psi (x)
+  		\end{array}
+	\right\} \text{ - начальные условия для } x > 0 \\
+	u_x |_{x=0} = 0, \; t > 0
+\end{cases}$$
+
+В этом случае отразим начальные условия четным образом:
+
+\begin{multicols}{2}
+	$\varphi (x) = 
+		\begin{cases}
+			\varphi (x), \; x \ge 0 \\
+			\varphi (-x), \; x < 0
+		\end{cases}$
+	\columnbreak
+	$\psi (x) = 
+		\begin{cases}
+			\psi (x), \; x \ge 0 \\
+			\psi (-x), \; x < 0
+		\end{cases}$
+\end{multicols}
+
+$$\begin{cases}
+	u_{tt} = a^2 u_{xx}, \; t > 0, \; x \in \mathbb{R} \\
+	\left.
+  		\begin{array}{ccc}
+    		u|_{t=0} = \varphi(x) \\
+    		u_t |_{t=0} = \psi (x)
+  		\end{array}
+	\right\}, \; x \in \mathbb{R}
+\end{cases}$$
+
+По формуле Даламбера:
+$$u(t,x) = \frac{1}{2} \left( \varphi(x+at) + \varphi(x-at) \right) + \frac{1}{2a} \underset{x-at}{\overset{x+at}{\int}} \psi(y) dy$$
+
+$$u_x |_{x=0} = \frac{1}{2} \left( \varphi'(at) + \varphi'(-at) \right) + \frac{1}{2} \left( \psi (at) - \psi (-at) \right) = 0$$
+
+\newpage
+Аналогично предыдущему получаем:
+$$u(t,x) = \begin{cases}
+	\frac{1}{2} \left( \varphi(x+at) + \varphi(x-at) \right) + \frac{1}{2a} \underset{x-at}{\overset{x+at}{\int}} \psi(y) dy, \; x > at \\
+	\frac{1}{2} \left( \varphi(x+at) - \varphi(at-x) \right) + \frac{1}{2a} \left( \underset{0}{\overset{x+at}{\int}}\psi(y)dy + \underset{0}{\overset{at-x}{\int}}\psi(y)dy \right), \; x < at
+\end{cases}$$
+
+\textbf{Однородное уравнение с неоднородным граничным условием $\RNumb{3}$ рода}
+
+$$\begin{cases}
+	u_{tt} = a^2 u_{xx}, \; t >0 , \; x >0 \\
+	\left.
+  		\begin{array}{ccc}
+    		u|_{t=0} = \varphi(x) \\
+    		u_t |_{t=0} = \psi (x)
+  		\end{array}
+	\right\}, \; x > 0 \\
+	(\alpha u_x + \beta u)|_{x=0} = \mu (t), \; t > 0
+\end{cases}$$
+
+В этом случае решение ищется в виде:
+$$u(t,x) = \begin{cases}
+	f(x+at) + g(x-at), \; x >at \text{ (по формуле Даламбера)} \\
+	f(x+at)+h(x-at), x < at
+\end{cases}$$
+
+Т.е. по формуле Даламбера найдем решение при $x>at$ и также найдем $f$, остается найти $h$. Воспользуемся начальным граничным условием $(\alpha u_x + \beta u)|_{x=0} = \mu(t)$. Выразим $h(y) = \dots + C$. Чтобы найти $C$, воспользуемся тем, что при $x = at \; g(0) = h(0)$.\\
+
+\textbf{Неоднородное уравнение с граничным условием $\RNumb{3}$ рода}
+
+$$\begin{cases}
+	u_{tt} = a^2 u_{xx} + f(t,x), \; t >0 , \; x >0 \\
+	\left.
+  		\begin{array}{ccc}
+    		u|_{t=0} = \varphi(x) \\
+    		u_t |_{t=0} = \psi (x)
+  		\end{array}
+	\right\}, \; x > 0 \\
+	(\alpha u_x + \beta u)|_{x=0} = \mu (t), \; t > 0
+\end{cases}\eqno(**)$$
+
+Рассмотрим вспомогательную функцию $w(t,x): \; w_{tt} = a^2 w_{xx} + f(t,x)$ ($w$ подбирается так, чтобы это было верно).\\
+
+Пусть теперь $u = w + v$, тогда подставим это в $**$ и получим:
+
+$$\begin{cases}
+	v_{tt} = a^2 v_{xx}\\
+	v|_{t=0} = \varphi_1 (x) \\
+	v_t |_{t=0} = \psi_1 (x) \\
+	(\alpha v_x + \beta v)|_{x=0} = \mu_1 (t)
+\end{cases}$$
+
+Алгоритм решения данной системы описан ранее.
+
