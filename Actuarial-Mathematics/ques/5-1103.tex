@@ -1,0 +1,354 @@
+\chapter{Лекция № 5 - 11.03.2021. Элементарные формы страхования} % (fold)
+\begin{enumerate}
+	\item \red{Страхование на всю жизнь} с единичной выплатой (равной 1) в конце года смерти, которая финансируется годовыми нетто-премиями, которые мы обозначим $ P_x.$
+
+	Тогда
+	\begin{gather*}
+		L = v^{k+1}-P_x \ddot{a}_{k+1\urcorner}\\
+		EL = 0 \; \Rightarrow \; A_x - P_x \ddot{a}_x = 0 
+	\end{gather*}
+	Отсюда
+	\[ P_x = \frac{A_x}{\ddot{a}_x}. \]
+	Вспоминая соотношение $ 1 = d \ddot{a}_x + A_k,$ имеем
+	\[P_x = \frac{1-d\ddot{a}_x}{\ddot{a}_x}.\]
+
+	\item \red{Страхование на n лет, без выплаты в случае дожития до n лет} (единичная выплата в конце года смерти)(n-term insurance).
+
+	Годовая нетто-премия в этом случае обозначается $ P_{x:n\urcorner}^{1}.$
+
+	Тогда
+	\[
+		L=\begin{cases}
+			v^{k+1} - P_{x:n\urcorner}^{1} \ddot{a}_{k+1\urcorner}, \;\; k = 0,1,.., n-1\\
+			- P_{x:n\urcorner} \ddot{a}_{n\urcorner}, \;\; k \geq n
+		\end{cases}
+	\]
+	Принцип эквивалентности:
+	\begin{gather*}
+		EL = A_{x:n\urcorner}^{1} - P_{x:n\urcorner}^{1} \ddot{a}_{x:n\urcorner} = 0\\
+		P_{x:n\urcorner}^{1} = \frac{A_{x:n\urcorner}^{1}}{\ddot{a}_{x:n\urcorner}}
+	\end{gather*}
+
+	\item Страховая сумма (равная 1) выплачивается  если страхователь \red{ дожил до n лет} (pure endowments)
+
+	Годовая нетто-премия в этом случае $ P_{x:n\urcorner}^{\;\;\;\;1}.$
+
+	Тогда убыток страховой компании
+	\[
+		L=\begin{cases}
+			-P_{x:n\urcorner}^{\;\;\;\;1}\ddot{a}_{k+1\urcorner}, \;\; k=0,1,..,n-1\\
+			v^n-P_{x:n\urcorner}^{\;\;\;\;1}\ddot{a}_{n\urcorner}, \;\; k \geq n
+		\end{cases}
+	\]
+	И из принципа эквивалентности:
+	\begin{gather*}
+		EL = 0\\
+		P_{x:n\urcorner}^{\;\;\;\;1} = \frac{A_{x:n\urcorner}^{\;\;\;\;1}}{\ddot{a}_{x:n\urcorner}}.
+	\end{gather*}
+
+	\item \red{Endowments}
+
+	Обязательства страховой компании 
+	\[
+		Z=\begin{cases}
+			v^{k+1}, \;\; k=0,1,...,n-1\\
+			v^n, \;\; k \geq n
+		\end{cases}
+	\]
+	\[ EZ = A_{x:n\urcorner}.\]
+
+	Обязательства клиента 
+	\[
+		Y=\begin{cases}
+			\ddot{a}_{k+1\urcorner}, \;\; k=0,1,...,n-1\\
+			\ddot{a}_{n\urcorner}, \;\; k \geq n.
+		\end{cases}
+	\]
+
+	В этом случае убыток $ L$ является суммой убытков $ L_1$ и $ L_2$ (равных убыткам в случаях (2) и (3)).
+	\begin{gather*}
+		L_2 = v^{k+1} - \ddot{a}_{k+1\urcorner}, \;\; k=0,1,...,n-1\\
+		L_3 = v^n -  \ddot{a}_{n\urcorner}, \;\; k \geq n\\
+		L = L_1 + L_2.
+	\end{gather*}
+	Отсюда 
+	\begin{gather*}
+		EL = E(v^{k+1}+v^n) - [E(\ddot{a}_{k+1\urcorner} + \ddot{a}_{n\urcorner})]P_{x:n\urcorner}=\\
+		=EZ + P_{x:n\urcorner}EY = 0,
+	\end{gather*}
+	где
+	\begin{gather*}
+		EZ = \sum\limits_{k=0}^{n-1}v^{k+1}{}_kp_xq_{x+k}+ v^n{}_np_x = A_{x:n\urcorner}\\
+		EY = \ddot{a}_{x:n\urcorner} = \sum\limits_{k=0}^{n-1} \ddot{a}_{k+1\urcorner}{}_kp_xq_{x+k} + \ddot{a}_{n\urcorner}{}_np_x\\
+		\Rightarrow\; P_{x:n\urcorner} = \frac{A_{x:n\urcorner}}{\ddot{a}_{x:n\urcorner}}.
+	\end{gather*}
+
+	При этом 
+	\[ P_{x:n\urcorner} = P_{x:n\urcorner}^{1} + P_{x:n\urcorner}^{\;\;\;\;1}.\]
+
+	Используя равенство (некоторое), получим
+	\[ \frac{1}{\ddot{a}_{x:n\urcorner}} = d+ P_{x:n\urcorner} \; \Rightarrow \; P_{x:n\urcorner} = \frac{1}{\ddot{a}_{x:n\urcorner}} - d. \]
+	И так как 
+	\[ \ddot{a}_{x:n\urcorner} = \frac{1- A_{x:n\urcorner}}{d},  \]
+	то 
+	\begin{gather*}
+		P_{x:n\urcorner} =  \frac{d}{1- A_{x:n\urcorner}} = \frac{dA_{x:n\urcorner}}{1- A_{x:n\urcorner}}\\
+		P_{x:n\urcorner} = \frac{dA_{x:n\urcorner}}{1-A_{x:n\urcorner}}.
+	\end{gather*}
+
+	Последнее равенство можно записать в виде 
+	\[P_{x:n\urcorner} = dA_{x:n\urcorner} + P_{x:n\urcorner}A_{x:n\urcorner}, \]
+	а его можно представить как сумму равенств 
+	\begin{gather*}
+		P_{x:n\urcorner}^{1} = d A_{x:n\urcorner}^{1}+ P_{x:n\urcorner} A_{x:n\urcorner}^{1}\\
+		P_{x:n\urcorner}^{\;\;\;\;1} = d A_{x:n\urcorner}^{\;\;\;\;1} + P_{x:n\urcorner} A_{x:n\urcorner}^{\;\;\;\;1}.	
+	\end{gather*}
+
+	\item \red{Отсроченное страхование}
+
+	В этом случае обязательства страховой компании
+	\[
+		Z=\begin{cases}
+			0, \;\; k=0,..,m-1\\
+			v^{k+1}, \;\; k = m, m+1, ...
+		\end{cases}
+	\]
+	Тогда 
+	\[EZ = {}_{m|}A_x = {}_mp_xv^mA_{x+m}.\]
+
+	Обязательства клиента 
+	\[
+		Y=\begin{cases}
+			0, \;\; k=0,1, .., m-1\\
+			v^m+...+v^k, \;\; k=m,m+1,...
+		\end{cases}
+	\]
+
+	Годовая нетто-премия в этом случае
+	\[ {}_{m|}P_x = \frac{{}_{m|}A_x}{{}_{m|}\ddot{a}_x} = \frac{{}_mp_xv^mA_{x+m}}{{}_mp_xv^m\ddot{a}_{x+m}} = \frac{A_{x+m}}{\ddot{a}_{x+m}}. \]
+
+	\item Это случай, когда \red{ страховая сумма меняется от года к году } (т.е. $ C_{j+1},\;\; j=0,1,..,k$), и при этом \red{ страхование финансируется годовыми премиями $ \pi_0,\pi_1, ..,\pi_k, $} выплачиваемыми вперед. 
+
+	В этом случае общий убыток 
+	\[ L = C_{k+1}v^{k+1} - \sum\limits_{k=0}^{k}\pi_kv^k, \]
+	а премии являются нетто-премиями, если они удовлетворяют уравнению 
+	\[ \sum\limits_{k=0}^{\infty}C_{k+1}v^{k+1}{}_kp_xq_{x+k} = \sum\limits_{k=0}^{\infty}\pi_kv^k{}_kp_x \]
+
+	\item \red{ Полисы с возмещением премии}.
+
+	В страховой практике встречается большое разнообразие форм страхования и планов платежей. Это делает очень сложным (невыполняемым) установаление одноразовых нетто-премий, определенных для всех возможных комбинаций. Основное правило, которому следуют в заданной ситуации, состоит в установлении убытка $ L$ и в дальнейшем применении условия $ EL=0.$ 
+	\begin{example}
+		Схема pure endowments с одной единичной выплатой через n лет исходит из условия , что в случае смерти клиента до истечения n лет, возвращение уплаченных премий будет произведено, но без учета набежавших процентов. Какой должны быть годовая нетто-премия , если брутто-премия превосходит годовую нетто-премию P на 40\%?
+
+		В этом случае убыток компании 
+		\[
+				L=\begin{cases}
+					(k+1)(1.4P)v^{k+1} - P \ddot{a}_{k+1\urcorner}, \;\; k=0,1,..,n-1\\
+					v^n- P\ddot{a}_{n\urcorner}, \;\; k=n, n+1,..
+				\end{cases}
+		\]	
+
+		Тогда 
+		\begin{gather*}
+			EL = E((k+1)(1.4P)v^{k+1}) + Ev^n - E[P(\ddot{a}_{k+1\urcorner} + \ddot{a}_{n\urcorner})]\\
+			EL = 1.4P (IA)_{x:n\urcorner}^{1} + A_{x:n\urcorner}^{\;\;\;\;1} -P \ddot{a}_{x:n\urcorner} = 0\\
+			P = \frac{A_{x:n\urcorner}^{\;\;\;\;1}}{\ddot{a}_{x:n\urcorner}- 1.4(IA)_{x:n\urcorner}^{1}}
+		\end{gather*}
+	\end{example}	
+\end{enumerate}
+
+\textbf{Некоторые определения}
+\begin{itemize}
+	\item \red{Net single premium} - одноразовая нетто-ставка (платится один раз при заключении контракта).
+	\item \red{Net premium} - ежегодная нетто-ставка (ежегодная или с другой частотой).
+	\item \textbf{Net single premium} = E(настоящее значение страховой суммы) и, конечно, удовлетворяет \blue{принципу эквивалентности} $ EL = 0.$
+	\item \textbf{Net premium} - для их расчета надо использовать \blue{принцип эквивалентности} $ EL = 0.$
+\end{itemize}
+
+\subsection{Резерв нетто-премий} % (fold)
+Рассмотрим страховой полис, который финансируется нетто-премиями. На начало работы полиса математическое ожидание настоящего значения будущих премий равно математическому ожиданию настоящего значения будущих выплат страховщика (benefits), что приводит к тому, что математическое ожидание убытка $ L$ равно 0 ($ EL = 0$). Это равенство между будущими премиями и будущими benefits, вообще говоря, отсутствует для более позднего времени.
+
+Поэтому дадим
+\begin{definition}
+	случайной величины $ {}_tL$ как разности (для момента $ t$) между настоящим значением будущих выплат страховщика и настоящим значением будущих (после момента $ t$) премий страхователя.
+\end{definition}
+Считаем, что страхователь жив в момент $ t,$ т.е. $ T_x > t$.
+
+Рассмотрим два типа резерва:
+\begin{enumerate}
+	\item проспективный
+	\item ретроспективный
+\end{enumerate}
+
+\begin{definition}
+	\red{Проспективный резерв} нетто-премий на момент $ t$ обозначается $ {}_tV$ и определяется как условное математическое ожидание $ {}_tL$ (при условии, что $ T_x > t$).
+\end{definition}
+
+Полис страхования жизни всегда выбирается в таком виде, чтобы резерв нетто-премий $ {}_tV$ был бы положительным или неотрицательным. Это делается для того, чтобы страхователь для любого момента времени имел бы интерес в продолжении страхования. Поэтому математическое ожидание будущих benefits будут всегда превосходить математическое ожидание будущих нетто-премий.
+
+Для компенсации этого долга (эти премии страховая компания полукчила и использовала уже в своей работе) страховщик всегда должен резервировать достаточное количество денежных средств для покрытия разности значений этих математических ожиданий, т.е. организовать соответствующий резерв нетто-премий $ {}_tV.$
+
+\begin{example}
+	Заключение 10000 договоров (с мужчинами 60 лет) на срок 5 лет по страхованию на случай смерти с условием выплат (в случае смерти в течении этих 5 лет) 100 денежных единиц в конце года смерти страхователя,  либо по прошествии 5 лет, $ i =4\%$  (схема endowments).
+
+	Тогда ежегодная нетто-ставка для одного страхователя (выплачивается в начале года)
+	\[  P_{60:5\urcorner}= 100 \frac{A_{60:5\urcorner}}{\ddot{a}_{60:5\urcorner}} = \frac{100dA_{60:5\urcorner}}{1-A_{60:5\urcorner}} = 18.43.\]
+	По английским таблицам имеем
+	\begin{gather*}
+		q_{60} = 0.0144\\
+		q_{61} = 0.01601
+	\end{gather*}
+
+	Произведя расчеты получаем
+	\begin{gather*}
+		{}_1V = 100A_{61:4\urcorner} - 18.43 \ddot{a}_{61:4\urcorner} = 17.98\\
+		{}_2V = 100A_{62:3\urcorner} - 18.43 \ddot{a}_{62:3\urcorner} = 36.85\\
+	\end{gather*}
+\end{example}
+
+Далее поговорим о проспективном резерве для трех моделей страхования 
+\begin{enumerate}
+	\item \textbf{Endowments}
+	Резерв нетто-премий для конца к-ого года в этом случае (n лет, страховая сумма выплачивается либо в конце года клиента, либо по окончании n лет, ежегодные премии) обозначается $ {}_k V_{x:n\urcorner}$ и 
+	\[ {}_k V_{x:n\urcorner} = A_{x+k:n-k\urcorner} - P_{x:n\urcorner}\ddot{a}_{x+k:n-k\urcorner}, \;\; k = 0,1,...,n-1 \]
+
+	Очевидно $ {}_0 V_{x:n\urcorner} = 0$ из определения нетто-премий.
+	\item \textbf{Term insurance}
+	Резерв нетто-премий для конца к-ого года обозначается $ {}_kV_{x:n\urcorner}^{1}$ и задается 
+	\[ {}_kV_{x:n\urcorner}^{1} = A_{x+k:n-k\urcorner}^{1} -P_{x:n\urcorner}^{1}\ddot{a}_{x+k:n-k\urcorner}\]
+
+	\item \textbf{Whole life insurance}
+	В этом случае резерв нетто-премий 
+	\[ {}_kV_x = A_{x+k} - P_x \ddot{a}_{x+k}	 \]
+\end{enumerate}
+
+\subsection{Реккурентная формула} % (fold)
+Для обычного полиса страхования на всю жизнь со страховой суммой = 1, с выплатой по случаю смерти в конце года и ежегодной премией $ P_x$, выплачиваемой вперед
+\[ ({}_kV_x + P_x)(1+i) = (A_{x+k} - P_x \ddot{a}_{x+k} + P_x)(1+i). \]
+
+При этом 
+\[ A_{x+k}= vq_{x+k} + vp_{x+k}A_{x+k+1} \]
+и
+\[ P_x - P_x \ddot{a}_{x+k} = [a_x = \ddot{a}-1] = -P_xa_{x+k}=-P_xvp_{x+k}\ddot{a}_{x+k+1} , \]
+так как $ a_{x+k}$ - математическое ожидание настоящего значения ренты клиентаб выплачиваемой в конце $ x+k$ года, а $ \ddot{a}_{x+k+1}$ - математическое ожидание настоящего значения ренты клиента выплачиваемой в начале $ x+k+1$ года, т.е. надо прожить год после $ x+k$ и послп этого привести $ \ddot{a}_{x+k+1}$ к моменту $ x+k\;\; \;\Rightarrow\;\;p_{x+k}v \ddot{a}_{x+k+1}.$
+
+Поэтому 
+\begin{gather*}
+	({}_kV_x + P_x)(1+i) = (vq_{x+k} + vp_{x+k}A_{x+k+1} - P_xvp_{x+k}\ddot{a}_{x+k+1})(1+i)=\\
+	=q_{x+k} +p_{x+k}(A_{x+k+1} -P_x\ddot{a}_{x+k+1}) = q_{x+k} +p_{x+k}{}_{k+1}V_x.
+\end{gather*}
+Получили
+\[ ({}_kV_x+P_x)(1+i)=q_{x+k}+p_{x+k}{}_{k+1}V_x. \]
+
+Таким образом, если взять резерв $ {}_mV_x$ на начало года, прибавить к нему периодическую нетто-премию для этого года, увеличить эту сумму с учетом нормы доходности , то эта сумма в точности достаточна для финансирования выплат по случаю смерти $ q_{x+k}$ (страховая сумма = 1), а так же ожидаемой стоимости резерва $ {}_{k+1}V_x$ на конец года $ k+1$ для доживших до этого момента , что происходит с вероятностью $ p_{x+k}.$ Эта ожидаемая стоимость равна 
+\[ p_{x+k}{}_{k+1}V_x. \] 
+
+ Если трактовать резерв $ {}_kV_x$ на начало года как доход, а на конец года, если полис действует, как расход, то реккурентная формула говорит, что $ {}_kV_x+P_x$ плюс инвестиционный доход равно ожидаемым расходам.
+
+ \textbf{Второй вариант получения реккурентной формулы}:
+ \begin{itemize}
+ 	\item $T(x+k)>1$. В этом случае 
+ 	\[ {}_kL_x = (0-P_x) +v{}_{k+1}L_x.\]
+ 	\item $T(x+k)= T_{x+k} \leq1$. В этом случае 
+ 	\[ {}_kL_x  = v -P_x.\]
+ 	Отсюда по формуле полной вероятности 
+ 	\begin{gather*}
+ 		{}_kV_x = E({}_kL_x|T_{x+k}>0) = E({}_kL_x|T_{x+k}>1)P(T_{x+k}>1) +\\
+ 		+ E({}_kL_x|T_{x+k}\leq1)P(T_{x+k}\leq1) = E((0-P_x) +v{}_{k+1}L_x)p_{x+k} +\\
+ 		+E( v -P_x)q_{x+k} = -P_x(p_{x+k}+q_{x+k}) + v(q_{x+k}+p_{x+k}{}_{k+1}V_x)=\\
+ 		=-P_x +v(q_{x+k}+p_{x+k}{}_{k+1}V_x)\\
+ 		\Rightarrow\;\; ({}_{k+1}V_x + P_x)(1+i) = q_{x+k} p_{x+k}{}_{k+1}V_x.
+ 	\end{gather*}
+ \end{itemize}
+
+ \begin{example}
+ 	Рассмотрим частный случай \textbf{Endowments}:
+ 	\begin{gather*}
+ 		{}_0 V_{x:n\urcorner} = A_{x:n\urcorner} - P_{x:n\urcorner}\ddot{a}_{x:n\urcorner} = 0\\
+ 		{}_k V_{x:n\urcorner} + P_{x:n\urcorner} = vq_{x+k}+ vp_{x+k}{}_{k+1}V_x,\;\;k=0,1,..,n-1\\
+	\end{gather*}
+	Для последнего года 
+	\[ {}_{n-1} V_{x:n\urcorner} + P_{x:n\urcorner}=vq_{n-1+x}+vp_{x+n-1} = v.\]
+ \end{example}
+
+ \subsection{Коммутационные числа} % (fold)
+
+В таблицах дожития есть $ l_x$. Причем
+\begin{gather*}
+	\frac{l_{x+1}}{l_x}=p_x\\
+	\frac{l_{x+k}}{l_x}= {}_kp_x
+\end{gather*}
+
+\begin{definition}
+	Величину 
+	\[ D_x = v^xl_x \]
+	называют \red{ дисконтированным числом доживающих до возраста $ x$}
+\end{definition}
+ 
+\begin{clair}
+	Пусть 
+	\[ N_x = D_x+D_{x+1}+...\]
+	Тогда
+	\begin{gather*}
+		\ddot{a}_x = \frac{N_x}{D_x}\\
+		a_x = \frac{N_{x+1}}{D_x}\\
+		\ddot{a}_{x:n\urcorner}= \frac{N_x-N_{x+n}}{D_x}\\
+		a_{x:n\urcorner} = \frac{N_{x+1}- N_{x+n+1}}{D_x}
+	\end{gather*}
+\end{clair}
+\begin{proof}
+	Имеем
+	\[ \frac{D_{x+n}}{D_x}=\frac{v^{x+n}l_{x+n}}{v^xl_x}=v^n \frac{l_{x+n}}{l_x} = v^n{}_np_x .\]
+	Отсюда
+	\begin{gather*}
+		\ddot{a}_x = \sum\limits_{k=0}^{\infty}v^k{}_kp_x = \sum\limits_{k=0}^{\infty}v^k \frac{l_{x+k}}{l_x}=\\
+		=\frac{\sum\limits_{k=0}^{\infty}v^{x+k}l_{x+k}}{v^xl_x} = \frac{ D_x+D_{x+1}+...}{ D_x}=\frac{N_x}{D_x}
+	\end{gather*}
+	Так как $ a_x= \ddot{a}-1, $ то
+	\[ a_x = \frac{N_x}{D_x} -1= \frac{N_{x+1}}{D_x.} \]
+	Очевидно, 
+	\begin{gather*}
+		\ddot{a}_{x:n\urcorner}=\frac{N_x - N_{x+n}}{D_x}\\
+		a_{x:n\urcorner} = \frac{N+{x+1}-N_{x+n+1}}{D_x}		
+	\end{gather*}
+\end{proof}
+
+Отсюда
+\begin{gather*}
+	\ddot{a}_{x:n\urcorner} - a_{x:n\urcorner} = frac{N_x - N_{x+n}}{D_x} - \frac{N+{x+1}-N_{x+n+1}}{D_x}=\\
+	=\frac{D_x - D_{x+n}}{D_x}= 1 - \frac{D_{x+n}}{D_x}.
+\end{gather*}
+Таким образом разность $ \ddot{a}_{x:n\urcorner} - a_{x:n\urcorner}$ всегда меньше 1.
+\begin{definition}
+	Величину 
+	\[ v^{x+1}d_x\]
+	называют \red{ дисконтированным числом умирающих}. Тут $ d_x$ - число умерших в течение ближайшего года из обющего числа $ l_x,$ заключивших контракт в возрасте $ x.$
+\end{definition}
+
+Положим также 
+\[ M_x = C_x + C_{x+1}+...\]
+
+Тогда обязательство компании (страховая сумма равна 1):
+\begin{gather*}
+	A_x = \sum\limits_{k=0}^{\infty}v^{k+1}{}_kp_xq_{x+k}=\\
+	=[{}_kp_xq_{x+k} = \frac{l_{x+k}}{l_x}\frac{l_{x+k}-l_{x+k+1}}{l_{x+k}}=\frac{d_{x+k}}{l_x}]=\\
+	= \sum\limits_{k=0}^{\infty}v^{k+1}\frac{d_{x+k}}{l_x} = \frac{v^{x+1}d_x+v^{x+2d_{x+1}}+...}{v^xl_x}=\frac{C_x+C_{x+1}+...}{v^xl_x}=\frac{M_x}{D_x}.
+\end{gather*}
+
+Аналогично
+\begin{gather*}
+	A_{x:n\urcorner}^{1} = \frac{M_x-M_{x+n}}{D_x}\\
+	A_{x:n\urcorner} = \frac{M_x-M_{x+n} + D_{x+n}}{D_x}
+\end{gather*}
+
+Теперь годовые нетто-премии 
+\begin{gather*}
+	P_x = \frac{A_x}{\ddot{a}_x}=\frac{M_x}{N_x}\\
+	P_{x:n\urcorner}= \frac{A_{x:n\urcorner}}{\ddot{a}_{x:n\urcorner}} = \frac{M_x - M_{x+n}+D_{x+n}}{N_x - N_{x+n}}
+\end{gather*}
+ % subsection коммутационные_числа (end)
+% subsection реккурентная_формула (end)$ \ddot{a}_{x+k+1}$
+
+
+% subsection резерв_нетто_премий (end)
+% chapter chapter_name (end)

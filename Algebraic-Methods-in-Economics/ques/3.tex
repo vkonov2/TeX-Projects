@@ -1,0 +1,37 @@
+\chapter{Замкнутость конечно порожденного конуса}
+\label{cha:3}
+
+\epigraph{
+	\textit{Взгляд, постоянно обращенный назад, и исключительное, замкнутое общество — начало выражаться в речах и мыслях, в приемах и одежде; новый цех — цех выходцев — складывался и костенел рядом с другими.}}
+{-- Герцен А.И.}
+
+\begin{definition}\label{cha:3/def:1}
+	\blue{Конусом} K в $\mathbb{A}^n$ с вершиной в $O \in \mathbb{A}^n$ называется множество точек в $\mathbb{A}^n$, обладающее следующим свойством: если $A \in K, \; \lambda \in \mathbb{R} \lambda \ge 0$, то $O + \lambda \overline{OA} \in K$.
+\end{definition}
+
+\begin{propose}\label{cha:3/propose:1}
+	Конус K является выпуклым множеством тогда и только тогда, когда вместе с точками $P, Q \in K$ он содержит точку $O + (\overline{OP} + \overline{OQ}) \in K$.
+\end{propose}
+\begin{Proof}
+	Пусть $K$ выпуклое множество и $P, Q \in K$. Тогда $K$ содержит точку $O + \left( \frac{1}{2}\overline{OP} + \frac{1}{2}\overline{OQ} \right)$ и поэтому содержит точку $O + 2\left( \frac{1}{2}\overline{OP} + \frac{1}{2}\overline{OQ} \right) = O + \left( \overline{OP} + \overline{OQ} \right)$. Обратно, если выполнено указанное условие, то по определению конуса $O + \alpha \overline{OP}, \; O + (1 - \alpha) \overline{OQ} \in K$, и поэтому $O + \alpha \overline{OP} + (1-\alpha)\overline{OQ} \in K$, т.е. $[P,Q] \subseteq K$ и конус $K$ выпуклый.
+\end{Proof}
+
+\begin{definition}\label{cha:3/def:2}
+	Говорят, что конус K с вершиной O \blue{порождается точками}
+	$$A_1, \dots, A_m\eqno(3)$$
+	если он состоит из всех точек вида $O + i \underset{i=1}{\overset{m}{\sum}}\lambda_i \overline{OA_i}$, где $\lambda_i \ge 0$. Конус K называется \textit{конечнопорожденным}, если он порождается некоторым конечным множеством точек.
+\end{definition}
+
+\begin{propose}\label{cha:3/propose:2}
+	Конечнопорожденный конус является замкнутым выпуклым множеством.
+\end{propose}
+\begin{Proof}
+	В силу предложения \ref{cha:3/propose:1} конус K является выпуклым. Докажем его замкнутость. Доказательство восходит к доказательству предложения \ref{cha:1/propose:1}. Пусть конус K с вершиной в точке O порождается точками (3). Рассмотрим точку:
+	$$O + \lambda_1 \overline{OA_{i_1}} + \dots + \lambda_k \overline{OA_{i_k}} \in K, \; \lambda_j > 0\eqno(4)$$
+	Предположим, что векторы $\overline{OA_{i_1}}, \dots, \overline{OA_{i_k}}$ линейно зависимы и $\displaystyle \alpha_1 \overline{OA_{i_1}} + \dots + \alpha_k \overline{OA_{i_k}} = 0$.
+
+	Без ограничения общности можно предполагать, что, например, $\alpha_1 > 0$. Выберем индекс t так, чтобы $\theta = \frac{\lambda_t}{\alpha_t}$ было бы минимальным положительным числом среди всех чисел $\frac{\lambda_t}{\alpha_t}$ , где $\lambda_t$ из (4), $\alpha_t > 0$. Тогда в (5) получаем равенство:
+	$$O + \lambda_1 \overline{OA_{i_1}} + \dots + \lambda_k \overline{OA_{i_k}} = O + (\lambda_1 - \theta \alpha_1)\overline{OA_{i_1}} + \dots + (\lambda_k - \theta \alpha_k)\overline{OA_{i_k}}$$
+	причем все коэффициенты $\lambda_j−\theta \alpha_j \ge 0$, и один из этих коэффициентов равен нулю. Таким образом, точка (4) лежит в конусе, порожденном точками $A_{i_1}, \dots, A_{i_{t−1}}$, $A_{i_{t+1}}, \dots, A_{i_m}$. Отсюда вытекает, что каждая точка из K лежит в некотором конусе $K_{j_1,\dots,j_s}$, порождаемом точками $A_{j_1}, \dots, A_{j_s}$, причем векторы $\displaystyle e_1 = \overline{OA_{j_1}}, \dots, e_s = \overline{OA_{j_s}}$ независимы. Дополним эти векторы до базиса $e_1, \dots, e_n$ всего линейного пространства и возьмем точку O в качестве начала координат. Тогда в этой системе координат конус $K_{j_1,\dots,j_s}$ задается неравенствами и уравнениями $x_1 \ge 0, \dots ,x_s \ge 0, x_{s+1} = \dots = x_n = 0$. Следовательно, конус K является объединением конечного числа замкнутых конусов вида $K_{j_1,\dots,j_s}$ и потому конус K замкнут.
+\end{Proof}
+

@@ -1,0 +1,89 @@
+\chapter{Модель Гейла сбалансированного роста. Существование состояния равновесия.}\label{cha:13}
+
+$z:= (x,y) \in \mathbb{R}^{2n}$
+
+\begin{definition}[Модель Гейла]
+	Модель Гейла -- подмножество $Z \subset \mathbb{R}^{2n}_+:$
+	\begin{enumerate}
+		\item $Z$ -- выпуклый замкнутый конус
+		\item если $(0,y) \in Z \Rightarrow y = 0$
+		\item $\forall \; i: \; \exists (x,y) \in Z: \; y_i > 0 \;\; (3'. \exists (x,y)\in Z: \; y \gg 0)$
+	\end{enumerate}
+\end{definition}
+
+\begin{itemize}
+	\item $z = (x,y) \in Z$ -- производственный процесс
+	\item x -- вектор затрат, y -- вектор выпуска
+\end{itemize}
+
+\begin{clair}
+	(A, B) -- модель Неймана, в А нет нулевых строк (все товары производятся), тогда $Z = \{ (Au, Bu) | u \geq 0\}$ -- модель Гейла.
+\end{clair}
+
+\begin{definition}[Траектория(план)]
+	Модель Гейла с началом $y_0$ -- последовательность $z_t = (x_{t-1}, y_t) \in Z, \; t \in \mathbb{N}, \; x_t \leq y_t.$
+\end{definition}
+
+\begin{definition}[Траектория цен]
+	Последовательность $p_t \in \mathbb{R}_+^n, \; t \in \mathbb{N}_0: \; \forall \; (x,y) \in Z: \; p_{t-1}x \geq p_t y. \; \pi_t(\xi) := p_t y_t, \; \xi = \{ z_t\}, \; \pi_t(\xi)$ монотонно убывает.
+\end{definition}
+
+\begin{definition}[Состояние равновесия]
+	Тройка $(\alpha, \vec{z}, \vec{p}), \; \alpha > 0, \; \vec{z} \in Z, \; \vec{p} > 0,$ -- состояние равновесия, если:
+	\begin{enumerate}
+		\item $\alpha \vec{x} \leq \vec{y}$
+		\item $\forall \; (x, y) \in Z: \; \alpha p x \geq py$.
+	\end{enumerate}
+
+	Если (p, y) > 0, то положение равновесия невырожденное, $\alpha$ -- темп роста.
+\end{definition}
+
+\begin{theorem}
+	У $\forall$ модели Гейла $\exists$ состояние равновесия.
+\end{theorem}
+
+\begin{proof}
+	$\forall \; z \in Z$ определим технологический темп роста процесса $z = (x, y): \; \alpha(z) = \underset{\alpha}{max}\{\alpha | \alpha x \leq y \} \Rightarrow \alpha(z) \geq 0, \; \alpha(\lambda z) = \alpha(z) \; \forall \; \lambda > 0.$ Обозначим $\lambda_N = \underset{z \in Z \setminus \{ 0\} }{sup} \alpha(z)$ -- число Неймана модели Гейла. Покажем, что $\lambda_N < \infty.$
+
+	Пусть $\lambda_N = \infty \Rightarrow \exists z_n = (x_n, y_n) \in Z: \; \alpha(z_n) > n, \; \| y_n\| = 1 \Rightarrow \| x_n\| \leq \dfrac{\| y_n\|}{\alpha(z_n)} \Rightarrow \| x_n \| \underset{n \to \infty}{\to} 0.$
+
+	С другой стороны, $\{ y_n\}$ -- ограничена, тогда $\exists$ сходящаяся подпоследовательность $y_{n_k} \to y: \; \| y\| = 1.$
+
+	Множество $Z$ замкнуто, тогда $z_{n_k} \underset{k \to \infty}{\to} (0,y) \in Z$ -- противоречие с пунктом 2) определения множеста Гейла, тогда $\alpha_N < \infty.$
+
+	Аналогично доказывается, что $\exists z_n \to \vec{z}\in Z: \; \alpha(z) \to \alpha_N \Rightarrow \alpha(\vec{z}) = \alpha_N.$ Рассмотрим $U = \{ y - \alpha_N x | (x,y) \in Z\}, \; \mathbb{R}^n_{++} = \{ x \gg 0\} \Rightarrow U \cup \mathbb{R}^n_{++} = \emptyset,$ иначе $\exists (x,y)\in Z: \; y - \alpha_N x \gg 0 \Rightarrow \alpha(z) > \alpha_N. \; U, \; \mathbb{R}^n_{++}$ -- выпуклые, тогда по теореме отделимости $\exists p \neq 0: \; \forall \; u \in U, \; \forall \; v \in \mathbb{R}^n_{++}: \; pu \leq pv.$ Так как $0 \in U \Rightarrow pv \geq 0 \Rightarrow p > 0.$
+
+	$\exists v_n \to 0 \Rightarrow pu \leq 0 \; \forall u \Rightarrow \alpha_N px \geq py \; \forall (x, y) \in Z \Rightarrow (\alpha_N, \vec{z}, p) $ -- состояние равновесия.
+\end{proof} 
+
+\begin{remark}
+	Состояние равновесия $(\alpha, \vec{z}, p)$ может быть вырожденным.
+\end{remark}
+
+\begin{clair}
+	В модели Гейла может быть не более n темпов роста.
+\end{clair}
+	
+\begin{proof}
+	$\forall \; \alpha > 0$ обозначим $Z(\alpha) = \{ z = (x, y) \in Z | \alpha(z) \geq \alpha\}, \; l(z) = \{ i | y_i > 0\}, \; \vec{z}(\alpha)$ -- вектор из Z, имеющий наибольшее количество ненулевых компонент, а $n(\alpha) = \#l(\vec{z}(\alpha)).$
+
+	Тогда $n(\alpha)$ -- корректно определено, так как $Z(\alpha)$ -- выпуклый конус. Пусть $\alpha_1 < \alpha_2 \Rightarrow Z(\alpha_1) \subset Z(\alpha_2), \; n(\alpha_1) \geq n(\alpha_2).$ Пусть $\alpha_1, \alpha_2$ -- темпы роста и $(\alpha_i, \vec{z}_i, p_i)$ -- состояния равновесия i = 1,2. Можно считать, что $z_i$ имеет наибольшее число ненулевых компонент. Пусть $n(\alpha_1) = n(\alpha_2) \Rightarrow l(z_1) = l(z_2), \text{ и } \exists \gamma > 0: \; y_1 \leq \gamma y_2 \Rightarrow \gamma p_1 y_2 \geq p_1 y_1 \Rightarrow p_1 y_2 > 0 \Rightarrow \alpha_1 p_1 x_2 \geq p_1 y_2$ (по определению p) $\Rightarrow \alpha_2 p_2 \leq y_2  \Rightarrow \alpha_2 p_1 x_2 \leq p_1 y_2 \leq \alpha_1 p_1 x_2, $ но $p_1 y_2 > 0  \Rightarrow p_1 x_1 > 0  \Rightarrow \alpha_2 \leq \alpha_1$ -- противоречие.
+\end{proof}
+
+\begin{definition}[Число Фробениуса модели Гейла]
+	Обозначим $\alpha'(p) = \inf \{ \alpha | \alpha p x  \geq p y \; \forall \; (x, y) \in Z\}.$ Тогда $\alpha_F = \underset{p > 0}{\inf}\alpha'(p)$ -- число Фробениуса модели Гейла.
+
+	Отметим, что $\exists \vec{p} > 0: \; \alpha'(\vec{p}) = \alpha_F.$
+\end{definition}
+
+\begin{clair}
+	\begin{enumerate}
+		\item $\alpha_F \leq \alpha_N$.
+		\item $\forall \; \alpha \in [\alpha_F, \alpha_N] \; \exists $ состояние равновесия $(\alpha, z, p): \; \alpha'(p) \leq \alpha \leq \alpha(z)$.
+		\item Если $(\alpha, z, p)$ невырожденно, то $\alpha = \alpha(z) = \alpha'(p).$
+	\end{enumerate}
+\end{clair}
+
+\begin{remark}
+	Существуют модели Гейла без (ненулевых) темпов роста.
+\end{remark}

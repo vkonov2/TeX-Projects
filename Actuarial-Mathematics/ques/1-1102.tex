@@ -1,0 +1,134 @@
+\chapter{Лекция №1. Страхование жизни}\label{lec:1}
+
+
+\begin{remark}
+	Предполагается спокойное, мирное время. Страхование жизни основано на закономерностях уровня смертности различных групп населения.
+\end{remark}
+
+\section{Вероятность выживания} % (fold)
+\label{lec:1sec:alive_prob}
+
+Рассмотрим однородную группу людей. Время измеряем в годах.
+
+\begin{definition}
+	Введем следующие понятия:
+	\begin{itemize}
+		\item[$\bullet$] 
+			$x$ - возраст клиента на момент заключения договора;
+		\item[$\bullet$] 
+			$T_x$ - остаточное время жизни, начиная с момента заключения контракта - случайная величина;
+		\item[$\bullet$] 
+			$F(t) = P(T_x \leq t) = {}_{t}q_x$, где $F(t)$ — функция распределения, обладающая плотностью распределения, а ${}_{t}q_x$ — вероятность того, что с момента $x$ человек проживет время, не большее $t$;
+		\item[$\bullet$] 
+			$f(t)$ - плотность распределения $T_x$;
+		\item[$\bullet$] 
+			${}_{t}p_x = P(T_x > t)$ - вероятность того, что с момента $x$ человек проживет время, большее $t$; ${}_{t}p_x = 1 - {}_{t}q_x$;
+		\item[$\bullet$] 
+			$\omega - x$ — максимальное оставшееся время жизни заключившего договор, где $\omega$ — максимальное время жизни. Его обычно берут равным 100.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	При заключении договора фиксируются:
+	\begin{enumerate}
+		\item продолжительность заболеваний страхователя;
+		\item возраст страхователя;
+	\end{enumerate}
+
+	Тогда $\lambda$ - время, прошедшее между медицинским обследованием (началом заболевания) и моментом заключения страхового договора.
+\end{definition}
+	
+
+
+\begin{clair}
+	\blue{ПРОВЕРИТЬ}
+	$$\begin{gathered}
+		{}_{\omega - x}p_x = 0 \\
+		{}_{0}p_x = 1
+	\end{gathered}$$
+\end{clair}
+
+\begin{clair}
+	\blue{ПРОВЕРИТЬ}
+	Пусть 
+	$${}_{\frac{t}{t'}}q_x \MYdef P(t < T_x \leq t + t')$$
+	Тогда 
+	$${}_{\frac{t}{t'}}q_x = {}_{t}p_x - {}_{t+t'}p_x > 0$$
+\end{clair}
+\begin{Proof}
+	$$P(T_x > t) = P(t \leq T_x \leq t+t') + P(T_x > t+t') \; \Rightarrow \; {}_{t}p_x = {}_{\frac{t}{t'}}q_x + {}_{t+t'}p_x. $$
+\end{Proof}
+
+\begin{conseq}
+	Из доказательства очевидно вытекает, что
+	$${}_{\frac{t}{t'}}q_x \;\rightarrow \; 0 \text{ при } t'\;\rightarrow\;0$$
+\end{conseq}
+
+\begin{definition}
+	Рассмотрим $$P(t \leq T_x \leq t + \Delta t| T_x > t) = \frac{P(t < T_x \leq t + \Delta t)}{P(T_x > t)} $$
+
+	Тогда $$\lim\limits_{\Delta t \rightarrow 0}\frac{P(t \leq T_x \leq t + \Delta t| T_x > t)}{\Delta t} = \lim\limits_{\Delta t \rightarrow 0}\frac{F(t + \Delta t) - F(t)}{\Delta t \cdot \pre{t}p_x} = \frac{f(t)}{1 - F(t)} = \mu_x(t)$$ называется \red{мгновенной смертностью в момент $x + t$} или \red{интенсивностью смерти в возрасте $x+t$}.
+\end{definition}
+
+\begin{remark}
+	$$\begin{gathered}
+		\mu_x (t) = \frac{F'(t)}{1-F(t)} = \frac{-\frac{\partial}{\partial t}(1-F(t))}{1-F(t)}
+		= \frac{-\frac{\partial}{\partial t}(\pre{t}p_x)}{\pre{t}p_x} = -\frac{d}{dt}\ln\pre{t}p_x \Rightarrow \pre{t} p_x = e^{-\int\limits_0^t\mu_x(u)du}
+	\end{gathered}$$
+\end{remark}
+
+
+\begin{properties}
+	Мгновенная смертность обладает следующими свойствами:
+	\begin{enumerate}
+		\item $\mu_x(t) \geq 0 $ при $t \in [0, \omega - x]$
+		\item $\int\limits_0^b\mu_x(t)dt = \infty$, где $b > \omega - x$
+	\end{enumerate}
+\end{properties}
+
+\section{Модели смертности} % (fold)
+\label{lec:1sec:death_mod}
+
+\begin{description}
+	\item[\blue{Модель Муавра}] \begin{gather*}
+		T_x \text{ равномерно распределено на } [0, \omega - x]\\
+		f(t) = \begin{cases}
+			\frac{1}{\omega - x} \;\;\; 0 \leq t \leq \omega-x\\
+			0 \;\;\;\;\;\;\; t < 0, t > \omega - x
+		\end{cases}
+		\end{gather*}
+	\item[\blue{Модель Гомпертца}]
+		$$\mu_x(t) = A\cdot C^{x+t}, (A>0, C>1)$$
+		$$\pre{t}p_x \rightarrow 0 \text{ при } t \rightarrow \infty$$
+		Эта модель предполагает, что человек может жить бесконечно долго.
+
+	\item[\blue{Модель Мэйкхэма}]
+		$$\mu_x(t) =D+ AC^{x+t}, (A>0, C>1, D>0)$$
+		Тут берётся во внимание тот факт, что смерть может наступать не только от старости.
+		$${}_tp_x = e^{-\int\limits_0^t (D+AC^{x+u})du} = e^{-Dt - \frac{A(C^{x+t} - C^x)}{\ln C}}$$
+\end{description}
+
+\section{Оценка числа людей, доживших до момента t}
+\label{lec:1sec:eval}
+
+Пусть $L_x$ — \red{число людей возраста $х$ из однородной группы в момент} $t = 0$. Определим индикатор:
+$$X_i(t) = \begin{cases}
+	1 \;\;\;\; i-\text{ый человек проживет не меньше, чем } t\\
+	0 \;\;\;\; i-\text{ый человек проживет меньше, чем } t
+	\end{cases}$$
+
+Тогда $$\begin{gathered}
+	EX_i(t) = {}_tp_x \\
+	\mathbb{D}X_i(t) = {}_tp_x - ({}_tp_x)^2 = {}_tp_x \cdot {}_tq_x
+\end{gathered}$$
+
+Положим $$L_{x+t} = X_1(t) +...+ X_{L_x}(t)$$
+
+Тогда $$\begin{gathered}
+	EL_{x+t} = L_x \cdot {}_tp_x = l_{x+t}\;\;(\Rightarrow EL_x = L_x = l_x)\\
+	\mathbb{D}L_{x+t} = L_x \cdot {}_tp_x \cdot {}_tq_x\;\text{(в силу независимости смертей)}.
+\end{gathered}$$
+
+\begin{remark}
+	Видно, что $${}_tp_x = \frac{l_{x+t}}{l_x}$$
+\end{remark}

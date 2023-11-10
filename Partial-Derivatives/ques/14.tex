@@ -1,0 +1,228 @@
+\chapter{Обобщенные функции. Действия над обобщенными функциями. Фундаментальное решение линейного дифференциального оператора с постоянными коэффициентами.}
+\label{cha:14}
+
+\begin{definition}
+	\red{Финитная функция $ \varphi(x) $: }
+	$\varphi(x) =
+	\begin{cases}
+		\neq 0, \; x \in K\\
+		\equiv 0, \; x \notin K
+	\end{cases}$
+	
+	где $K \subset \Omega $ - компакт и носитель функции $ \varphi(x) .$
+\end{definition}
+
+\begin{definition}
+	\red{Основные(пробные) функции} -- бесконечно дифференцируемые финитные функции.
+\end{definition}
+
+\begin{definition}
+	$ D(\Omega) = C_0^{\infty}(\Omega) $ -- \blue{множество бесконечно дифференцируемых функций}.
+\end{definition}
+
+\begin{definition}
+	$ \varphi_n(x) \in D(\Omega) \underset{\text{равномерно}}{\longrightarrow} \varphi(x), $ если:
+	\begin{enumerate}
+		\item $ 
+			\exists \; K: \; K_n \subseteq K \subset \Omega, \; K_n $ -- носитель $ \varphi_n(x)$
+		\item 
+			$ \dfrac{\partial^{|\alpha|}\varphi_n(x)}{\partial x^{\alpha}} \underset{K}{\rightrightarrows} \dfrac{\partial^{|\alpha|}\varphi(x)}{\partial x^{\alpha}}, \; |\alpha| = 0,\; 1, \ldots, \text{т.е. } \dfrac{\partial^{|\alpha|}}{\partial x^{\alpha}} \equiv \dfrac{\partial^{\alpha_1 + \ldots + \alpha_n}}{\partial x_1^{\alpha_1}\ldots\partial x_n^{\alpha_n}}.$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	\red{Обобщенные функции} -- линейные непрерывные функционалы над $ D(\Omega). $ \textit{Обозначение: } $ D'(\Omega) $ или $ D^{*}(\Omega) .$
+\end{definition}
+
+\begin{definition}
+	\red{Функционал: } L: $ \varphi(x) \in D(\Omega) \to \mathbb{R}. $
+\end{definition}
+
+\begin{definition}
+	\blue{Линейный функционал: } $ L(\varphi_1(x)\alpha + \varphi_2(x)\beta) = \alpha L(\varphi_1(x)) + \beta L(\varphi_2(x)).$
+\end{definition}
+
+\begin{definition}
+	\blue{Непрерывный функционал: } $ \varphi_n(x) \underset{\text{равномерно}}{\longrightarrow} \varphi(x) \Longrightarrow L(\varphi_n(x)) \longrightarrow L(\varphi(x))$
+\end{definition}
+
+\begin{definition}
+	\red{$L_{1loc}$ } -- интегрируемые на $ \forall $ компакте $K \subset \Omega. $
+\end{definition}
+
+\begin{theorem}
+	$ \forall L \; \exists f(x) \in L_{1loc}: \; \forall \; \varphi(x) \in D \; L(\varphi(x)) = (f(x), \varphi(x)), $ где
+	$$\begin{gathered}
+		(f(x), \varphi(x)) = \int\limits_{\Omega} f(x)\varphi(x)dx.
+	\end{gathered}$$
+\end{theorem}
+
+\begin{definition}
+	\blue{Регулярные обобщенные функции}: 
+	$$\text{функционалы } L: \; \exists f(x) \in  L_{1loc}(\Omega): \; \forall \; \varphi(x)\in D(\Omega)$$
+	$$\begin{gathered}
+		(f(x), \varphi(x)) = \int\limits_{\Omega} f(x)\varphi(x)dx.
+	\end{gathered}$$
+\end{definition}
+
+\begin{definition}
+	\blue{Сингулярные обобщенные функции }: 
+	$$\begin{gathered}
+		\text{функционалы } L: \; \nexists f(x) \in  L_{1loc}(\Omega): \; L(\varphi(x)) = (f(x), \varphi(x))
+	\end{gathered}$$
+\end{definition}
+
+\begin{definition}
+	\red{Дельта-функция}: 
+	$\delta(x) =
+	\begin{cases}
+		0, \; x \neq 0\\
+		\infty, \; x = 0
+	\end{cases}$
+	$$\delta(\varphi) = \varphi(0) = (\delta, \varphi) = (\delta(x), \varphi(x)) =  \int\limits_{\Omega} \delta(x)\varphi(x)dx$$
+\end{definition}
+
+\section*{Действия с обобщенными функциями}
+
+\begin{enumerate}
+	\item \underline{Линейная комбинация} обобщенных функций:
+		$$\begin{gathered}
+			f_1(x), \; f_2(x) \in D'(\Omega) \; \Rightarrow \;  \forall \; \alpha, \; \beta \in \mathbb{R} \; \alpha f_1(x) + \beta f_2(x) \in D'(\Omega) \\
+			(\alpha f_1(x) + \beta f_2(x), \varphi(x)) = \alpha (f_1, \varphi) + \beta (f_2, \varphi) \; \forall \varphi \in D.
+		\end{gathered}$$
+	\item \underline{Линейная замена переменных} в аргументе обобщенных функций:
+		$$\begin{gathered}
+			f \in D'(\Omega) \; \Rightarrow \;  f(Ax + b) \in D'(\Omega), \; det(A) \neq 0 \\
+			(f(Ax + b), \varphi(x)) \equiv \dfrac{1}{|A|} (f(x), \varphi(A^{-1}(x - b)))
+		\end{gathered}$$
+		Рассмотрим $\mathbb{R}^1$: пусть $f(x)$ - регулярная функция, тогда:
+		$$\begin{gathered}
+			(f(Ax + b), \varphi(x)) = \int\limits_{R}f\underbrace{(Ax + b)}_{= y}\varphi(x)dx = \dfrac{1}{|A|}\int\limits_{R}f(y)\varphi(\frac{y - b}{A})dy
+		\end{gathered}$$
+		Для $\mathbb{R}^n$ аналогично: $A^{-1}$ - обратная матрица, $\frac{1}{|A|}$ - якобиан многомерной линейной замены переменных.
+	\item \underline{Умножение обобщенной функции} на бесконечно дифференцируемую функцию:
+		$$\begin{gathered}
+			f(x) \in D'(\Omega), \; a(x) \in C^{\infty}(\Omega) \longrightarrow a(x)f(x) \in D'(\Omega) \\
+			(a(x)f(x), \varphi(x)) = (f(x), a(x)\varphi(x))
+		\end{gathered}$$
+		Если $f(x)$ - регулярная, то $(a(x)f(x), \varphi(x)) = \int\limits_{\Omega} a(x)f(x) \varphi(x) dx$.
+	\item \underline{Дифференцирование} обобщенной функции: $ f(x) \in D'(\Omega). $
+		Рассмотрим $\mathbb{R}^1$: 
+		$$\begin{gathered}
+			f'(x) \in D(\Omega): \; (f'(x), \varphi(x)) \equiv - (f(x), \varphi'(x)) \\
+			(f^{(k)}(x), \varphi(x)) \equiv (-1)^k(f(x), \varphi^{(k)}(x))
+		\end{gathered}$$
+
+		Если $f(x)$ - регулярная, то:
+		$$\begin{gathered}
+			(f', \varphi) = \int\limits_{-\infty}^{\infty}
+			f'(x)\varphi(x)dx = \int\limits_{-\infty}^{\infty} \varphi(x)df(x) = \underbrace{f(x)\varphi(x) \mid_{-\infty}^{\infty}}_{ 0 \text{, т.к. } \varphi \text{ -- финитная}} - \int\limits_{-\infty}^{\infty} f(x)\varphi'(x)dx
+		\end{gathered}$$
+\end{enumerate}
+
+\section*{Свертка обобщенных функций}
+
+Пусть $f(x), \; g(x) \in L_1$. Тогда верны следующие свойства:
+
+\begin{enumerate}
+	\item 
+		$ (f * g)(x) = \int\limits_{-\infty}^{\infty} f(t)g(x - t)dt = (g * f)(x)$ 
+	\item 
+		$ (f * g)'(x) = (f' * g)(x) = (f * g')(x)  $
+	\item 
+		$ (f * g)^{m}(x) = (f^{k} * g^{m - k})(x) = (f^{m - k} * g^{k})(x)  $
+	\item 
+		$ f(x), \; g(x) \in D' \; \Rightarrow \;  (f * g)(x) \in D': $
+		\begin{Proof}
+			$$\begin{gathered}
+			((f * g)(x), \varphi(x)) \equiv (f(x), (g(x), \varphi(x + t))_t) \; \\ 
+			\forall \varphi(x) \in D \\
+			((f * g)(x), \varphi(x)) = \int\limits_{-\infty}^{\infty} \varphi(x) (\int\limits_{-\infty}^{\infty} f(t)g(t - x)dt)dx =\\
+			= \int\limits_{-\infty}^{\infty} f(t) (\int\limits_{-\infty}^{\infty} g(t - x)\varphi(x))dtdx = \int\limits_{-\infty}^{\infty} f(t) (\int\limits_{-\infty}^{\infty} g(y)\varphi(y + t))dtdy
+			\end{gathered}$$
+		\end{Proof}
+	\item 
+		$ ((f * g)'(x), \varphi(x)) =  -((f * g)(x), \varphi'(x))$
+		\begin{Proof}
+			$$ ((f * g)'(x), \varphi(x)) =  -((f * g)(x), \varphi'(x)) = (f(x), (g(x), \varphi'(x + t))_t)_x = $$
+			\begin{itemize}
+				\item[$\bullet$] 
+					$= (f(x), (g'(x), \varphi(x + t))_t)_x = ((f * g')(x), \varphi(x)) $
+				\item[$\bullet$] 
+					$= -(f(x), (g(x), \dfrac{\partial}{\partial x}\varphi(x + t))_t)_x = -(f(x), \dfrac{\partial}{\partial x}(g(x), \varphi(x + t))_t)_x = \\
+					= (\dfrac{\partial}{\partial x}f(x), (g(x), \varphi(x + t))_t)_x = ((f' * g)(x), \varphi(x))$
+			\end{itemize}
+		\end{Proof}
+\end{enumerate}
+
+\section*{Фундаментальное решение дифференциального оператора}
+
+Имеем дифференциальное уравнение и дифференциальный оператор:
+$$\begin{gathered}
+	Ly \equiv y^{(m)} + a_{m - 1}y^{(m - 1)} + \dots a_1y' + a_0y = f(x) \\
+	L \equiv \dfrac{d^m}{dx^m} + a_{m - 1}\dfrac{d^{m - 1}}{dx^{m - 1}} + \dots + a_1\dfrac{d}{dx} + a_0
+\end{gathered}$$
+
+\begin{definition}
+	$ \varepsilon(x) \in D' $ -- \red{фундаментальное решение дифференциального оператора L}, если $ L\varepsilon(x) = \delta(x) $.
+\end{definition}
+
+\begin{remark}
+	Если $y_0$ - решение, т.е. $Ly_0 = 0$, тогда $\varepsilon(x) + y_0$ - фундаментальное решение.
+\end{remark}
+
+\begin{definition}
+	$ \theta(x) $ -- \red{функция Хевисайда:}
+	$$\theta(x) = 
+	\begin{cases}
+		1, \; x \geq 0\\
+		0, \; x < 0
+	\end{cases} \text{и } \theta'(x) = \delta(x)$$
+\end{definition}
+
+\begin{theorem}[\blue{нахождение фундаментального решения}]\label{lec:13/the:2}
+	Формула нахождения фундаментального решения имеет вид: $ \varepsilon(x) = \theta(x)u(x), $ где $ u(x) $ является решением системы: 
+	$$\begin{gathered}
+		\begin{cases}
+			Lu(x) = 0\\
+			u(0) = 0\\
+			u'(0) = 0 \\
+			\ldots\\
+			u^{(m-2)}(0) = 0\\
+			u^{(m-1)}(0) = 1\\
+		\end{cases}
+	\end{gathered}$$
+\end{theorem}
+\begin{Proof}
+	\begin{flushleft}
+		$\varepsilon'(x) = \theta'(x)u(x) + \theta(x)u'(x) = \delta(x)u(x) + \theta(x)u'(x) =$
+		
+		\hspace{1.15cm}$= \delta(x)u(0) + \theta(x)u'(x) = \theta(x)u'(x)$
+
+		$\varepsilon''(x) = \theta'(x)u'(x) + \theta(x)u''(x) = \theta(x)u''(x)$
+
+		$\dots$
+		
+		$\varepsilon^{(m - 1)}(x) = \theta(x)u^{(m - 1)}(x)$
+
+		$\varepsilon^{(m)}(x) = \theta'(x)u^{(m - 1)}(x) + \theta(x)u^{(m)}(x) = \delta(x)u^{(m - 1)}(x) + \theta(x)u^{(m)}(x) =$
+
+		\hspace{1.5cm} $= \delta(x)u^{(m - 1)}(0) + \theta(x)u^{(m)}(x) = \delta(x) + \theta(x)u^{(m)}(x)$
+	\end{flushleft}
+	Тогда получаем:
+	$$\begin{gathered}
+		L\varepsilon(x) = \delta(x) + \theta(x)u^{(m)}(x) + a_{m - 1}\theta(x)u^{(m - 1)}(x) + \ldots + a_1\theta(x)u'(x) + a_0\theta(x)u(x) = \\
+		= \theta(x)(L(u(x))) + \delta(x) = \delta(x).
+	\end{gathered}$$
+\end{Proof}
+
+
+
+
+
+
+
+
+
+
+

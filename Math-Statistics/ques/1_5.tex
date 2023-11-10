@@ -1,0 +1,156 @@
+\chapter{Оценивание в многопараметрическом случае}\label{lec:5}
+
+\section{Основные понятия}\label{lec:5/sec:1}
+
+Пусть $A = (a_{ij})_{i,j=\ton m}$ - $m\times m$-матрица, $a_{ij}\in \mathbb{R}^1$.
+
+\begin{itemize}
+	\item[$\bullet$] $A$ - симметрическая (симметричная), если $A = A^T$ 
+	\item[$\bullet$] симметрическая матрица $A$ неотрицательно определена ($A \ge 0$), если $\alpha^T A \alpha \ge 0 \; \forall \alpha \in \mathbb{R}^m$
+
+	$A \ge 0 \; \Leftrightarrow$ собственные числа $\lambda_i \ge 0, \; i = \ton m$
+	\item[$\bullet$] симметрическая $A > 0$, если $\alpha^T A \alpha > 0 \; \forall \alpha \in \mathbb{R}^m, \; \alpha \not = 0$
+
+	$A > 0 \; \Leftrightarrow$ собственные числа $\lambda_i > 0, \; i = \ton m$
+\end{itemize}
+
+Пусть случайный вектор $\xi$ определен на $(\Omega, \mathcal{F}, P)$ и принимает значения в $(\mathbb{R}^m, \mathcal{B}(\mathbb{R}^m))$, $\xi = (\xi_1, \dots, \xi_m)^T$.
+
+\begin{itemize}
+	\item[$\bullet$] $\xi$ - случайный вектор $\Leftrightarrow$ $\xi_i$ - случайные величины, $i = \ton m$
+	\item[$\bullet$] $E \xi := (E \xi_1, \dots, E \xi_m)^2$, $E|\xi| < \infty \; \Leftrightarrow \; E |\xi_i| < \infty$
+	\item[$\bullet$] $cov (\xi, \xi) = D \xi := E (\xi - E \xi) (\xi - E \xi)^T$
+
+	$D \xi$ существует $\Leftrightarrow$ $D \xi_i < \infty$
+	\item[$\bullet$] $D \xi = (D \xi)^T$, т.е. ковариационная матрица является симметрической
+	\item[$\bullet$] $D \xi \ge 0$, т.е. $\alpha^T D \xi \alpha \ge 0 \; \forall \alpha \in \mathbb{R}^m$
+\end{itemize}
+
+Пусть $X = (X_1, \dots, X_n)$ - случайное наблюдение со значениями в $(\mathbb{R}^m, \mathcal{B}(\mathbb{R}^m))$. Пусть $X \sim P_X$ - распределение. Будем предполагать далее, что $\displaystyle P_X \in \{P_{\theta}, \; \theta \in \Theta \subseteq \mathbb{R}^k\}$.
+
+Необходимо оценить функцию $\tau (\theta) = (\tau_1 (\theta), \dots, \tau_m(\theta))^T$. Оценка - $\hat{\tau_n}(X) = (\hat{\tau}_{1n}(X), \dots, \hat{\tau}_{mn}(X))^T$, скалярные борелевские функции $\hat{\tau}_{in}(X)$ не зависят от $\theta$, но зависят от $X$.
+
+\begin{definition}\label{lec:5/def:1}
+	Оценка $\hat{\tau}_n(X)$ функции $\tau(\theta)$ называется \red{несмещенной}, если
+	$$E_{\theta}\hat{\tau}_n(X) := (E_{\theta} \hat{\tau}_{1n}(X), \dots, E_{\theta}\hat{\tau}_{mn}(X))^T = (\tau_1(\theta), \dots, \tau_m (\theta))^T \; \forall \theta \in \Theta \subseteq \mathbb{R}^m$$
+\end{definition}
+
+Ковариационная матрица несмещенной оценки: $D_{\theta} \hat{\tau}_n := E_{\theta} (\hat{\tau}_n - \tau(\theta)) (\hat{\tau}_n - \tau (\theta))^T$ - 
+это симметрическая неотрицательная определенная $(m\times m)$-матрица.
+
+\begin{definition}\label{lec:5/def:2}
+	Если $\hat{\tau_n}$ - несмещенная оценка для $\tau(\theta)$ с конечной ковариационной матрицей и 
+	$$ D_{\theta} \hat{\tau_n} (X) \le D_{\theta} \tilde{\tau_n}(X) \; \forall \theta \in \Theta \eqno(1)$$
+	(где $\tilde{\tau_n}$ - любая несмещенная оценка $\tau (\theta)$ с конечной ковариационной матрицей), то $\hat{\tau_n}(X)$ называется \red{оптимальной} в с.к. смысле.
+\end{definition}
+
+\noindentНеравенство (1) означает, что $\displaystyle \alpha^T D_{\theta} \hat{\tau_n} \alpha \le \alpha^T D_{\theta} \tilde{\tau_n}\alpha \; \forall \alpha \in \mathbb{R}^n \; \forall \theta \in \Theta$.
+
+\noindentРазумеется, если $\hat{\tau_n}$ - с.к. оптимальная оценка $\tau(\theta)$, то $\hat{\tau_{in}}$ - оптимальные оценки для $\tau_i (\theta)$.
+
+Существует ли равномерная нижняя граница для $D_{\theta} \hat{\tau_n}$?\\
+
+\section{Многомерное неравенство Рао-Крамера}\label{lec:5/sec:2}
+
+\textbf{\blue{Многомерное неравенство Рао-Крамера}}
+
+\begin{itemize}
+	\item[$\bullet$] 
+		Если $\theta = (\theta_1, \dots, \theta_k)^T$, $\varphi (x, \theta) \in \mathbb{R}^1$, то \\
+		$$\displaystyle \frac{\partial}{\partial \theta} \varphi (x, \theta) := \left( \frac{\partial}{\partial \theta_1} \varphi (x, \theta), \dots, \frac{\partial}{\partial \theta_k} \varphi (x, \theta) \right)^T$$ 
+		$($вектор-столбец размера $k$$)$
+	\item[$\bullet$] 
+		Если $\varphi (x, \theta) = (\varphi_1 (x, \theta), \dots, \varphi_m (x, \theta))^T$, то \\
+		$$\displaystyle \frac{\partial}{\partial \theta} \varphi (x, \theta) := \left( \frac{\partial}{\partial \theta} \varphi_1 (x, \theta), \dots, \frac{\partial}{\partial \theta} \varphi_m (x, \theta) \right) = \left(\frac{\partial}{\partial \theta_i} \varphi_j (x, \theta)\right)$$ 
+		$($$(k\times m)$-матрица$)$
+\end{itemize}
+
+\textbf{\blue{Условие (RM)}}
+\begin{itemize}
+	\item[(i)] $\Theta$ - прямоугольник, т.е. $a_i < \theta_i < b_i, \; i=\ton k$
+	\item[(ii)] $X \sim p(x, \theta)$ по мере $\mu$; носитель $N_p = \Set{x}{p(x, \theta) > 0}$ не зависит от $\theta$, и $\forall x \in N_p$ существует $\frac{\partial}{\partial \theta} \ln p(x, \theta)$ при всех $\theta \in \Theta$
+	\item[(iii)] \begin{itemize}
+		\item[(a)] $\frac{\partial}{\partial \theta} \underset{N_p}{\overset{}{\int}}p(x, \theta)\mu(dx) = \underset{N_p}{\overset{}{\int}}\frac{\partial p(x, \theta)}{\partial \theta} \mu(dx) = 0 \; \forall \theta \in \Theta$
+		\item[(b)] $\left( \frac{\partial}{\partial \theta} \underset{N_p}{\overset{}{\int}} \hat{\tau_n}(x) p(x, \theta) \mu(dx) \right)^T = \underset{N_p}{\overset{}{\int}} \hat{\tau_n}(x) \left( \frac{\partial}{\partial \theta} p(x, \theta) \right)^T \mu(dx) \; \forall \theta \in \Theta$, \\
+		где $\left( \frac{\partial}{\partial \theta} \underset{N_p}{\overset{}{\int}} \hat{\tau_n}(x) p(x, \theta) \mu(dx) \right)^T$ - $(m\times k)$-матрица
+	\end{itemize}
+	\item[(iv)] если $I(\theta) := E_{\theta} \left(\frac{\partial}{\partial \theta} \ln p(x, \theta) \right) \left(\frac{\partial}{\partial \theta} \ln p(x, \theta) \right)^T $ - информация Фишера, то $0 < I(\theta) < \infty \; \forall \theta \in \Theta$, $\left(\frac{\partial}{\partial \theta} \ln p(x, \theta) \right)$ - $(k\times k)$-матрица.
+	$$I(\theta) = \left( E_{\theta} \frac{\partial}{\partial \theta_i} \ln p(x, \theta) \frac{\partial}{\partial \theta_j} \ln p(x, \theta) \right)_{i,j = \ton k}$$
+\end{itemize}
+
+\begin{theorem}[\red{векторное неравенство Рао-Крамера}]\label{lec:5/the:1}
+	Пусть $\hat{\tau_n}(X)$ - несмещенная оценка $\tau(\theta)$ с конечной ковариационной матрицей $D_{\theta}\hat{\tau_n}(X)$. Пусть выполнено условие $($RM$)$. Тогда:
+	$$D_{\theta} \hat{\tau_n}(X) \ge \left( \frac{\partial \tau(\theta)}{\partial \theta} \right)^T I^{-1} (\theta) \frac{\partial \tau(\theta)}{\partial \theta} \; \forall \theta \in \Theta$$
+\end{theorem}
+
+Если в этом неравенстве достигается равенство, то $\hat{\tau_n}(X)$ называется \red{эффективной} в классе $\mathbb{C}_{RM}$. Тогда $p(x, \theta) = exp \{ \hat{\tau_n}^T (x) A(\theta) + B(\theta) \} h(x)$ для некоторых специальных $A(\theta), B(\theta)$, $x \in N_p, \; \theta \in \Theta$, т.е. распределение $X$ принадлежит экспоненциальному семейству очень специального вида. (см. про матричное неравенство Коши-Буняковского в пар. 16, гл. 2, А.А. Боровков, Мат. стат. оценка пов., пров. гип.).\\
+
+Пусть $X = (X_1, \dots, X_n)$ - наблюдение, и $\{X_i\}$ - н.о.р.с.в. Пусть $X_1$ имеет плотность $f(x, \theta), \; \theta \in \Theta \subseteq \mathbb{R}^k$, по мере $\nu$.
+
+Предположим, что при $x \in N_f$ существует $\frac{\partial}{\partial \theta} \ln f(x, \theta)$, $E_{\theta} \frac{\partial}{\partial \theta_i} \ln f(X_1, \theta) = 0$, $E_{\theta} \left\{ \frac{\partial}{\partial \theta_i} \ln f(X_1, \theta) \right\}^2 < \infty, \; \theta \in \Theta, \; i = \ton k$.
+
+Тогда существует информация фишера о параметре $\theta$, содержащаяся в одном наблюдении $X_1$ (матрица информации фишера):
+$$I_1 (\theta) := \left( E_{\theta} \frac{\partial}{\partial \theta_i} \ln f(x_1, \theta) \cdot \frac{\partial}{\partial \theta_j} f(x_1, \theta) \right), \; i,j = \ton k$$
+Поскольку $I_1 (\theta)$ - ковариационная матрица вектора $\frac{\partial}{\partial \theta} \ln f(x, \theta)$, то $I_1 (\theta) \ge 0 \; \forall \theta \in \Theta$. Если $det I(\theta) \not = 0$, то $I_1 (\theta) > 0$.\\
+Рассуждая как в одномерном случае (т.е. при $k=1$) получим: $I(\theta) = n I_1 (\theta)$. Для н.о.р. наблюдений информация $I(\theta)$ есть сумма информаций $I_1 (\theta)$. Тогад неравенство Рао-Крамера (2) приобретает вид:
+$$ D_{\theta} \hat{\tau_n}(x) \ge \left( \frac{\partial \tau(\theta)}{\partial \theta} \right)^T \left( n I_1 (\theta) \right)^{-1} \frac{\partial \tau(\theta)}{\partial \theta}, \; \theta \in \Theta \eqno(3)$$
+
+\noindent\textbf{Важный пример}\\
+Пусть $X = (X_1, \dots, X_n)$, $\{X_i\}$ - н.о.р.с.в., $n \ge 2$, $X_1 \sim N(\theta_1, \theta_2)$, где $\theta_1 \in \mathbb{R}^1, \; \theta_2 > 0$ (т.е. из $\mathbb{R}^{+}$). Пусть $\tau (\theta) = (\theta_1, \theta_2)^T$, оценка $\hat{\tau_n} (X) = (\overline{X}, S^2)^T$, где $\overline{X} = n^{-1} \underset{i=1}{\overset{n}{\sum}}X_i, \; S^2 = \frac{1}{n-1} \underset{i=1}{\overset{n}{\sum}}(X_i - \overline{X})^2$.
+
+\begin{definition}\label{lec:5/def:3}
+	Если $\xi_1, \dots, \xi_k$ - н.о.р. стандартные гауссовские $N(0,1)$ сл.в., то $\displaystyle \text{сл.в. } \eta_k := \xi_1^2 + \dots + \xi_k^2$ имеет распределение \red{хи-квадрат Пирсона} с $k$ степенями свободы. Пишем $\eta_k \sim \chi^2 (k)$.
+\end{definition}
+
+\noindentОчевидно, что $E \eta_k = k E \xi_1^2 = k$, $D \eta_k = k D \xi_1^2 = k \left( E \xi_1^4 - (E \xi_1^2)^2 \right) = k (3 - 1) = 2 k$.
+
+\begin{problem}
+	Пусть $\xi \sim N(0, \sigma^2)$. Проверить, что $E \xi^{2k} = 1 \cdot 3 \cdot \dots \cdot (2k-1) \sigma^{2k}$.
+\end{problem}
+
+Очевидно, что $\overline{X} \sim N(\theta_1, \frac{\theta_2}{n})$. Вскоре будет показано, что $\frac{(n-1)S^2}{\theta_2} \sim \chi^2 (n-1)$, и величины $\overline{X}$ и $S^2$ независимы. Значит, $D_{\theta} \frac{(n-1) S^2}{\theta_2} = \frac{(n-1)^2}{\theta_2^2} D_{\theta} S^2 = 2(n-1)$, т.е. $D_{\theta} S^2 = \frac{2 \theta_2^2}{n-1}$. Значит, ковариационная матрица $D_{\theta} \hat{\tau_n} = \begin{pmatrix}
+	\frac{\theta_2}{n} & 0 \\
+	0 & \frac{2 \theta_2^2}{n-1}
+\end{pmatrix}$.\\
+Найдем информационную матрицу фишера $I_1 (\theta) = (i_{ij} (\theta)), \; i,j = 1,2$. Имеем:
+$$\begin{gathered}
+	f(x, \theta) = \frac{1}{\sqrt{2 \pi \theta_2}} e^{-\frac{1}{2 \theta_2} (x - \theta_1)^2} \\
+	\ln f(x, \theta) = - \frac{1}{2} \ln (2 \pi) - \frac{1}{2} \ln \theta_2 - \frac{1}{2 \theta_2} (x - \theta_1)^2 \\
+	\frac{\partial \ln f(x, \theta)}{\partial \theta_1} = \frac{x - \theta_1}{\theta_2}, \; \frac{\partial \ln f(x, \theta)}{\partial \theta_2} = \frac{(x - \theta_1)^2 - \theta_2}{2\theta_2^2}\\
+	i_{1,1}(\theta) = E_{\theta} \frac{(x_1 - \theta_1)^2}{\theta_2^2} = \frac{1}{\theta_2}, \; i_{2,2} = E_{\theta} \left\{ \frac{(x - \theta_1)^2 - \theta_2}{2\theta_2^2} \right\}^2 = \frac{1}{3 \theta_2^2} D_{\theta} \frac{(x_1 - \theta_1)^2}{\theta_2} = \frac{1}{2 \theta_2^2} \\
+	i_{1,2}(\theta) = i_{2,1}(\theta) = E_{\theta} \frac{x_1 - \theta_1}{\theta_2} \cdot \frac{(x_1 - \theta_1)^2 - \theta_2}{2 \theta_2} = 0 \\
+	I_1 (\theta) = \begin{pmatrix}
+		\frac{1}{\theta_2} & 0 \\
+		0 & \frac{1}{2 \theta_2^2}
+	\end{pmatrix}
+\end{gathered}$$
+Т.к. $\frac{\partial \tau (\theta)}{\partial \theta} = \begin{pmatrix}
+	1 & 0 \\ 0 & 1
+\end{pmatrix} = E_2$, то неравенство Рао-Крамера имеет вид:
+$$\begin{pmatrix}
+	\frac{\theta_2}{n} & 0 \\
+	0 & \frac{2 \theta_2^2}{n-1}
+\end{pmatrix} \ge \begin{pmatrix}
+	\frac{\theta_2}{n} & 0 \\
+	0 & \frac{2 \theta_2^2}{n}
+\end{pmatrix} \; \forall \theta \in \Theta$$
+Неравенство верное, но равенства нет, т.е. $\hat{\tau_n}(X) = (\overline{X}, S^2)^T$ неэффективная оценка $\tau (\theta) = (\theta_1, \theta_2)^T$.
+
+Далее покажем, что $\hat{\tau_n}(X)$ - оптимальная оценка для $\tau (\theta)$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

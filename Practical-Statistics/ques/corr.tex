@@ -1,0 +1,193 @@
+\chapter{Корреляция}\label{cha:corr}
+
+\section{Общие сведения}\label{cha:corr/sec:basic}
+
+$$r = \frac{cov (\xi, \eta)}{\sqrt{D \xi} \sqrt{D \eta}} = \frac{E \xi \eta - E \xi E \eta}{\sqrt{D \xi} \sqrt{D \eta}} \in (-1,1)$$
+\begin{itemize}
+	\item[$\bullet$] $r = 1 \; \Rightarrow \; \xi = a \eta + b, \; a > 0$
+	\item[$\bullet$] $r = -1 \; \Rightarrow \; \xi = a \eta + b, \; a < 0$
+	\item[$\bullet$] $r = 0 \; \Rightarrow$ возможно $\xi$ и $\eta$ независимы, но не всегда: $\xi \sim N(0,1)$ и $\xi^2$ -- $corr (\xi, \xi^2) = 0$, но $\xi$ и $\xi^2$ не независимы. 
+\end{itemize}
+Т.о. корреляция - мера линейной зависимости.
+
+\section{Выборочный коэффициент корреляции Пирсона}\label{cha:corr/sec:pirson}
+
+\subsection*{Теория}\label{cha:corr/sec:pirson/subsec:theory}
+
+Тест применяется для нормальных выборок, больших выборок без тяжелых хвостов. Тест не устойчив к выбросам. Строим точечную оценку корреляции. Хорошо ловит именно линейную зависимость.\\
+
+$n$ объектов, $X$ и $Y$ - два признака.
+$$\begin{gathered}
+	r_{XY} = \frac{\frac{1}{n} \underset{}{\overset{}{\sum}}X_i Y_i - \overline{X} \overline{Y}}{\sigma_X \sigma_Y} \text{ - состоятельная оценка} \\
+	\sigma_X = \sqrt{\frac{1}{n}\underset{i=1}{\overset{n}{\sum}}(X_i - \overline{X})^2}, \; \sigma_Y = \sqrt{\frac{1}{n}\underset{i=1}{\overset{n}{\sum}}(Y_i - \overline{Y})^2} \\
+	r_{XY} = \frac{\sqrt{\underset{}{\overset{}{\sum}}(X_i - \overline{X})(Y_i - \overline{Y})}}{\sqrt{\underset{i=1}{\overset{n}{\sum}}(X_i - \overline{X})^2 \underset{i=1}{\overset{n}{\sum}}(Y_i - \overline{Y})^2}}
+\end{gathered}$$
+$H_0 : r = 0$.
+$$T = \frac{r_{XY} \cdot \sqrt{n-2}}{\sqrt{1 - r_{XY}^2}} \Hosim t(n-2)$$
+
+\subsection*{Пример}\label{cha:corr/sec:pirson/subsec:prob}
+
+\begin{lstlisting}[language=Python]
+	pearsonr(x, y)[0]
+	pearsonr(x, y)[1]
+	r = (np.mean(x*y) - np.mean(x)*np.mean(y))/(np.std(x) * np.std(y))
+	from scipy.stats import t
+	n=len(x)
+	t_stat = (r * np.sqrt(n-2)) / np.sqrt(1 - r**2)
+	p_value = 2*np.min([t.cdf(t_stat, n-2), 1 - t.cdf(t_stat, n-2)])
+\end{lstlisting}
+
+\section{Коэффициент корреляции Спирмана}\label{cha:corr/sec:spearman}
+
+\subsection*{Теория}\label{cha:corr/sec:spearman/subsec:theory}
+
+Тест непараметрический (применяется, если выборка ненормальна). Ловит монотонные распределения, более устойчив к выбросам.\\
+
+Имеем $X = (X_1, \dots, X_n), \; Y = (Y_1, \dots, Y_n)$. $R_i$ - ранги $X_i$, $S_j$ - ранги $Y_j$. $\overline{R} = \overline{S} = \frac{n+1}{2}$.
+$$\rho_S = \frac{\sqrt{\underset{}{\overset{}{\sum}}(R_i - \overline{R})(S_i - \overline{S})}}{\sqrt{\underset{i=1}{\overset{n}{\sum}}(R_i - \overline{R})^2 \underset{i=1}{\overset{n}{\sum}}(S_i - \overline{S})^2}}$$
+$H_0:$ $X$ и $Y$ независимы, т.е. $E \rho_S = 0, \; D \rho_S = \frac{1}{n-1}$.\\
+
+Асимптотический критерий для $n \ge 50$:
+$$\frac{\rho_S}{\sqrt{D \rho_S}} = \sqrt{n-1} \; \rho_S \xrightarrow[H_0]{d}N(0,1)$$
+
+\subsection*{Пример}\label{cha:corr/sec:spearman/subsec:prob}
+
+\begin{lstlisting}[language=Python]
+	spearmanr(x, y)[0]
+	spearmanr(x, y)[1]
+\end{lstlisting}
+
+\section{Коэффициент корреляции Кендала}\label{cha:corr/sec:kendal}
+
+\subsection*{Теория}\label{cha:corr/sec:kendal/subsec:theory}
+
+\begin{definition}\label{lec:corr/def:1}
+	$(X_i, Y_i)$ и $(X_j, Y_j)$ называются \blue{согласованными}, если $sgn (X_i - X_j) \cdot sgn (Y_i - Y_j) = 1$.
+\end{definition}
+
+$S$ - число согласованных пар, $R$ - число несогласованных пар. $T = S - R$. Всего пар $C_n^2 = \frac{n(n-1)}{2}, \; -\frac{n(n-1)}{2} \le T \le \frac{n(n-1)}{2}$.
+$$\tau = \frac{2}{n(n-1)}T, \; -1 \le \tau \le 1$$
+$H_0:$ $X$ и $Y$ независимы, т.е. $E \tau = 0, \; D \tau = \frac{2(2n+5)}{9n (n-1)}$.\\
+
+Асимптотический критерий для $n \ge 50$:
+$$\frac{\tau}{\sqrt{D \tau}} \xrightarrow[H_0]{d} N(0,1)$$
+$H_1$ двусторонняя, свойства похожи на Спирмана.
+
+\subsection*{Пример}\label{cha:corr/sec:kendal/subsec:prob}
+
+\begin{lstlisting}[language=Python]
+	kendalltau(x, y)[0]
+	kendalltau(x, y)[1]
+\end{lstlisting}
+
+\section{Частная корреляция}\label{cha:corr/sec:chast}
+
+\subsection*{Теория}\label{cha:corr/sec:chast/subsec:theory}
+
+$$\rho_{XY|Z} = \frac{\rho_{XY} - \rho_{XZ} \cdot \rho_{YZ}}{\sqrt{(1-\rho_{XZ}^2)(1-\rho_{YZ})^2}}$$
+$M \ge 3$ - общее число признаков $X_1, \dots, X_M$.\\
+$\rho_{X_1 X_2 | X_3 \dots X_M} = -\frac{r_{12}}{r_{11} r_{22}}$, $\Sigma$ - матрица выборочных корреляций, $R = \Sigma^{-1}, \; R = (r_{ij})$.\\
+
+$H_0:$ некоррелируемость $X_1$ и $X_2$ без $(X_3, \dots, X_M)$.
+$$T = \frac{\rho \cdot \sqrt{n-M}}{\sqrt{1-\rho^2}} \Hosim t(n-M), \; \rho = \rho_{X_1 X_2 | X_3 \dots X_M}$$
+
+\subsection*{Пример}\label{cha:corr/sec:chast/subsec:prob}
+
+\begin{lstlisting}[language=Python]
+	z = st.norm.rvs(size=1000, loc=0, scale=4) 
+	x = z + st.norm.rvs(size=1000, loc=3, scale=1)
+	y = z + st.norm.rvs(size=1000, loc=-2, scale=1)
+	def partial_corr(x, y, z, method='pearson'):
+    	if method == 'pearson':
+       	 r_xy, r_xz, r_yz = pearsonr(x, y)[0], pearsonr(x, z)[0], 
+       	 		pearsonr(y, z)[0]
+    	elif method == 'kendall':
+        	r_xy, r_xz, r_yz = kendalltau(x, y).correlation, 
+        		kendalltau(x, z).correlation, kendalltau(y, z).correlation
+   		else:
+        	return None
+    	return (r_xy - r_xz * r_yz) / np.sqrt((1 - r_xz ** 2) * 
+    			(1 - r_yz ** 2))
+    print ("pearson partial correlation:", 
+    		partial_corr(x, y, z, method='pearson'))
+\end{lstlisting}
+
+\section{Таблицы сопряженности}\label{cha:corr/sec:contingency}
+
+\subsection*{Теория}\label{cha:corr/sec:contingency/subsec:theory}
+
+Пусть $A$ и $B$ - признаки, $A_1, \dots, A_r, B_1, \dots, B_s$ - значения. 
+
+\begin{center}
+	\begin{tabular}{| l || c | c | c | r |}
+	\hline
+	 & $B_1$ & $B_2$ & $\dots$ & $B_s$ \\ \hline \hline
+	 $A_1$ & $\mu_{11}$ & $\mu_{12}$ & $\dots$ & $\mu_{1s}$ \\ \hline
+	 $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ \\ \hline
+	 $A_r$ & $\mu_{r1}$ & $\mu_{r2}$ & $\dots$ & $\mu_{rs}$ \\ \hline
+	\end{tabular}
+\end{center}
+
+$H_0:$ $A$ и $B$ независимы.
+$$\begin{gathered}
+	\chi^2 = \underset{i=1}{\overset{r}{\sum}}\underset{j=1}{\overset{s}{\sum}}\frac{\left( \mu_{ij} - n \cdot \frac{\mu_{i \cdot}}{n} \cdot \frac{\mu_{\cdot j}}{n} \right)^2}{n \cdot \frac{\mu_{i \cdot}}{n} \cdot \frac{\mu_{\cdot j}}{n}} \xrightarrow[H_0]{d} \chi^2 \left( (r-1)(s-1) \right) \\
+	\mu_{i \cdot} = \underset{j=1}{\overset{s}{\sum}}\mu_{ij}, \; \mu_{\cdot j} = \underset{i=1}{\overset{r}{\sum}}\mu_{ij} \\
+	C_{\text{кр}} = [ \chi_{1-\alpha}^2 \left( (r-1)(s-1) \right), +\infty)
+\end{gathered}$$
+
+\hfill \break \hfill \break
+Критерий Фишера:\\
+$\tilde{r}$ - кол-во исходов
+$$\hat{\chi^2} = \underset{i=1}{\overset{r}{\sum}}\frac{\left( m_i - n p_i (\hat{\theta_1}, \dots, \hat{\theta_k}) \right)^2}{n p_i (\hat{\theta_1}, \dots, \hat{\theta_k})} \xrightarrow[H_0]{d} \chi^2 (\tilde{r}-1-k) $$
+
+\subsection*{Пример}\label{cha:corr/sec:contingency/subsec:prob}
+
+\begin{problem}
+	 Программные продукты оцениваются по шкале от 1 до 4 по качеству, и кроме того, имеется два способа написания программных продуктов: быстрый и медленный. Известно, что среди быстро написанных программных продуктов оценку 1 имеют 120 продуктов, оценку 2 – 124 продукта, 3 — 133 продукта, 4 – 106 продуктов. Среди медленно написанных продуктов оценку 1 имеют 97, 2 – 142, 3 – 129 и 4 – 149 продуктов. Выяснить, имеется ли статистически значимая связь между скоростью написания программных продуктов и их качеством (на уровне значимости 1$\%$ и на уровне значимости 3$\%$).
+\end{problem}
+\begin{solution}
+	\begin{lstlisting}[language=Python]
+		table = np.array([[120, 124, 133, 106],
+		[97, 142, 129, 149]])
+
+		st.chi2_contingency(table)
+		st.chi2_contingency(table)[1]
+	\end{lstlisting}
+\end{solution}
+
+\begin{problem}
+	 Проверка независимости двух признаков с помощью таблиц сопряженности
+\end{problem}
+\begin{solution}
+	\begin{lstlisting}[language=Python]
+		Star = pd.read_csv("Star.csv")
+		x = Star['x']
+		y = Star['y']
+		Star['x_bin'] = pd.cut(x, [-np.inf, -0.5, 0.5, np.inf])
+		Star['y_bin'] = pd.cut(y, [-np.inf, -0.5, 0.5, np.inf])
+
+		table2 = Star.pivot_table(values='x', index='x_bin', columns='y_bin', aggfunc='count', fill_value=0)
+
+		res = st.chi2_contingency(table2)
+		p_value = res[1]
+	\end{lstlisting}
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

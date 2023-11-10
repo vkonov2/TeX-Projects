@@ -1,0 +1,110 @@
+\chapter{Одномерность собственного подпространства положительной матрицы A, соответствующего $\rho(A)$}
+\label{cha:30}
+
+\epigraph{
+	\textit{Сердце России, Москва, было, comme de raison, [разумеется.] покрыто самым густым слоем ярко-красной краски; от этого центра, в виде радиусов, шли другие губернии, постепенно бледнея и бледнея по мере приближения к окраинам.}}
+{-- Салтыков-Щедрин М.Е.}
+
+% \begin{propose}\label{cha:30/propose:1}
+% 	Пусть A – положительная матрица и x – неотрицательный ненулевой вектор. Тогда вектор $Ax$ положителен.
+% \end{propose}
+% \begin{Proof}
+% 	Пусть $x_k > 0$. Для любого индекса $i = \ton n$ имеем $\underset{j=1}{\overset{n}{\sum}} a_{ij}x_j \ge a_{ik}x_k > 0$.
+% \end{Proof}
+
+% \begin{theorem}[]\label{cha:30/the:1}
+% 	Пусть задана квадратная матрица $A \ge 0$ без нулевых строк, причем существуют такие положительные векторы x, y, что:
+% 	$$A x = \rho(A) x, \; y A = \rho(A) y, \; (x,y) = \underset{j}{\overset{}{\sum}}x_j y_j = 1\eqno(91)$$
+% 	где x, y отождествляются со столбцами из координат векторов. Положим $L = (x_iy_j) = x \cdot y$ Тогда:
+% 	$$Lx=x, \; yL=y, \; L^2 =L, \; AL=LA=\rho(A)L$$
+% 	Кроме того, $(\rho(A)^{−1}A − L)^m = (\rho(A)^{−1}A)^m − L$.
+% \end{theorem}
+% \begin{Proof}
+% 	Заметим, что $Lx=(x,y)x=x, \; yL=y(x,y)=y$. Отсюда:
+% 	$$L^2 =x(y,x)y=L, \; AL=(Ax)y=\rho(A)xy=\rho(A)L=LA \eqno(92)$$
+% 	Поэтому $\rho(A)^{−1}AL = L = L(\rho(A)^{−1}A)$ и
+% 	$$\begin{gathered}
+% 		\left[ \rho(A)^{-1}A - L \right]^m = \underset{j=1}{\overset{m}{\sum}}\begin{pmatrix}
+% 			m \\ j
+% 		\end{pmatrix} (-1)^jL^j + \rho(A)^{-m}A^m = \\
+% 		= \left[ \underset{j=1}{\overset{m}{\sum}}\begin{pmatrix}
+% 			m \\ j
+% 		\end{pmatrix} (-1)^j \right] L + \rho(A)^{-m}A^m = -L + \rho(A)^{-m}A^m
+% 	\end{gathered}$$
+% 	Отсюда $\displaystyle \rho(A)^{−m}A^m = L + \left[\rho(A)^{−1}A − L\right]^m$.
+% \end{Proof}
+
+% \begin{theorem}[]\label{cha:30/the:2}
+% 	Пусть A – положительная матрица и $Ax = \lambda x$ для некоторого ненулевого вектора x, причем $|\lambda| = \rho(A)$. Тогда:
+% 	\begin{itemize}
+% 		\item[1)] $A|x| = \rho(A)|x|$
+% 		\item[2)] $|x| > 0$
+% 		\item[3)] $x = e^{i\theta}|x|$ для некоторого $\theta \in \mathbb{R}$
+% 		\item[4)] $\lambda = \rho(A)$
+% 	\end{itemize}
+% \end{theorem}
+% \begin{Proof}
+% 	Имеем:
+% 	$$\rho(A)|x| = |\lambda||x| = |\lambda x| = |Ax| \le |A||x| = A|x|\eqno(93)$$
+% 	Положим $y = A|x| − \rho(A)|x|$. По (93) вектор y неотрицателен.
+
+% 	Предположим сначала, что $y \not = 0$. По предложению \ref{cha:30/propose:1} вектор Ay положителен. Положим $z = A|x|$. В силу предложения \ref{cha:30/propose:1} этот вектор также положителен. Отсюда $0 < Ay = Az- \rho(A)z$ и поэтому $Az > \rho(A)z$. Это противоречит следствию \ref{cha:29/conseq:2}.
+
+% 	Итак, $y = 0$, т.е. $A|x| = \rho(A)|x|$. Кроме того, $|x| = \rho(A)^{−1}A|x| > 0$ по предложению \ref{cha:30/propose:1}. Поэтому для любой координаты $x_k$ вектора x имеем:
+% 	$$\begin{gathered}
+% 		\rho(A)|x_k| = |\lambda||x_k| = |\lambda x_k| = \Big| \underset{j}{\overset{}{\sum}} a_{kj}x_j \Big| \le \\
+% 		\le \underset{j}{\overset{}{\sum}}|a_{kj}||x_j| = \underset{j}{\overset{}{\sum}}a_{kj}|x_j| = \rho(A)|x_k|
+% 	\end{gathered}$$
+% 	Таким образом, $| \underset{j}{\overset{}{\sum}} a_{kj} x_j | = \underset{j}{\overset{}{\sum}} a_{kj} |x_j |$, а, значит, все $x_j$ расположены на одном луче в комплексной области. В частности, существует такой угол $\theta$, что $e^{−i\theta}x_j > 0$ для всех j. Отсюда $e^{−i\theta}x = |x|$, т.е. x – собственный вектор A c собственным значением $\rho(A)$.
+% \end{Proof}
+
+% \begin{conseq}[]\label{cha:30/conseq:1}
+% 	Пусть A – положительная матрица. Тогда $\rho(A)$ – положительное собственное значение A. Существует положительный собственный вектор с собственным значением $\rho(A)$.
+% \end{conseq}
+% \begin{Proof}
+% 	Пусть $|\lambda| = rho(A)$ для некоторого собственного значения $\lambda$ матрицы A и $Ax = \lambda x$, где $x \not = 0$. По теореме $A|x| = \rho(A)|x|$, причем $|x| > 0$.
+% \end{Proof}
+
+% \begin{conseq}[]\label{cha:30/conseq:2}
+% 	Пусть $A > 0$. Если $\lambda$ – собственное значение матрицы A, причем $\lambda \not = \rho(A)$, то $|\lambda| < \rho(A)$.
+% \end{conseq}
+
+\begin{theorem}[]\label{cha:30/the:3}
+	Пусть $A > 0$ и $w, z \in \mathbb{C}^n \setminus 0$, причем $\displaystyle Aw = \rho(A)w, \; Az = \rho(A)z$. Тогда $w = \alpha z, \; \alpha \in \mathbb{C}$.
+\end{theorem}
+\begin{Proof}
+	По теореме \ref{cha:30/the:2} имеем $\displaystyle z = e−^{i\theta}|z|, \; w = e^{−i\psi}|w|$. Таким образом, можно считать, что $z, w > 0$. Положим $\beta = \underset{j}{\min} z_j w_j^{-1}, \; r = z - \beta w$. Тогда $r \ge 0$ и r не положительный вектор. Вместе с тем $Ar = \rho(A)r$. Отсюда $r = \rho(A)^{−1}Ar > 0$ по предложению \ref{cha:30/propose:1}. Итак, $r = 0$.
+\end{Proof}
+
+\begin{conseq}[]\label{cha:30/conseq:3}
+	Если $A > 0$, то существует единственный вектор x такой, что $x>0$, $Ax = \rho(A)x$, $\underset{j}{\overset{}{\sum}}x_j = 1$.
+\end{conseq}
+
+\begin{definition}\label{cha:30/def:1}
+	Пусть $A > 0$. Тогда $\rho(A)$ называется \textit{перроновым числом}, а вектор x из следствия \ref{cha:30/conseq:3} называется \textit{перроновым вектором} для A.
+\end{definition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

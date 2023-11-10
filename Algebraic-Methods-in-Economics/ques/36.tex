@@ -1,0 +1,52 @@
+\chapter{Сходимость $[{\rho(A)}^{−1}A]^m$ для неотрицательной неразложимой матрицы}
+\label{cha:36}
+
+\epigraph{
+	\textit{Об этом, сходясь, и толкуем, и — сильно подействовало.}}
+{-- Достоевский Ф.М.}
+
+\begin{propose}\label{cha:36/propose:1}
+	Пусть $A, x, y, L$ из теоремы \ref{cha:30/the:1}, причем матрица A неразложима. Тогда матрица
+	$$E − [\rho(A)^{−1}A − L]\eqno(97)$$
+	обратима.
+\end{propose}
+\begin{Proof}
+	Рассмотрим вектор z с условием $\left[E − \left(\rho(A)^{−1}A − L\right)\right] z = 0$. Тогда:
+	$$z = \rho(A)^{−1}Az − Lz\eqno(98)$$
+	Умножая (98) слева на матрицу L по теореме \ref{cha:30/the:1} получаем:
+	$$Lz = \rho(A)^{−1}LAz − L^2z = Lz − Lz = 0\eqno(99)$$
+	Таким образом, по (98) $z = \rho(A)^{−1}Az$, т.е. $Az = \rho(A)z$. В силу теоремы \ref{cha:35/the:1} имеем $z = \alpha x$. Отсюда по (99) $0 = Lz = \alpha Lx = \alpha x = z$. Итак, матрица (97) невырождена и потому обратима.
+\end{Proof}
+
+\begin{theorem}[]\label{cha:36/the:1}
+	Пусть A — неотрицательная неразложимая матрица. Тогда матрица $^tA$ неразложима. В силу теоремы \ref{cha:35/the:1} существуют такие положительные векторы $x,y$, что выполнены равенства (91). Положим $L = x^ty$. Тогда существует такая положительная константа $C = C(A)$, что для любого натурального числа N:
+	$$\Big| \Big| \frac{1}{N} \underset{m=1}{\overset{N}{\sum}}\left( \rho(A)^{-1} A \right)^m - L \Big| \Big|_{\infty} \le \frac{C}{N}$$
+\end{theorem}
+\begin{Proof}
+	По теореме \ref{cha:30/the:1} имеем:
+	$$\begin{gathered}
+		\frac{1}{N} \underset{m=1}{\overset{N}{\sum}}\left( \rho(A)^{-1} A \right)^m - L = \frac{1}{N} \underset{m=1}{\overset{N}{\sum}} \left( \left[ \rho(A)^{-1} A  - L \right]^m + L \right) - L = \frac{1}{N} \underset{m=1}{\overset{N}{\sum}} \left[ \rho(A)^{-1} A  - L \right]^m \\
+		= \frac{1}{N}\left[ \rho(A)^{-1} A  - L \right]\left[ E - \left( \rho(A)^{-1} A  - L \right)^N \right]\left[ E - \left( \rho(A)^{-1} A  - L \right) \right]^{-1} = \\
+		= \frac{1}{N}\left[ \rho(A)^{-1} A  - L \right]\left[ E - \left( \rho(A)^{-1} A \right)^N + L \right]\left[ E - \left( \rho(A)^{-1} A  - L \right) \right]^{-1}
+	\end{gathered}$$
+	Для завершения доказательства теоремы достаточно показать, что все элементы матрицы $B = \left[ \rho(A)^{−1}A\right]^N$ ограничены. Непосредственная проверка показывает, что $Bx = x$. Пусть $B = (b_{ij})$. Тогда для любого $i = \ton n$ имеем $\underset{j}{\overset{}{\sum}} b_{ij}x_j = x_i$. Следовательно:
+	$$\underset{s}{\max}x_s \ge x_i = \underset{j}{\overset{}{\sum}}b_{ij} x_j \ge \left( \underset{j}{\min} x_j \right) \underset{j}{\overset{}{\sum}}b_{ij} \ge \left( \underset{j}{\min}x_j \right)b_{ij}$$
+	Отсюда:
+	$$b_{ij} \le \frac{\underset{s}{\max}x_s}{\underset{j}{\min}x_j}$$
+\end{Proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,114 @@
+\chapter{Формула Кирхгофа решения задачи Коши для волнового уравнения в $R^3$.}
+\label{cha:7}
+
+Задача Коши для волнового уравнения в $\mathbb{R}^3$:
+$$\begin{cases}
+	u_{tt} = a^2 \triangle_{\overline{x}} u, \; t > 0, \; x \in \mathbb{R}^3 \\
+	u|_{t = 0} = \varphi (x) \\
+	u_t |_{t = 0} = \psi (x)
+\end{cases}\eqno(1)$$
+
+\begin{theorem}[\red{Формула Киргхгофа}]\label{lec:7/the:1}
+	Формула решения задачи Коши для волнового уравнения имеет вид:
+	$$u(t, \overline{x}) = \frac{1}{4 \pi a^2 t} \underset{|\overline{x} - \xi| = at}{\overset{}{\varoiint}} \psi (\overline{\xi}) d \sigma_\xi + \frac{\partial}{\partial t} \left(\frac{1}{4 \pi a^2 t} \underset{|\overline{x} - \xi| = at}{\overset{}{\varoiint}} \varphi (\overline{\xi}) d \sigma_\xi \right) $$
+\end{theorem}
+\begin{Proof}
+	Разобьем исходную задачу $u$ на сумму двух задач $u_1$ и $u_2$:
+	$$\begin{gathered}
+		u = u_1 + u_2 \\
+	\begin{cases}
+		(u_1)_{tt} = a^2 \triangle_{\overline{x}} u_1 \\
+		(u_1)|_{t = 0} = \varphi (x) \\
+		(u_1)_t |_{t = 0} = 0
+	\end{cases}
+	\begin{cases}
+		(u_2)_{tt} = a^2 \triangle_{\overline{x}} u_2 \\
+		(u_2)|_{t = 0} = 0 \\
+		(u_2)_t |_{t = 0} = \psi (x)
+	\end{cases}
+	\end{gathered}$$
+	Найдем такую функцию $v(t, \overline{x})$, что:
+	$$\begin{cases}
+		v_{tt} = a^2 \triangle_{\overline{x}} v \\
+		v|_{t = 0} = 0 = v (0, x_1, x_2, x_3) \\
+		v_t |_{t = 0} = \varphi (\overline{x})
+	\end{cases}$$
+	Докажем, что $u_1 = v_t$. Имеем:
+	$$\begin{gathered}
+		v_t|_{t=0} = \varphi (\overline{x}) = u_1|_{t=0}\\
+		v_{tt}|_{t=0} = a^2 \triangle_x v|_{t=0} = 0 = (u_1)_t|_{t=0}\\
+		(u_1)_{tt} = v_{ttt} = a^2 \triangle v_t = a^2 \triangle u_1
+ 	\end{gathered}$$
+	Доказательство свелось к рассмотрению следующей задачи:
+	$$\begin{cases}
+		v_{tt} = a^2 \triangle_{\overline{x}} v, \; t > 0, \; \overline{x} \in \mathbb{R}^3 \\
+		v|_{t = 0} = 0 \\
+		v_t |_{t = 0} = \varphi (\overline{x})
+	\end{cases}$$
+	Хотим доказать следующую формулу:
+	$$v(t, \overline{x}) = \frac{1}{4 \pi a^2 t}\underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint}}\varphi (\overline{\xi})d \sigma_{\xi}$$
+	Сделаем замену координат:
+	$$\begin{gathered}
+		\overline{y}  = \frac{1}{at} (\overline{\xi} - \overline{x})\; \Rightarrow \;  \overline{\xi} = \overline{x} + a t \overline{y} \; \Rightarrow \;  d \sigma_{\xi} = (at)^2 d \sigma_{y}
+	\end{gathered}$$
+	Подставим в формулу:
+	$$v (t, \overline{x}) = \frac{1}{4 \pi a^2 t} \underset{| \overline{\xi} - \overline{x}| = at}{\overset{}{\varoiint}} \varphi(\xi) d \sigma_{\xi} = \frac{t}{4 \pi} \underset{|y| = 1}{\overset{}{\varoiint}} \varphi (\overline{x} + at\overline{y}) d\sigma_y$$
+	Проверим начальные условия: 
+	$$\begin{gathered}
+		v|_{t=0} = 0 \\
+		v_t = \frac{1}{4\pi}\underset{|y| = 1}{\overset{}{\varoiint}} \varphi (\overline{x} + at\overline{y}) d\sigma_y + \frac{at}{4\pi}\underset{|y| = 1}{\overset{}{\varoiint}} (\varphi_{\xi_1} a y_1 + \varphi_{\xi_2} a y_2 + \varphi_{\xi_3} a y_3) d\sigma_y \\
+		v_t|_{t=0} = \frac{1}{4\pi}\underset{|y| = 1}{\overset{}{\varoiint}} \varphi (\overline{x}) d\sigma_y = \frac{1}{4\pi}\varphi (\overline{x}) \cdot\underset{|y| = 1}{\overset{}{\varoiint}}d\sigma_y = \frac{1}{4\pi}\varphi(\overline{x}) \cdot 4\pi R^2|_{R=1} = \varphi (\overline{x})
+	\end{gathered}$$
+	Таким образом, начальные условия выполнены. Теперь сделаем обратную замену.\\
+	Для начала заметим, что:
+	$$\varphi_{\xi_1} n_1 + \varphi_{\xi_2} n_2 + \varphi_{\xi_3} n_3 = (\overline{\nabla}\varphi, \overline{n}) = \frac{\partial \varphi}{\partial \overline{n}}$$
+	Найдем $v_t$:
+	$$\begin{gathered}
+		v_t = \frac{1}{t}v + \frac{at}{4\pi (at)^2}\underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint}}(\varphi_{\xi_1} n_1 + \varphi_{\xi_2} n_2 + \varphi_{\xi_3} n_3)d \sigma_{\xi} = \frac{1}{t}v + \frac{1}{4\pi at}\underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint}}\frac{\partial \varphi}{\partial \overline{n}}d \sigma_{\xi}
+	\end{gathered}$$
+	По теореме о потоке имеем:
+	$$v_t = \frac{1}{t}v + \frac{1}{4\pi at}\underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint \hspace{-19.3pt} \int}}\triangle_{\xi}\varphi d \xi$$
+	Найдем $v_{tt}$:
+	$$\begin{gathered}
+		v_{tt} = -\frac{1}{t^2}v + \frac{1}{t}v_t - \frac{1}{4\pi at^2}\underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint \hspace{-19.3pt} \int}}\triangle_{\xi}\varphi d \xi + \frac{1}{4\pi at}\frac{\partial}{\partial t}\left( \underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint \hspace{-19.3pt} \int}}\triangle_{\xi}\varphi d \xi \right) = \\
+		= -\frac{1}{t^2}v + \frac{1}{t}\left( \frac{1}{t}v + \frac{1}{4\pi at}\underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint \hspace{-19.3pt} \int}}\triangle_{\xi}\varphi d \xi \right) - \frac{1}{4\pi at^2}\underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint \hspace{-19.3pt} \int}}\triangle_{\xi}\varphi d \xi + \\
+		+ \frac{1}{4\pi at}\frac{\partial}{\partial t}\left( \underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint \hspace{-19.3pt} \int}}\triangle_{\xi}\varphi d \xi \right) = \frac{1}{4\pi at}\frac{\partial}{\partial t}\left( \underset{0}{\overset{at}{\int}}\underset{|\overline{\xi} - \overline{x}|=\tau}{\overset{}{\varoiint}}\triangle\varphi d \sigma_{\xi}d\tau \right)
+	\end{gathered}$$
+	Отсюда по формуле дифференцирования интеграла с переменным верхним пределом получаем:
+	$$v_{tt} = \frac{a}{4\pi at}\underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint}}\triangle\varphi d \sigma_{\xi} = \frac{1}{4\pi t}\underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint}}\triangle\varphi d \sigma_{\xi}$$
+	Найдем $\triangle_x v$:
+	$$\begin{gathered}
+		\triangle_x v = \frac{t}{4 \pi} \underset{|y| = 1}{\overset{}{\varoiint}} \triangle \varphi (\overline{x} + at\overline{y}) d\sigma_y = \frac{t}{4 \pi a^2 t^2} \underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint}} \triangle_{\xi}\varphi d\sigma_{\xi} = \frac{1}{4 \pi a^2 t} \underset{|\overline{\xi} - \overline{x}|=at}{\overset{}{\varoiint}} \triangle_{\xi}\varphi d\sigma_{\xi}
+	\end{gathered}$$
+	Таким образом, получаем, что $v_{tt} = a^2 \triangle v$. Отсюда имеем формулу:
+	$$v (t, \overline{x}) = \frac{1}{4 \pi a^2 t} \underset{| \overline{\xi} - \overline{x}| = at}{\overset{}{\varoiint}} \varphi(\xi) d \sigma_{\xi}, \;\; u_1 = v_t$$
+	Итак, получаем итоговую формулу:
+	$$u(t, \overline{x}) = \frac{1}{4 \pi a^2 t} \underset{|\overline{x} - \xi| = at}{\overset{}{\varoiint}} \psi (\overline{\xi}) d \sigma_\xi + \frac{\partial}{\partial t} \left(\frac{1}{4 \pi a^2 t} \underset{|\overline{x} - \xi| = at}{\overset{}{\varoiint}} \varphi (\overline{\xi}) d \sigma_\xi \right)$$
+\end{Proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,288 @@
+\chapter{Уравнение теплопроводности(параболический тип).}
+\label{cha:30}
+
+Рассмотрим одномерный случай (стержень на оси $x$).
+
+$u(t,x)$ - температура стрежня в точке х в момент времени t.
+
+Тогда \red{уравнение теплопроводности} имеет вид
+
+\[
+u_t = a^2u_{xx}\]
+
+Для $n$-мерного случая имеем
+
+\begin{gather*}
+	u(t,\overline{x}),\;\; \overline{x} = (x_1, ..., x_n) \\
+u_t = a^2\Delta_xu \equiv a^2(u_{x_1x_1}+...+u_x{x_nx_n})
+\end{gather*}
+
+\begin{theorem}[\blue{Принцип максимума в ограниченной области (в стакане)}]
+	Пусть $u(t,x)$ удовлетворяет 
+	\[
+	u_t=a^2u_{xx}, \;\; (t,x) \in \Omega: \{0<x<l, 0<t<T\}.\]
+
+	Пусть 
+	\begin{gather*}
+		\Sigma = \{x = 0\}\bigcup\{x = l\}\bigcup \{t=0\};\\
+	m = \min\limits_{\Sigma}u, M = \max\limits_{\Sigma}u \\
+	\end{gather*}
+	Тогда \[m \leq u(t,x) \leq M\;\; \forall (t,x) \in \Sigma\]
+		
+	
+\end{theorem}
+
+\begin{proof}
+	От противного.
+
+	Пусть найдется максимум в точке $(t_0, x_0)$ внутри или на $t = T.$
+
+	Рассмотрим \[u_{\varepsilon} = u(t,x) + \varepsilon x^2.\]
+
+	Пусть максимум $u_{\varepsilon(t,x)}-$ точка $(t_1, x_1)$ внутри или на $t = T.$
+
+	Тогда в силу максимума в точке
+	\[
+		(u_{\varepsilon})_t(t_1, x_1) = \begin{cases}
+			0, t_1 < T\\
+			>0, t_1 = T
+		\end{cases}
+	\]
+	и
+
+	\[(u_{\varepsilon})_{xx}(t_1, x_1)\leq 0.\]
+
+	Но тогда 
+
+	\[
+	{(u_{\varepsilon})_t} - {a^2(u_{\varepsilon})_{xx}} \geq 0 \text{ в }  (t_1, x_1).\]
+
+	Однако
+
+	\begin{gather*}
+		{(u_{\varepsilon})_t} - {a^2(u_{\varepsilon})_{xx}}=\\
+		= u_t- a^2u_{xx}-2a^2\varepsilon = -2a^2\varepsilon <0
+	\end{gather*}
+
+\end{proof}
+
+\begin{remark}
+	Теорема называется приципом максимума \blue{в стакане}, потому что при пространственной размерности $n=2$ множество точек, на котором может достигаться максимум по форме напоминает стакан
+\end{remark}
+
+\begin{conseq}
+	Решение первой краевой задачи единственно:
+	
+	\begin{gather*}
+		\begin{cases}
+			u_t = a^2u_{xx}, \; \; \;t > 0, \; \; \;x \in (0,l)\\
+			u|_{t = 0} = \phi(x)\\
+			u|_{x = 0} = \mu(t)\\
+			u|_{x = l} = \nu(t)\\	
+		\end{cases}\\
+		\Rightarrow \exists ! \; \; \; u(t,x), \text{ удовлетворяющее данной задаче.}
+	\end{gather*}
+\end{conseq}
+
+\begin{proof}
+	Пусть $u_1, u_2$- два решения данной задачи.
+
+	Положим $z = u_1 - u_2.$ Тогда
+	\[
+		\begin{cases}
+			z_t = a^2z_{xx}\\
+			z|_{t=0}=0\\
+			z|_{x=0} = 0\\
+			z|_{x=l} = 0\\
+		\end{cases}
+	\]
+
+	Отсюда по \blue{принципу максимума}
+	\[
+		z \equiv 0 \; \Rightarrow \; u_1 \equiv u_2.
+	\]
+	
+\end{proof}
+
+\section{Задача Коши для уравнения теплопроводности} % (fold)
+\label{sec:cauchy_parab}
+
+Поставим \red{задачу Коши} для неограниченного стержня:
+
+\[
+	\begin{cases}
+		u_t = a^2u_{xx}, \; \; \; t > 0, \; \; \; x \in \mathbb{R}\\
+		u|_{t=0} = \phi(x)\\
+		|u| \leq C = const \; \; \; t \geq 0, \; \; \; x \in \mathbb{R}.
+	\end{cases}
+\]
+
+\begin{theorem}[\blue{Принцип максимума в неограниченной области}]
+	Пусть дана задача Коши:
+
+	\[
+	\begin{cases}
+		u_t = a^2u_{xx}, \; \; \; t > 0, \; \; \; x \in \mathbb{R}\\
+		u|_{t=0} = \phi(x)\\
+		|u| \leq C = const \; \; \; t \geq 0, \; \; \; x \in \mathbb{R}
+	\end{cases}
+	\]
+и 
+	\[
+		m = \min\limits_{\mathbb{R}}\phi(x), \;\;\; M = \max_{\mathbb{R}}\phi(x)
+	\]
+
+	Тогда
+	\[
+		m \leq u(t,x) \leq M \; \; \; t>0, x \in \mathbb{R}.
+	\]
+\end{theorem}
+
+\begin{proof}
+	Фиксируем $R > 0$. Рассмотрим 
+	\[
+		(t,x) \in \Omega: \{x \in [-R, R], t \in [0, R]\}
+	\]
+
+	Хотим доказать, что для $(t_0, x_0) \in \Omega$
+	\[
+		M - u(t_0, x_0) \geq 0.
+	\]
+
+	Положим 
+	\[
+		v(t,x) = 2a^2t + x^2 \geq 0.
+	\]
+	При этом
+	\[
+		v_t - a^2v_{xx} = 2a^2 - 2a^2 = 0.
+	\]
+	Рассмотрим 
+	\[	
+		u_{\varepsilon}(t,x) = M - u(t,x) + \varepsilon\frac{v(t,x)}{v(t_0, x_0)}.
+	\]
+
+	Тогда
+	\begin{gather*}
+		u_{\varepsilon}|_{t=0} = M - \phi(x) + \frac{\varepsilon x^2}{v(t_0, x_0)} \geq 0\\
+		u_{\varepsilon}|_{+R} = M - u(t, +R) + \varepsilon\frac{2a^2t + R^2}{v(t_0, x_0)} \geq\\
+		\geq M - u(t, +R) + \varepsilon\frac{R^2}{v(t_0, x_0)} \geq\\
+		\geq[\text{выберем настолько большое R, что } \varepsilon\frac{R^2}{v(t_0, x_0)} \geq C_1] \geq 0 (R \rightarrow \infty)
+	\end{gather*}
+		
+	Тогда по \blue{принципу максимума в стакане} $u_{\varepsilon} \geq 0$ в прямоугольнике $\Rightarrow \; \; \; u_{\varepsilon}(t_0, x_0) \geq 0$
+
+	\begin{gather*}
+		M - u(t_0, x_0) + \varepsilon \geq 0\\
+		u(t_0, x_0) \leq M + \varepsilon \;\;\; \Rightarrow(\varepsilon \rightarrow 0) \;\;\;  u(t_0, x_0) \leq M
+	\end{gather*}
+
+\end{proof}
+
+\begin{conseq}
+	Ограниченное решение задачи Коши единственно:
+	\[
+		\begin{cases}
+			u_t = a^2u_{xx} \;\;\; t>0, x \in \mathbb{R}\\
+			u|_{t=0} = \phi(x)\\
+			|u| \leq C, \;\;\; t \geq 0, x \in \mathbb{R}\\
+		\end{cases}
+		\Rightarrow \;\;\; \exists u!
+	\]
+\end{conseq}
+
+\begin{proof}
+	Пусть $ u_1, u_2 $ решения. Рассмотрим $ z = u_1 - u_2$.
+
+	Тогда
+	\[
+		\begin{cases}
+			z_t = a^2z_{xx}\\
+			z|_{t=0} = 0\\
+			|z| \leq \widetilde{C}
+		\end{cases}
+	\]	
+
+	Вследствие \blue{принципа максимума в неограниченной области}
+
+	\[
+		z \equiv 0 \;\;\; \Rightarrow \;\;\; u_1 \equiv u_2
+	\]
+\end{proof}
+
+\begin{remark}
+	Условие $ |u| \leq C$ обязательное.
+
+	Тихонов:
+	\[
+		\begin{cases}
+			u_t = a^2u _{xx}\\
+			u|_{t=0} = 0
+		\end{cases}
+		\rightarrow 
+			\begin{cases}
+				u_1 \equiv 0\\
+				u_2 \sim   e^{\alpha x^{2+\beta}}
+			\end{cases}
+	\]
+\end{remark}
+
+\section{\blue{Формула Пуассона} решения задачи Коши}
+
+Задача:
+\[
+	\begin{cases}
+		u_t=a^2u _{xx}, \;\;\;t \geq 0, x \in \mathbb{R}\\
+		u|_{t=0} = \phi(x)\\
+		|u| \leq C, \;\;\;t \geq 0, x \in \mathbb{R}
+	\end{cases}
+\]
+
+Решение:
+\[
+	u(t,x) = \frac{1}{2a\sqrt{\pi t}}\int\limits^{+\infty}_{-\infty}e^{\frac{(x-\xi)^2}{4a^2t}}\phi(\xi)d\xi
+\]
+
+\begin{chck}
+	Просто продифференциируем интеграл и проверим удовлетворение начальным условиям:
+	\begin{gather*}
+		u_t = \frac{1}{2a\sqrt{\pi}}\int\limits^{+\infty}_{-\infty} (-\frac{1}{2t^{ \frac{3}{2}}} + \frac{(x-\xi)^2}{\sqrt{t} 4a^2t^2})e^{- \frac{(x-\xi)^2}{4a^2t}}\phi(\xi)d\xi;\\
+		u_x = \frac{1}{2a\sqrt{\pi}}\int\limits^{+\infty}_{-\infty} (-\frac{x-\xi}{\sqrt{t}2a^2t})e^{-\frac{(x-\xi)^2}{4a^2t}}\phi(\xi)d\xi;\\
+		u_{xx} = \frac{1}{2a\sqrt{t}}\int\limits^{+\infty}_{-\infty} (\frac{-1}{\sqrt{t}2a^2t} + \frac{(x-\xi)^2}{\sqrt{t}4a^4t})e^{-\frac{(x-\xi)^2}{4a^2t}}\phi(\xi)d\xi.
+	\end{gather*}
+
+	Видно, что действительно $ u_t = a^2u _{xx}.$
+
+	Теперь проверим начальные условия. Рассмотрим замену
+	\[
+		y = \frac{x-\xi}{2a\sqrt{t}}
+	\]
+
+	 Тогда
+	\begin{gather*}
+		\xi = 2a\sqrt{t}y + x\\
+		d\xi = 2a\sqrt{t}dy
+	\end{gather*}
+
+	и
+	\begin{gather*}
+		u(t,x) = \frac{2a\sqrt{t}}{2a\sqrt{\pi t}}\int\limits^{+\infty}_{-\infty} e^{-y^2}\phi(2a\sqrt{t}y + x)dy=\\
+		= \frac{1}{\sqrt{\pi}}\int\limits^{+\infty}_{-\infty} e^{-y^2}\phi(2a\sqrt{t}y + x)dy \;\; \rightarrow\;\; \frac{\phi(x)}{\sqrt\pi}\int\limits^{+\infty}_{-\infty}e^{-y^2}dy = \phi(x)
+	\end{gather*}
+\end{chck}
+
+\section{\blue{Многомерная формула Пуассона} решения задачи Коши}
+
+Задача:
+\[
+	\begin{cases}
+		u_t=a^2\Delta_x u \equiv a^2(u_{x_1x_1}+ ...+ u_{x_nx_n}), \;\;\;t \geq 0, \overline{x} \in \mathbb{R}^n\\
+		u|_{t=0} = \phi(x)\\
+		|u| \leq C, \;\;\;t \geq 0, \overline{x} \in \mathbb{R}^n
+	\end{cases}
+\]
+
+Решение:
+\[
+	u(t,x) = \frac{1}{(2a\sqrt{\pi t})^n}\idotsint\limits_{\mathbb{R}^n}e^{-\frac{||\overline{x}-\overline{\xi}||^2}{4a^2t}}\phi(\overline{\xi})d\xi_1..d\xi_2
+\]

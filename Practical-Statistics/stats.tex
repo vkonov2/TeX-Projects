@@ -1,0 +1,137 @@
+\documentclass[article,final,14pt]{scrreprt}
+% \documentclass[14pt,pdf,hyperref={unicode}]{beamer}
+\usepackage[utf8x]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{multicol}
+\usepackage{pb-diagram}
+\usepackage[Bjornstrup]{fncychap}
+\usepackage{xcolor}
+\usepackage{esint}
+\usepackage{tocloft}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{calc}
+\setpapersize{A4}
+\setmarginsrb{2cm}{1.5cm}{1cm}{1.5cm}{0pt}{0mm}{0pt}{13mm}
+\usepackage{indentfirst}
+\sloppy
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\graphicspath{{ques/images/}}
+
+\definecolor{linkcolor}{HTML}{610B0B}
+\definecolor{urlcolor}{HTML}{6495ED}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    %commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    extendedchars=\true,
+    %literate = {й}{{{\color{codegreen}й}}}1
+}
+
+\lstset{style=mystyle}
+
+\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true, pagecolor=linkcolor}
+
+\setcounter{tocdepth}{2}
+\linespread{1}
+\begin{document}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\renewcommand\contentsname{Содержание}
+
+\newtheorem{theorem}{Теорема}[chapter]
+
+\newtheorem{problem}{Задача}[chapter]
+
+\newtheorem{lemma}{Лемма}[chapter]
+
+\newtheorem{clair}{Утверждение}[chapter]
+
+\newtheorem{definition}{Определение}[chapter]
+
+\newtheorem{property}{Свойство}[chapter]
+
+\newtheorem{properties}{Свойства}[chapter]
+
+\newtheorem{conseq}{Следствие}[chapter]
+
+\newtheorem*{rulee}{Правило}
+
+\newtheorem{example}{Пример}[chapter]
+
+\newtheorem{remem}{Напоминание}[chapter]
+
+\newtheorem*{remark}{Замечание}
+
+\newtheorem{problema}{Проблема}
+
+\newenvironment{Proof}       
+	{\par\noindent{\bf Доказательство.}}
+	{\hfill$\blacksquare$}
+
+\newenvironment{solution}       
+	{\par\noindent{\bf Решение.}}
+	{\hfill$\blacksquare$}
+
+\newcommand{\red}[1]{\textbf{\color{red}#1}}
+\newcommand{\blue}[1]{\textbf{\color{blue}#1}}
+\newcommand{\green}[1]{\textbf{\color{green}#1}}
+
+\newcommand{\RNumb}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\def\ton#1{1,2,\dots,#1}
+\def\Set#1#2{\left\{#1\colon#2\right\}}
+\def\MYdef{\mathrel{\stackrel{\rm def}=}}
+\def\QUdef{\mathrel{\stackrel{\rm ?}=}}
+\def\Ddef{\mathrel{\stackrel{\rm d}=}}
+\def\Hosim{\mathrel{\stackrel{\rm H_0}\sim}}
+
+\input{title}
+
+\input{ques/acc.tex}
+
+\tableofcontents
+
+\input{ques/basic.tex}
+\input{ques/1sample.tex}
+\input{ques/compliance.tex}
+\input{ques/corr.tex}
+\input{ques/2sample.tex}
+\input{ques/uniform.tex}
+\input{ques/linreg1.tex}
+\input{ques/linreg2.tex}
+
+\input{ques/import.tex}
+\input{ques/bibl.tex}
+
+\end{document}

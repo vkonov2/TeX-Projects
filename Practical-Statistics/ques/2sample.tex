@@ -1,0 +1,301 @@
+\chapter{Сравнение двух выборок}\label{cha:2sample}
+
+\section{Сравнение средних (медиан)}\label{cha:2sample/sec:mo}
+
+\subsection{Парные (зависимые выборки)}\label{cha:2sample/sec:mo/subsec:pair}
+
+Признаки:
+\begin{itemize}
+	\item[$\bullet$] одинаковый размер выборок
+	\item[$\bullet$] строгое соответствие $X_i \leftrightarrow Y_i$
+\end{itemize}
+Примеры:
+\begin{itemize}
+	\item[$\bullet$] <<до и после>>
+	\item[$\bullet$] один и тот же показатель двумя способами
+\end{itemize}
+
+Сводим к одной выборке: $Z_i = Y_i - X_i$.
+
+	\subsubsection{t-test 2 sample}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:ttest}
+
+		\paragraph*{Теория}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:ttest/par:theory}
+
+		Применяем, если $X$ и $Y$ - две нормальные выборки.\\
+
+		$$\begin{gathered}
+			Z_i = Y_i - X_i \\
+			H_0: E Z_i = 0 \; \Leftrightarrow \; H_0: E X_i = E Y_i\\
+		\end{gathered}$$
+
+		Применяем t-test:
+		$$t = \frac{\overline{Z}}{\frac{S_Z}{\sqrt{n}}} \Hosim t(n-1)$$
+
+		\paragraph*{Пример}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:ttest/par:prob}
+
+		\begin{problem}
+			Было проведено исследование, чтобы выяснить, повлияют ли новые диетические медикаменты на женщин, желающих сбросить вес. Вес 100 пациенток был измерен до лечения и через 6 недель ежедневного применения лечения. Данные приведены в файле "Weight.txt". При уровне значимости 5$\%$ можно ли сделать вывод, что лечение уменьшает вес?
+		\end{problem}
+		\begin{solution}
+			\begin{lstlisting}[language=Python]
+				data = pd.read_csv("Weight.txt")
+				x = data['x']
+				y = data['y']
+				st.shapiro(x)
+				st.shapiro(y)
+				from scipy.stats import ttest_rel
+				ttest_rel(x, y)
+				t_test_res = ttest_rel(x, y)
+				t_test_res.pvalue/2.0
+			\end{lstlisting}
+			Вручную:
+			\begin{lstlisting}[language=Python]
+				z = y - x
+				from scipy.stats import t
+				n = len(z)
+				z_mean = np.mean(z)
+				z_s = np.std(z, ddof=1)
+				t_stat = (z_mean - 0) * np.sqrt(n) / z_s
+				t_p_value = t.cdf(t_stat, n-1)
+				t_p_value
+			\end{lstlisting}
+		\end{solution}
+
+	\subsubsection{Критерий знаков}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:signes}
+
+		\paragraph*{Теория}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:signes/par:theory}
+
+		Является непараметрическим критерием, применяется, когда выборки не нормальны.\\
+
+		$Z_i = Y_i - X_i$, $Z_i = \theta + e_i$, где $\theta$ - эффект обработки, $e_i$ - взаимно независимые случайные величины из непрерывной совокупности такой, что $P (e_i < 0) = P(e_i > 0) = \frac{1}{2}$.\\
+
+		$H_0: \theta = 0$. $\psi_i = \begin{cases}
+			1, \; Z_i > 0 \\
+			0, \; Z_i < 0
+		\end{cases}$. Отбрасываем $Z_i = 0$ и уменьшаем $n$. $B = \underset{i=1}{\overset{n}{\sum}}\psi_i$ - число пар таких, что $Y_i > X_i$. $B \Hosim Bin (n, \frac{1}{2})$.\\
+
+		Асимптотический критерий: $B^{*} = \frac{B - \frac{n}{2}}{\sqrt{\frac{n}{4}}} \xrightarrow[H_0]{d}N(0,1)$.
+
+		\paragraph*{Пример}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:signes/par:prob}
+
+		\begin{lstlisting}[language=Python]
+			z = z[z!=0] 
+			b = sum(z > 0)
+			n = len(z)
+
+			from scipy.stats import binom_test
+			binom_test(b, n,  p=0.5)
+
+			sign_res=binom_test(b, n,  p=0.5)
+			sign_res/2.0
+
+			from scipy.stats import binom
+			binom.cdf(b, n, 0.5)
+
+			b_star = (b - n*0.5) / np.sqrt(n*0.25)
+			from scipy.stats import norm
+			norm.cdf(b_star, loc=0, scale=1)
+		\end{lstlisting}
+
+	\subsubsection{Знакоранговый критерий Вилкоксона}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:wilcox}
+
+		\paragraph*{Теория}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:wilcox/par:theory}
+
+		Является непараметрическим критерием, применяется, когда выборки не нормальны. Применяется при $n > 20$.\\
+
+		$Z_i = Y_i - X_i$, $Z_i = \theta + e_i$, где $\theta$ - эффект обработки, $e_i$ - взаимно независимые случайные величины из непрерывной совокупности и симметричные относительно 0.\\
+
+		$H_0: \theta = 0$. Сортируем $|Z_1|, \dots, |Z_n|$ по возрастанию. $R_i$ - ранг $Z_i$. $\psi_i = \begin{cases}
+			1, \; Z_i > 0 \\
+			0, \; Z_i < 0
+		\end{cases}$. Отбрасываем $Z_i = 0$ и уменьшаем $n$. $T^{+} = \underset{i=1}{\overset{n}{\sum}}R_i \psi_i$.\\
+
+		Асимптотический критерий: $\frac{T^{*} - \frac{n(n+1)}{4}}{\sqrt{\frac{n(n+1)(2n+1)}{24}}} \xrightarrow[H_0]{d} N(0,1)$.
+
+		\paragraph*{Пример}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:wilcox/par:prob}
+
+		\begin{lstlisting}[language=Python]
+			from scipy.stats import wilcoxon
+			wilcoxon(x, y)
+			signed_rank_res = wilcoxon(x, y)
+			signed_rank_res.pvalue/2.0
+		\end{lstlisting}
+
+\subsection{Независимые выборки}\label{cha:2sample/sec:mo/subsec:nes}
+
+Признаки:
+\begin{itemize}
+	\item[$\bullet$] может быть разный размер выборок
+	\item[$\bullet$] выборки взяты <<из разных мест>> независимо друг от друга
+\end{itemize}
+Примеры:
+\begin{itemize}
+	\item[$\bullet$] врачи из разных городов
+\end{itemize}
+
+	\subsubsection{F-test 2 sample}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:ftest}
+
+	Применяется, если выборки нормальны. Используем F-test для установления равенства или неравенства дисперсий.
+
+		\paragraph{t-test 2 sample}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:ftest/par:ttest}
+
+			\subparagraph*{Теория}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:ftest/par:ttest/subpar:theory}
+
+			Применяется, если имеем неизвестные равные дисперсии.
+
+			$X_i \sim N(a_1, \sigma_1^2), \; Y_i \sim N(a_2, \sigma_2^2)$. После F-testа устанавливаем, что $\sigma_1^2 = \sigma_2^2$. $H_0: E X_i = E Y_j$.
+			$$\begin{gathered}
+				t = \frac{\overline{X} - \overline{Y}}{\sqrt{S_p^2 (\frac{1}{n} + \frac{1}{m})}} \Hosim t(n+m-2) \\
+				S_p^2 = \frac{(n-1)S_x^2 + (m-1)S_y^2}{n+m-2} \text{ (pooled variance estimator)}
+			\end{gathered}$$
+
+			\subparagraph*{Пример}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:ftest/par:ttest/subpar:prob}
+
+			\begin{problem}
+				Для сравнения уровня заработной платы были отобраны в соответствии со стажем работники-мужчины и работники-женщины. В файлах "Male.txt" и "Female.txt" содержатся получившиеся данные (в тысячах рублей). Можно ли утверждать на уровне значимости 5$\%$, что зарплата женщин ниже?
+			\end{problem}
+			\begin{solution}
+				\begin{lstlisting}[language=Python]
+					data1 = pd.read_csv("Male.txt")
+					male = data1['male']
+					data2 = pd.read_csv("Female.txt")
+					female = data2['female']
+					st.shapiro(male)
+					st.shapiro(female)
+
+					from scipy.stats import f
+					def F_test(x, y):
+					    x = np.array(x)
+					    y = np.array(y)
+					    df1 = len(x) - 1
+					    df2 = len(y) - 1
+					    F_stat = np.var(x, ddof=1)/np.var(y, ddof=1)
+					    pv = 2*np.min([f.cdf(F_stat, df1, df2), 1 - f.cdf(F_stat, df1, df2)])
+					    return pv
+					
+					F_test(male, female)
+
+					from scipy.stats import ttest_ind
+					ttest_ind(male, female, equal_var=False)
+					t_res = ttest_ind(male, female, equal_var=False)
+					t_res.pvalue/2.0
+				\end{lstlisting}
+			\end{solution}
+
+		\paragraph{Критерий Аспина-Уэлса}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:ftest/par:wales}
+
+			\subparagraph*{Теория}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:ftest/par:wales/subpar:theory}
+
+			Применяется, если имеем неизвестные разные дисперсии.
+
+			$X_i \sim N(a_1, \sigma_1^2), \; Y_i \sim N(a_2, \sigma_2^2)$. После F-testа устанавливаем, что $\sigma_1^2 \not = \sigma_2^2$. $H_0: E X_i = E Y_j$.
+			$$\begin{gathered}
+				t = \frac{\overline{X} - \overline{Y}}{\sqrt{\frac{S_x^2}{n} + \frac{S_y^2}{m}}} \Hosim t(d.f.) \\
+				d.f. = \frac{\left( \frac{S_x^2}{n} + \frac{S_y^2}{m} \right)^2}{\frac{\left( \frac{S_x^2}{n} \right)^2}{n-1} + \frac{\left( \frac{S_y^2}{m} \right)^2}{m-1}} \text{ (берем ближайшее целое число)}
+			\end{gathered}$$
+
+			При больших $n$ и $m$ статистика $t \Hosim N(0,1)$.
+
+			\subparagraph*{Пример}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:ftest/par:wales/subpar:prob}
+
+			надо реализовать
+
+	\subsubsection{Критерий ранговых сумм Вилкоксона}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:wilcox}
+
+		\paragraph*{Теория}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:wilcox/par:theory}
+
+		Является непараметрическим тестом, применятся в случае ненормальности выборок.
+
+		$X_i = e_i, i = \ton n$, $Y_j = e_{n+j} + \triangle$, где $\triangle$ - сдвиг. $e_1, \dots, e_n$ - значения $X$, $e_{n+1}, \dots, e_{n+m}$ - значения $Y$. Значения взаимно независимы и из одной непрерывной совокупности.
+
+		$H_0: \triangle = 0$ (нет повторов). Рассмотрим $N = n+m$ наблюдений. От $min$ к $max$ $R_j$ -- ранг $Y_j$. Статистика: $W = \underset{j=1}{\overset{m}{\sum}}R_j$.\\
+
+		\textit{Замечание}: рассматриваем ранги $X_i$, тогда:
+		$$W' = \frac{(n+m)(n+m+1)}{2}-W$$
+		Асимптотический критерий при $n,m > 20$:
+		$$\frac{W - \frac{m (n+m+1)}{2}}{\sqrt{\frac{n m (n+m+1)}{12}}} \xrightarrow[H_0]{d} N(0,1)$$
+
+		\paragraph*{Пример}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:wilcox/par:prob}
+
+		надо реализовать
+
+	\subsubsection{Критерий Манна и Уитни}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:mann}
+
+		\paragraph*{Теория}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:mann/par:theory}
+
+		Является непараметрическим тестом, применятся в случае ненормальности выборок.
+
+		$H_0: \triangle = 0$. Вместо $W$ рассмотрим:
+		$$\begin{gathered}
+			U = \underset{i=1}{\overset{n}{\sum}}\underset{j=1}{\overset{m}{\sum}}\mathbb{I}(X_i < Y_j) \\
+			W = U + \frac{m(m+1)}{2}
+		\end{gathered}$$
+		Асимптотический критерий:
+		$$\frac{U - \frac{n m }{2}}{\sqrt{\frac{n m (n+m+1)}{12}}} \xrightarrow[H_0]{d} N(0,1)$$
+
+		\paragraph*{Пример}\label{cha:2sample/sec:mo/subsec:pair/subsubsec:mann/par:prob}
+
+		\begin{lstlisting}[language=Python]
+			from scipy.stats import mannwhitneyu
+			mannwhitneyu(female, male, alternative='less')
+			res = mannwhitneyu(female, male, alternative='less')
+			res.pvalue
+		\end{lstlisting}
+
+\section{Сравнение дисперсий}\label{cha:2sample/sec:var}
+
+Пусть $X = (X_1, \dots, X_n)$ и $Y = (Y_1, \dots, Y_n)$ -- две независимые выборки. $H_0: D X_i = D Y_j$. $H_1: D X_i \not = D Y_j$. 
+
+\subsection{F-test 2 sample}\label{cha:2sample/sec:var/subsec:ftest}
+
+	\subsubsection*{Теория}\label{cha:2sample/sec:var/subsec:ftest/subsubsec:theory}
+
+	Применяется, если обе выборки нормальные.\\
+
+	$X_i \sim N(a_1, \sigma_1^2), \; Y_j \sim N(a_2, \sigma_2^2)$ - независимые выборки. $H_0: \sigma_1^2 = \sigma_2^2$. $H_1: \sigma_1^2 \not = \sigma_2^2$.
+	$$F = \frac{S_X^2}{S_Y^2} \Hosim F (n-1, m-1)$$
+
+	\subsubsection*{Пример}\label{cha:2sample/sec:var/subsec:ftest/subsubsec:prob}
+
+	надо реализовать
+
+\subsection{Критерий Зигеля-Тьюки}\label{cha:2sample/sec:var/subsec:siegel}
+
+	\subsubsection*{Теория}\label{cha:2sample/sec:var/subsec:siegel/subsubsec:theory}
+
+	Рассмотрим $N = n+m$. Сортируем от $min$ к $max$, где $Z$ - объединенные $X$ и $Y$: $Z_{(1)} \le Z_{(2)} \le \dots \le Z_{(n-1)} \le Z_{(n)}$. Присваиваем ранги двигаясь от краев к центру последовательности, чередуя начало и конец последовательности, т.е.: ранг 1 имеет $Z_{(1)}$, ранг 2 -- $Z_{(n)}$, ранг 3 -- $Z_{(2)}$ и т.д.\\
+	$T = \underset{i=1}{\overset{n}{\sum}}\tilde{rank} (X_i)$.\\
+
+	Асимптотический критерий:
+	$$\frac{T - \frac{n (n+m+1)}{2}}{\sqrt{\frac{n m (n+m+1)}{2}}} \xrightarrow[H_0]{d} N(0,1)$$
+
+	\subsubsection*{Пример}\label{cha:2sample/sec:var/subsec:siegel/subsubsec:prob}
+
+	надо реализовать
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

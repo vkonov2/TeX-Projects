@@ -1,0 +1,48 @@
+\chapter{Открытая линейная модель Леоньтева. Описание модели. Критерий существования решения в открытой модели.}\label{cha:8}
+
+Пусть у нас есть n отраслей, все выпускают разные товары.
+
+\begin{definition}
+	\begin{gather*}
+		\begin{pmatrix}
+		  \bar{a}_{11} & \ldots & \bar{a}_{1n} & c_1\\
+		  \ldots & \ldots & \ldots & \ldots\\
+		  \bar{a}_{n1} & \ldots & \bar{a}_{nn} & c_n\\
+		  v_1 & \ldots & v_n &  \\
+		\end{pmatrix}
+	\end{gather*} -- балансовая матрица, где $\bar{a}_{ij}$ -- количество i-ого товара, потребляемого j-ой отраслью, $v_i$ -- валовый выпуск i-ой отрасли, $c_i$ -- количество i-ого товара, потребляемого непроизводственным сектором.
+
+	$v_i = \sum\limits_{j = 1}^n \bar{a}_{ij} + c_i$ -- балансовые соотношения, $a_{ij} \dfrac{\bar{a}_{ij}}{v_j}$ -- количество i-ого товара, необходимого для производства единицы товара j-ой отраслью. $a_{ij}$ -- коэффициенты пряых затрат, $A = (a_{ij})$ -- матрица прямых затрат/
+\end{definition}
+
+\begin{definition}
+	$v_i = \sum\limits_{j = 1}^n \bar{a}_{ij} + c_i, \; i = \bar{1,n} \Leftrightarrow v = Av + c, $ где A -- матрица прямых затрат, $c = (c_1, \ldots, c_n)^T$(вектор спроса), $v = (v_1, \ldots, v_n)^T$(вектор интенсивности), Av -- вектор прямых затрат. $v \geq 0, \; v = Av + c$ -- \red{открытая модель Леонтьева}.
+\end{definition}
+
+\begin{definition}
+	Модель продуктивна, если $\forall \; c \geq 0 \; \exists \; v \geq 0: \; v = Av + c.$ То есть, пусть 
+
+	\begin{equation*}
+		\begin{cases}
+			x - Ax = c \\
+			x \geq 0
+		\end{cases} 
+	\end{equation*}--
+	открытая модель Леонтьева. Модель продуктивна, если $\forall \; c \geq 0 \; \exists $ решение системы.
+\end{definition}
+
+\begin{theorem}
+	Модель Леонтьева продуктивна $\Leftrightarrow \lambda_A < 1.$
+\end{theorem}
+
+\begin{clair}
+	x > 0: x - Ax $\gg 0 \Rightarrow$ модель продуктивна.
+\end{clair}
+
+\begin{clair}
+	А -- неразложима и $\exists x > 0: \; x - Ax = c > 0 \Rightarrow $ модель продуктивна.
+\end{clair}
+
+\begin{clair}
+	$\exists p > 0: \; p(I - A) \gg 0 \Rightarrow $ модель продуктивна.
+\end{clair}

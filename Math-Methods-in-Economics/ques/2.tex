@@ -1,0 +1,35 @@
+\chapter{Функция спроса. Основные задачи теории потребления.}\label{cha:2}
+
+Пусть $X \subset \mathbb{R}$ -- потребительское множество, $K \subset \mathbb{R}_+$ -- капитал, $p \in \mathbb{R}_+^n$ -- постранство систем цен, $\preceq$ -- отношение предпочтения на X, $u(x)$ -- функция полезности, $B_{p,k}(X) = \{ x \in X \mid px \leq x\}$ -- бюджетное множество. 
+
+\begin{definition}
+	$\Phi(p,k) = \{ x \in B_{p,k}(X) \mid u(x) = \underset{x' \in B_{p,k}(x)}{max \; u(x')} \}: \mathbb{R}_+^n \times \mathbb{R}_+ \rightarrow X$ -- \red{функция спроса}.
+\end{definition}
+
+\begin{clair}
+	$\forall \lambda > 0: \; \Phi(\lambda p, \lambda k) = \Phi(p, k),$ то есть функция спроса является однородной степени 0 $\Leftrightarrow $ при изменении цен и благосостояния в одинаковой пропорции потребительский выбор не меняется.
+\end{clair}
+
+Если $k = k(p), \; k(\lambda p) \underset{\forall \; \lambda > 0}{=} \lambda k(p)(k(p)$ -- однородная степени 1) $\Rightarrow \Phi(\lambda p, k(\lambda p)) = \Phi(p, k(p)) \Rightarrow \Phi(\lambda p) = \Phi(p) \Rightarrow \Phi(p)$ -- однородная степени 0, то есть выбор потребителя зависит лишь от соотношения цен на различные товары, а не от масштаба цен.
+
+\begin{example}
+	\begin{enumerate}
+		\item $X = \mathbb{R}_+^2, \; p = (0, 1), \; k = 1, \; u(x_1, x_2) = x_1 + x_2 \Rightarrow \Phi(p, k(p)) = \varnothing,$ так как у $u(x_1, x_2)$ нет максимума: $x_2 \leq \infty$.
+		\item $p = (1, 1), \; k = 1 \Rightarrow x_1 + x_2 \leq 1 \Rightarrow \Phi(p, k) = \{ (t, 1 - t) \mid t \in [0, 1]\}$.
+	\end{enumerate}
+\end{example}
+
+\textbf{Основные задачи теории потребления:}
+
+\begin{itemize}
+	\item Максимизация полезности $u(x) \rightarrow max$ при заданном капитале K и ценах $p >> 0: \; px \leq K,$ то есть построить функию спроса $\Phi(p, k)$.
+	\item Минимизация затрат: $px \rightarrow min,$ то есть при известных ценах $p >> 0$ вычислить минимальный уровень капитала K, требуемый для достижения заданного уровня полезности $u(x) \geq u_0.$ 
+
+	\vspace{1cm}\begin{definition}
+		Функция $H(p,u)$, ставящая в соответствие каждой паре (p,u) множество тех $x \in X,$ на которых достигается этот оптимальный уровень затрат, называется функцией \red{Хикса}:
+		\begin{gather*}
+			H(p,u_0) = \{ x \in X \mid u(x) \geq u_0, \; px = min (px'), \; x' \in X, \; u(x') \geq u_0\}.
+		\end{gather*}
+	\end{definition}
+
+\end{itemize}
